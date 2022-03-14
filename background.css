@@ -1,0 +1,23 @@
+.view{
+    width: 100vw;
+    height: 100vh;
+}
+
+.bg_box {
+    background-image: url(./img/myUni.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-position-y: bottom;
+    width: 100vw;
+    height: auto;
+    border: red 1px dotted;
+}
+
+@media screen and (max-width: 600px) {
+    .bg_box {
+        background-image: url(./img/myUni_copy.jpeg);
+        background-size: cover;
+        /* overflow: auto; */
+    }
+}
