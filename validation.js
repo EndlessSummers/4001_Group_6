@@ -113,7 +113,7 @@ function validate(component) {
         } else {
             // validation passed
             // do something here
-            console.log("DIFFERENT NEW PASSWORD ");
+            console.log("DIFFERENT NEW PASSWORD");
             para.innerHTML = "some error happened";
             para.setAttribute('hidden');
         }
@@ -134,3 +134,18 @@ function validateForm() {
         return false;
     }
 }
+
+function myOnSubmit(component) {
+    // submit validation and submit redirection
+    // do something here
+    if (component === "email") {
+        window.location.href="./input_email.html";
+    } else if (component === "cancelCheck") {
+        window.location.href="./input_cancelcheck.html";
+    } else if (component === "changePassword") {
+        window.location.href="./input_changepassword.html";
+    } else if (component === "newPassword") {
+        window.location.href="./input_newpassword.html";
+    }
+}
+

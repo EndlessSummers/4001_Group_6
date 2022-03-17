@@ -13,16 +13,16 @@
             <div class="circle"> </div>
             <!-- TODO: add action target scripts for submission-->
             <div class="form_align">
-                <form name="register" action="" autocomplete="off" onsubmit="return validateForm()" target="_blank" method="post">
+                <form name="register" action="" autocomplete="off" onsubmit="onSubmitResult('cancelCheck')" target="_blank" method="post">
                     <!-- NOTE: div is not used -->
                 
                     <label for="Email"> Are you sure that you want to cancel your account forever? </label>
 					<br>
 					
                     <input type="radio" name="Cancel_check" id="Yes" 
-                    value="Yes" onblur="validate('email')" required>Yes
+                    value="Yes" onblur="validate('cancelCheck')" required>Yes
 					<input type="radio" name="Cancel_check" id="No" 
-                    value="No" onblur="validate('email')" required>No<br>
+                    value="No" onblur="validate('cancelCheck')" required>No<br>
                     <p class="error_msg" id="cancel_check_e" hidden> some error happened</p>
                     <br>
                 
