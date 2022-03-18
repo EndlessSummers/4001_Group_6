@@ -29,7 +29,14 @@ function myOnSubmit(component) {
 }
 
 
-function togglePasswordView() {
+function togglePasswordView(e) {
     // change the visibility of password;
     // do something here
+    e.preventDefault();
+
+    passwd = document.getElementById("Password");
+    repeat = document.getElementById("Repeat");
+    const type = passwd.getAttribute("type") === "password" ? "text" : "password";
+    passwd.setAttribute("type", type);
+    repeat.setAttribute("type", type);
 }

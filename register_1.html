@@ -36,10 +36,10 @@
                     <p class="error_msg" id="password_e" hidden> some error happened</p>
                 
                     <label for="Repeat"> Repeat Password </label>
-                    <input type="text" name="repeat" id="Repeat" placeholder="cherry is 2 awesome!" onchange="myOnBlur('repeat')" required>
+                    <input type="password" name="repeat" id="Repeat" placeholder="cherry is 2 awesome!" onchange="myOnBlur('repeat')" required>
                     <p class="error_msg" id="repeat_e" hidden> some error happened</p>
 
-                    <button class="toggle_password" onclick="togglePasswordView()"> View Password</button>
+                    <button class="toggle_password" onclick="togglePasswordView(event)"> View Password</button>
                     <input type="submit" name="submit" id="Submit" value="Register">
                 </form>
 
