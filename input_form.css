@@ -1,0 +1,82 @@
+/* margin outside border {top right bottom left} */
+/* padding inside border {top right bottom left} */
+
+.bg_box {
+    width: 100vw;
+    min-height: 100vh;
+    background-image: url(./img/funboxbg.png);
+    background-repeat: repeat;
+    border: 1px solid purple;
+    align-items: center;
+    /* margin: none; */
+}
+
+.login_box {
+    width: 300px;
+    height: auto;
+    /* float: */
+    margin: 200px auto;
+    background-color: white;
+    border: green dotted 3px;
+    vertical-align: middle;
+    border-radius: 10px;
+    /* z-index: 100; */
+}
+
+.circle {
+    background-image: url(./img/approval.jpeg);
+    width: 50px;
+    height: 50px;
+    margin: 10px auto;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.form_align {
+    margin: 20px 20px;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 10px 5px; 
+    /* blank space inside input area 10 for up and down, 5 for left */
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+label {
+    /* margin-left: 24px; */
+    display: block;
+}
+
+input[type=email] {
+    width: 100%;
+    padding: 10px 5px;
+    /* margin: 8px auto; */
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    border: gray solid 1px;
+    background-color: #443527;
+    color: white;
+
+    padding: 10px 0;
+    display: block;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.error_msg {
+    /* border: 3px black dotted; */
+    margin: 0;
+    /* visibility: hidden; */
+    /* background-color: green; */
+    color: brown;
+    font-size: 14px;
+}
