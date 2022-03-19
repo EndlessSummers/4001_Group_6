@@ -139,13 +139,18 @@ function myOnSubmit(component) {
     // submit validation and submit redirection
     // do something here
     if (component === "email") {
-        window.location.href="./input_email.html";
-    } else if (component === "cancelCheck") {
-        window.location.href="./input_cancelcheck.html";
-    } else if (component === "changePassword") {
-        window.location.href="./input_changepassword.html";
-    } else if (component === "newPassword") {
         window.location.href="./input_newpassword.html";
+    } else if (component === "cancelCheck") {
+		let r = document.getElementById("Yes")
+		if(r.checked) {
+			window.location.href="./login.html";
+		} else {
+			window.location.href="./userpage.html";
+		}
+    } else if (component === "changePassword") {
+        window.location.href="./login.html";
+    } else if (component === "newPassword") {
+        window.location.href="./success.html";
     }
 }
 
