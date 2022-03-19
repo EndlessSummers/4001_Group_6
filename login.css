@@ -12,7 +12,33 @@ a {
     color: #242222;
 }
 
-input {
+input[type=radio] {
+    display: inline;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 10px 5px; 
+    margin-bottom: 10px;
+    /* blank space inside input area 10 for up and down, 5 for left */
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=password] {
+    width: 100%;
+    padding: 10px 5px; 
+    margin-bottom: 10px;
+    /* blank space inside input area 10 for up and down, 5 for left */
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=email] {
     width: 100%;
     padding: 10px 5px; 
     margin-bottom: 10px;
@@ -49,10 +75,6 @@ input[type=submit] {
     display: block;
     width: 100%;
     border-radius: 20px;
-}
-
-input[type=ratio] {
-    display: inline;
 }
 
 .out_box {
