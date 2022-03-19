@@ -4,27 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./input_form.css">
+    <link rel="stylesheet" href="./login.css">
     <title>Document</title>
 </head>
 <body onload="">
-    <div class="bg_box">
-        <div class="login_box">
-            <div class="circle"> </div>
+        <div class="out_box">
+            <div class="logo"> </div>
             <!-- TODO: add action target scripts for submission-->
             <div class="form_align">
                 <form name="register" action="" autocomplete="off" onsubmit="myOnSubmit('cancelCheck')" target="_blank" method="post">
                     <!-- NOTE: div is not used -->
                 
-                    <label for="Email"> Are you sure that you want to cancel your account forever? </label>
-					<br>
+                    <p style="font-weight: bold;"> Are you sure that you want to cancel your account forever? </p>
 					
-                    <input type="radio" name="Cancel_check" id="Yes" 
-                    value="1" onblur="validate('cancelCheck')" required>Yes
-					<input type="radio" name="Cancel_check" id="No" 
-                    value="0" onblur="validate('cancelCheck')" required>No<br>
+                    <input type="radio" name="Cancel_check" id="Yes" name="Yes"
+                    value="1" onblur="validate('cancelCheck')" required>
+                    <label for="Yes" class="label_ratio"> Yes </label>
+
+                    <input type="radio" name="Cancel_check" id="No" name="No"
+                    value="0" onblur="validate('cancelCheck')" required checked>
+                    <label for="No" class="label_ratio"> No </label>
                     <p class="error_msg" id="cancel_check_e" hidden> some error happened</p>
-                    <br>
                 
                     <!-- for Email -->
                     <!-- <div class="input">

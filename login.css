@@ -29,6 +29,13 @@ label {
     font-size: small;
 }
 
+.label_ratio {
+    display: inline;
+    color: black;
+    font-size: large;
+    font-weight: bold;
+}
+
 input::placeholder {
     font-size: small;
 }
@@ -44,7 +51,11 @@ input[type=submit] {
     border-radius: 20px;
 }
 
-.login_box {
+input[type=ratio] {
+    display: inline;
+}
+
+.out_box {
     width: 300px;
     height: auto;
     /* float: */
@@ -57,21 +68,17 @@ input[type=submit] {
 
 .logo {
     /* background-color: #F1C0E8; */
-    background-image: url(./img/Logo.png);
+    background-image: url(./img/funbox.png);
     background-size: cover;
     background-position: center;
-    width: 150px;
-    height: 100px;
-    margin: 10px auto 40px;
+    width: 200px;
+    height: 120px;
+    margin: 10px auto 10px;
 }
 
-.sign_in {
+.center_bold {
     text-align: center;
     font-weight: bold;
-}
-
-.create_account {
-    text-align: center;
 }
 
 .form_align {
