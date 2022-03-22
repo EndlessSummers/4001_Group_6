@@ -1,0 +1,56 @@
+/* margin outside border {top right bottom left} */
+/* padding inside border {top right bottom left} */
+body {
+    background-color: #FEC5BB;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    font-size: small;
+    font-weight: bold;
+    color: #242222;
+}
+
+input[type=submit] {
+    border: gray solid 1px;
+    background-color: #FFD7BA;
+    color: gray;
+
+    padding: 10px 0;
+    display: block;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.logo {
+    /* background-color: #F1C0E8; */
+    background-image: url(./img/funbox.png);
+    background-size: cover;
+    background-position: center;
+    width: 200px;
+    height: 120px;
+    margin: 10px auto 10px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.bold_big {
+    font-size: large;
+    font-weight: bold;
+}
+
+.success_info {
+    text-align: center;
+    margin-top: 10px;
+    color: black;
+}
+
+.bottom_info {
+    margin-top: 10px;
+    text-align: center;
+    color: grey;
+    font-size: small;
+}
