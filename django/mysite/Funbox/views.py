@@ -1,10 +1,13 @@
 from django.shortcuts import render,HttpResponse,redirect
 import pymysql
+from Funbox.models import UserInfo
+
 
 # Create your views here.
 #登录页面
 def login(request):
     #指定要访问的页面，render的功能：讲请求的页面结果提交给客户端
+    UserInfo.objects.all().delete()    
     return render(request,'login.html')
 
 def input_email(request):
