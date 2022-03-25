@@ -15,7 +15,7 @@
             <p class="center_bold"> Enter Your Information</p>
             <!-- TODO: add action target scripts for submission-->
             <div class="form_align">
-                <form name="form" action="{% url 'success' %}" autocomplete="off" onsubmit="return myOnSubmit(event, 'register')" target="_blank" method="get">
+                <form name="form" action="/login/reg_form/" autocomplete="off" onsubmit="return myOnSubmit(event, 'register')" target="_blank" method="POST">
                     {% csrf_token %}  
                     <label for="Email"> Email </label>
                     <input type="text" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>

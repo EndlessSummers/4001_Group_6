@@ -17,7 +17,10 @@
             <p class="center_bold"> Sign In </p>
             <!-- TODO: add action target scripts for submission-->
             <div class="form_align">
-                <form name="form" action="{% url 'userpage' %}" autocomplete="off" onsubmit="return myOnSubmit(event, 'login')" target="_blank" method="get">   
+                <form name="form" action="/login/" autocomplete="off" onsubmit="return myOnSubmit(event, 'login')" target="_blank" method="post">
+                    {% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                    {% endif %}   
                     {% csrf_token %}
                     <label for="Email"> Email </label>
                     <input type="email" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>

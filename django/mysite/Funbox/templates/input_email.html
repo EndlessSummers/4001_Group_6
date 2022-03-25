@@ -15,7 +15,10 @@
         <p class="center_bold"> Enter Your Email Address</p>
         <!-- TODO: add action target scripts for submission-->
         <div class="form_align">
-            <form name="form" action="{% url 'email' %}" autocomplete="off" onsubmit="return myOnSubmit(event, 'email')" target="_blank" method="get">
+            <form name="form" action="\login\input_email\" autocomplete="off" onsubmit="return myOnSubmit(event, 'email')" target="_blank" method="post">
+                {% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                {% endif %} 
                 {% csrf_token %}
                 <input type="email" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
                 <p class="error_msg" id="email_e" hidden> some error happened</p>

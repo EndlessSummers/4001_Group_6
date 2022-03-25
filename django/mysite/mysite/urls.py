@@ -28,7 +28,7 @@ urlpatterns = [
     path('userpage/',views.user_page, name= "userpage"),
     path('userpage/input_changepassword/', views.change_pswd,name = "cg_pswd"),
     path('userpage/input_cancelcheck/', views.cancel_check, name = "cg_cchk"),
-    path('login/reg_email/email',views.email, name = "email"), #注册
+    path('login/reg_email/email/',views.email, name = "email"), #注册
     path('login/reg_form/', views.reg_form, name = "reg_form"),
-    path('login/reg_form/success', views.success, name = "success"),
+    path('login/reg_form/success/', views.success, name = "success"),
 ]

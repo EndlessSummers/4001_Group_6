@@ -7,38 +7,88 @@ from Funbox.models import UserInfo
 #登录页面
 def login(request):
     #指定要访问的页面，render的功能：讲请求的页面结果提交给客户端
-    UserInfo.objects.all().delete()    
-    return render(request,'login.html')
-
+    if request.method == "GET":
+        return render(request,'login.html')
+    if request.method == "POST":
+        i_email = request.POST.get("email")
+        i_password = request.POST.get("password")
+        user_list = UserInfo.objects.all()
+        for object in user_list:
+            if object.user_id == i_email and object.password == i_password:
+                return render(request, "userpage.html")
+        message = "用户名或密码错误！"
+        return render(request, "login.html", {"message":message}) 
+    
+#+
 def input_email(request):
-
-    return render(request,'input_email.html')
-
+    if request.method == "GET": 
+        return render(request,'input_email.html')
+    if request.method == "POST":
+        i_email = request.POST.get("email")
+        user_list = UserInfo.objects.all()
+        for object in user_list:
+            if object.user_id == i_email:
+                return render(request, "email.html")
+        message = "用户不存在！"
+        return render(request, "input_email.html", {"message":message})
+    
+                
+#+
 def reg_email(request):
-   
-    return render(request,'reg_email.html')
-
+    if request.method == "GET": 
+        return  render(request,'reg_email.html')
+    if request.method == "POST":
+        i_email = request.POST.get("email")
+        user_list = UserInfo.objects.all()
+        for object in user_list:
+            if object.user_id == i_email:
+                message = "用户已存在！"
+                return render(request, "reg_email.html", {"message":message})
+        return render(request, "email.html")
+    
+#+
 def reg_form(request):
-    return render(request, 'reg_form.html')
+    if (request.method == "GET"):
+        return render(request, 'reg_form.html')
+    if request.method == "POST":
+        i_email = request.POST.get("email")
+        i_password = request.POST.get("password")
+        user_list = UserInfo.objects.all()
+        flag = 0
+        for object in user_list:
+            if object.user_id == i_email:
+                object.password = i_password
+                object.save()
+                flag = 1
+        if flag == 0:
+            UserInfo.objects.create(user_id = i_email, password = i_password)
+        return render(request, "success.html")
 
+#+
 def user_page(request):
     return render(request, 'userpage.html')
 
+#to do
 def change_pswd(request):
     return render(request, 'input_changepassword.html')
 
+#?
 def new_pswd(request):
     return render(request, 'input_newpassword.html')
 
+#to do
 def cancel_check(request):
     return render(request, 'input_cancelcheck.html')
 
+#?
 def pass_email(request):
     return render (request, 'pass_email.html')
 
+#+
 def email(request):
     return render (request, 'email.html')
 
+#+
 def success(request):
     return render (request, 'success.html')
 
