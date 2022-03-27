@@ -19,9 +19,8 @@
 
   <title>Title page</title>  
 
+  <link href="./external.css" rel="stylesheet">
   <link href="./main.css" rel="stylesheet">
-  <link href="./edit.css" rel="stylesheet">
-  <link href="./template.css" rel="stylesheet">
 </head>
 
 <body>
@@ -40,7 +39,7 @@
     <div class="navbar-collapse" id="navbar-collapse">
       <div class="site-header hidden-xs">
           <a class="site-brand" href="./index.html" title="">
-            <img class="img-responsive site-logo" alt="" src="./imgs/funbox.png">
+            <img class="img-responsive site-logo" alt="" src="./imgs/funbox.png" style="width: 200px; height: 150px;">
             FunBox
           </a>
         <p>User Info Goes here</p>
@@ -60,6 +59,10 @@
           <li><a class="btn btn-default" onclick="load(event, 'login')"> Log in </a></li>
           <li><a class="btn btn-primary" onclick="load(event, 'signUp')"> Sign up </a></li>
         </ul>
+        <p>
+          <a class="btn btn-info btn-sm" onclick="load(event, 'forget')" style="display: inline; font-size: 10px;">Forget password</a>
+          <a class="btn btn-info btn-sm" onclick="load(event, 'cancel')" style="display: inline; font-size: 10px;">Cancel Account</a>
+        </p>
       </nav>  
     </div> 
   </nav>
