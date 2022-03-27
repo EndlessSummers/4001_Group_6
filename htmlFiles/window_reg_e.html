@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body onload="">
+    <iframe src="" frameborder="0" name="iframeName"></iframe>
+    <div class="login-text-holder">
+        <span id='close' onclick='close(event)'>x</span>
+        <div class="login-text-inner">
+            <div class="template-login">
+                <p class="template-login-title"> Enter Your Email </p>
+                <div class="form-group">
+                    <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'email')" target="iframeName" method="get">
+                        <label for="Email"> Email </label>
+                        <input type="email" class="form-control" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
+                        <p class="alert alert-danger" id="email_e" hidden> some error happened</p>
+                        <input class="btn btn-primary" type="submit" name="submit" id="Submit" value="Next">
+                        <p class="alert alert-success" id="input_success" hidden> We've sent a verification to your email. Please Check! </p>
+                    </form>
+                
+                    <div class="bottom_info">
+                        <p> Already have an account? <a href="./login.html" style="display: inline;">Sign In</a></p>
+                        <p class="version_number"> Version 0.0.0 </p>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <script src="main.js" type="text/javascript"></script>
+</body>
+</html>

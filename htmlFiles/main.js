@@ -19,6 +19,7 @@ function myOnSubmit(e, info) {
         e.preventDefault;
         return false;
     } else {
+        document.getElementById("input_success").removeAttribute("hidden");
         console.log("VALID INPUT");
         return true;
     }
@@ -124,4 +125,32 @@ function togglePasswordView(e, info) {
         repeat.setAttribute("type", type);
         oldpasswd.setAttribute("type", type);
     }
+}
+
+function load(e, info) {
+  e.preventDefault();
+  const xhttp = new XMLHttpRequest();
+
+  xhttp.onload = function() {
+    document.getElementById("event_box").innerHTML = this.responseText;
+    document.getElementById("event_box").removeAttribute("hidden");
+    document.getElementById("close").onclick = function() {
+      this.parentNode.parentNode.setAttribute("hidden", "True");
+      this.parentNode.parentNode.removeChild(this.parentNode);
+      console.log('window closed');
+      return false;
+    }
+  }
+  if (info === "login") {
+    xhttp.open("GET", "./window_login.html");
+  } else if (info === "signUp") {
+    xhttp.open("GET", "./window_reg_e.html");
+  } else if (info === "forget") {
+    xhttp.open("GET", "./window_forget_e.html");
+  } else if (info === "cancel") {
+    xhttp.open("GET", "./window_cancel.html");
+  }
+  xhttp.send();
+
+  console.log("btn clicked");
 }

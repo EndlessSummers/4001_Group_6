@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body> 
+    <iframe src="" frameborder="0" name="iframeName"></iframe>
+    <div class="login-text-holder">
+      <span id='close' onclick='close(event)'>x</span>
+      <div class="login-text-inner">
+        <div class="template-login">
+          <p class="template-login-title" style="font-size: 32px;"> Be sure to cancel your account?</p>
+          <!-- TODO get account infomation from the user -->
+          <div class="form-group">
+            <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'cancel')" target="iframeName" method="get">  
+              <p style="text-align: center;">
+                <input type="radio" name="Cancel_check" id="Yes" name="Yes" value="1" style="display: inline; margin-left: 10px;" required>
+                <label for="Yes" style="display: inline; margin-left: 10px;">Yes</label>
+                <input type="radio" name="Cancel_check" id="No" name="No" value="0" style="display: inline; margin-left: 10px;" required checked>
+                <label for="No" style="display: inline; margin-left: 10px;">No</label>
+              </p>
+              <input class="btn btn-primary" type="submit" name="submit" id="Submit" value="Submit">
+              <p class="alert alert-success" id="input_success" hidden> Your Account has been cancelled successfully</p>
+            </form>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </body>
+</html>

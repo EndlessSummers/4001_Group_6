@@ -1,0 +1,36 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <iframe src="" frameborder="0" name="iframeName"></iframe>
+        <div class="login-text-holder">
+            <span id='close' onclick='close(event)'>x</span>
+            <div class="login-text-inner">
+                <div class="template-login">
+                    <p class="template-login-title"> Sign In </p>
+                    <div class="form-group">
+                        <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'login')" target="iframeName" method="get">   
+                            <label for="Email"> Email </label>
+                            <input type="email" class="form-control" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
+                            <p class="alert alert-danger" id="email_e" hidden> some error happened</p>
+
+                            <label for="Password"> Password </label>
+                            <input type="password" class="form-control" name="password" id="Password" placeholder="cherry is 2 awesome!" onfocus="" onblur="" required>
+                            <p class="alert alert-danger" id="password_e" hidden> some error happened</p>
+
+                            <button class="btn btn-default toggle_password" onclick="togglePasswordView(event, 'normal')"> View Password</button>
+                            <input class="btn btn-primary" type="submit" name="submit" id="Submit" value="Login">
+                            <p class="alert alert-success" id="input_success" hidden> Your message was successfully sent </p>
+                        </form>
+
+                        <div class="bottom_info">
+                            <p><a href="./reg_email.html"> Create New Account</a> </p>
+                            <p><a href="./input_email.html"> Forget Password?</a> </p>
+                            <p class="version_number"> Version 0.0.0 </p>
+                        </div>
+                    </div> 
+                </div> 
+            </div>
+        </div>
+    </body>
+</html>
