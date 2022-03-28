@@ -10,15 +10,16 @@
           <p class="wrapper-form-title"> cancel your account?</p>
           <!-- TODO get account infomation from the user -->
           <div class="form-group">
-            <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'cancel')" target="iframeName" method="get">  
+            <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'cancel')" target="iframeName" method="post">  
               <p style="text-align: center;">
                 <input type="radio" name="Cancel_check" id="Yes" name="Yes" value="1" style="display: inline; margin-left: 10px;" required>
                 <label for="Yes" style="display: inline; margin-left: 10px;">Yes</label>
                 <input type="radio" name="Cancel_check" id="No" name="No" value="0" style="display: inline; margin-left: 10px;" required checked>
                 <label for="No" style="display: inline; margin-left: 10px;">No</label>
               </p>
+              <input type="text" class="form-control" name="hint" value="cancel" style="display: none;" required>
               <input class="btn btn-primary" type="submit" name="submit" id="Submit" value="Submit">
-              <p class="alert alert-success" id="input_success" hidden> Your Account has been cancelled successfully</p>
+              <p class="alert alert-success" id="success"> Your Account has been cancelled successfully</p>
             </form>
             <div class="bottom_info">
               <p class="version_number"> Version 0.0.0 </p>

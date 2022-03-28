@@ -16,10 +16,10 @@ function myOnSubmit(e, info) {
 
     if (!state) {
         console.log("INVALID INPUT");
-        e.preventDefault;
+        e.preventDefault();
         return false;
     } else {
-        document.getElementById("input_success").removeAttribute("hidden");
+        document.getElementById("success").setAttribute("display", "block");
         console.log("VALID INPUT");
         return true;
     }
@@ -27,20 +27,18 @@ function myOnSubmit(e, info) {
 
 function validate_email() {
     let email = document.forms["form"]["email"].value;
-    let p_email = document.getElementById("email_e");
+    let p_email = document.getElementById("error");
     // Question: email should end with @link.cuhk.edu.cn?
     let reg_email = /^[a-zA-Z0-9][\w\-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$/
     if (!reg_email.test(email)) {
         console.log("ERROR: EMAIL: INCORRECT EMAIL FORMAT");
         p_email.innerHTML = "incorrect email format";
-        p_email.removeAttribute('hidden');
         return false;
     } else {
         // validation passed
         // do something here
         console.log("VAILD EMAIL");
-        p_email.innerHTML = "some error happened";
-        p_email.setAttribute('hidden', 'true');
+        p_email.innerHTML = "";
     }
     return true;
 }
@@ -48,44 +46,38 @@ function validate_email() {
 function validate_change() {
     let oldPasswd = document.forms["form"]["oldpassword"].value;
     let passwd = document.forms["form"]["password"].value;
-    let p_passwd = document.getElementById("oldpassword_e");
+    let p_passwd = document.getElementById("error");
     if (oldPasswd == passwd) {
         console.log("ERROR: CHANGE: MATCH");
         p_passwd.innerHTML = "The new password is the same as the original password";
-        p_passwd.removeAttribute('hidden');
         return false;
     } else {
         // validation passed
         // do something here
         console.log("DIFFERENT NEW PASSWORD");
-        p_passwd.innerHTML = "some error happened";
-        p_passwd.setAttribute('hidden', 'true');
+        p_passwd.innerHTML = "";
     }
     return true;
 }
 
 function validate_passwd() {
     let passwd = document.forms["form"]["password"].value;
-    let p_passwd = document.getElementById("password_e");
+    let p_passwd = document.getElementById("error");
     if (passwd.length != passwd.trim().length) {
         console.log("ERROR: PASSWORD: LEADING/TAILING SPACE");
         p_passwd.innerHTML = "password should contain no leading or tailing spaces";
-        p_passwd.removeAttribute('hidden');
         return false;
     } else if (passwd.length < 8 || passwd.length > 16) {
         console.log("ERROR: PASSWORD: LENGTH");
         p_passwd.innerHTML = "password must contain 8-16 (included) characters";
-        p_passwd.removeAttribute('hidden');
         return false;
     } else if (!(/^.*[A-Za-z].*$/.test(passwd) && /^.*[0-9].*$/.test(passwd))) {
         console.log("ERROR: PASSWORD: FORMAT");
         p_passwd.innerHTML = "password must contain at least one letter and one digit";
-        p_passwd.removeAttribute('hidden');
         return false;
     } else {
         console.log("VALID PASSWORD");
-        p_passwd.innerHTML = "some error happened";
-        p_passwd.setAttribute('hidden', 'true');
+        p_passwd.innerHTML = "";
     }
     return true;
 }
@@ -93,18 +85,16 @@ function validate_passwd() {
 function validate_repeat() {
     let passwd = document.forms["form"]["password"].value;
     let repeat = document.forms["form"]["repeat"].value;
-    let p_repeat = document.getElementById("repeat_e");
+    let p_repeat = document.getElementById("error");
     if (passwd != repeat) {
         console.log("ERROR: REPEAT: NOT MATCH");
         p_repeat.innerHTML = "password did not match";
-        p_repeat.removeAttribute('hidden');
         return false;
     } else {
         // validation passed
         // do something here
         console.log("DIFFERENT NEW PASSWORD");
-        p_repeat.innerHTML = "some error happened";
-        p_repeat.setAttribute('hidden', 'true');
+        p_repeat.innerHTML = "";
     }
     return true;
 }
