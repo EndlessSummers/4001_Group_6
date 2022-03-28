@@ -39,22 +39,22 @@
     <div class="navbar-collapse" id="navbar-collapse">
       <div class="site-header hidden-xs">
           <a class="site-brand" href="./index.html" title="">
-            <img class="img-responsive site-logo" alt="" src="./imgs/funbox.png">
+            <img class="img-responsive site-logo" alt="" src="./imgs/funbox.png" style="width: 200px; height: 100px;">
             FunBox
           </a>
-        <p>User Info Goes here</p>
       </div>
       <ul class="nav">
+        <div class="user-profile" onclick="load(event, 'edit')"><img alt="" src="./imgs/Nick.jpeg"><p>Nick Wilde<br> UID: 1</p></div>
         <li><a href="./index.html" title="" >Home</a></li>
         <li><a href="./about.html" title="">About</a></li>
-        <li><a href="./services.html" title="">Services</a></li>
+        <li class="disabled"><a href="./services.html" title="">Services</a></li>
         <li><a href="./contact.html" title="">Contact</a></li>
         <li><a href="./components.html" title="">Components</a></li>
         
       </ul>
 
       <nav class="nav-footer">
-        <p> Enjoy our work? Tell us how you feel by</p>
+        <p style="font-size: 12px;"> Enjoy our work? Tell us how you feel by</p>
         <ul class="nav">
           <li><a class="btn btn-default" onclick="load(event, 'login')"> Log in </a></li>
           <li><a class="btn btn-primary" onclick="load(event, 'signUp')"> Sign up </a></li>
@@ -63,7 +63,7 @@
           <a class="btn btn-info btn-sm" onclick="load(event, 'forget')" style="display: inline; font-size: 10px;">Forget password</a>
           <a class="btn btn-info btn-sm" onclick="load(event, 'cancel')" style="display: inline; font-size: 10px;">Cancel Account</a>
         </p>
-      </nav> 
+      </nav>  
     </div> 
   </nav>
 </header>

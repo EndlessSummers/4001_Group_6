@@ -140,7 +140,28 @@ function load(e, info) {
       console.log('window closed');
       return false;
     }
-  }
+
+    if (info === "edit") {
+      $(document).ready(function () {
+        $("#chg_usr_p").click(function () {
+          console.log("img btn clicked");
+          $("#img_slt").click();
+        });
+      });
+      
+      $("#img_slt").on("change", function(){
+        console.log("changePic() called");
+        var selectedFile = document.getElementById('img_slt').files[0];
+        var img = document.getElementById('chg_usr_p');
+        var reader = new FileReader();
+        reader.onload = function() {
+          img.src = this.result
+        }
+        reader.readAsDataURL(selectedFile);
+      });
+    }
+  };
+
   if (info === "login") {
     xhttp.open("GET", "./window_login.html");
   } else if (info === "signUp") {
@@ -149,8 +170,11 @@ function load(e, info) {
     xhttp.open("GET", "./window_forget_e.html");
   } else if (info === "cancel") {
     xhttp.open("GET", "./window_cancel.html");
+  } else if (info === "edit") {
+    xhttp.open("GET", "./window_user.html");
   }
   xhttp.send();
 
   console.log("btn clicked");
 }
+

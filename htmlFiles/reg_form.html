@@ -17,81 +17,89 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
 
-  <title>register_info</title>
-  <link rel="stylesheet" href="./external.css">
-  <link rel="stylesheet" href="./main.css">
+  <title>Title page</title>  
+
+  <link href="./external.css" rel="stylesheet">
+  <link href="./main.css" rel="stylesheet">
 </head>
 
 <body>
-  <header class="">
-    <div class="navbar navbar-default visible-xs">
-      <button type="button" class="navbar-toggle collapsed">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="./index.html" class="navbar-brand"> FunBox </a>
-    </div>
-  
-    <nav class="sidebar">
-      <div class="navbar-collapse" id="navbar-collapse">
-        <div class="site-header hidden-xs">
-            <a class="site-brand" href="./index.html" title="">
-              <img class="img-responsive site-logo" alt="" src="./imgs/funbox.png">
-              FunBox
-            </a>
-          <p>User Info Goes here</p>
-        </div>
+<header class="">
+  <div class="navbar navbar-default visible-xs">
+    <button type="button" class="navbar-toggle collapsed">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a href="./index.html" class="navbar-brand"> FunBox </a>
+  </div>
+
+  <nav class="sidebar">
+    <div class="navbar-collapse" id="navbar-collapse">
+      <div class="site-header hidden-xs">
+          <a class="site-brand" href="./index.html" title="">
+            <img class="img-responsive site-logo" alt="" src="./imgs/funbox.png" style="width: 200px; height: 100px;">
+            FunBox
+          </a>
+      </div>
+      <ul class="nav">
+        <div class="user-profile" onclick="load(event, 'edit')"><img alt="" src="./imgs/Nick.jpeg"><p>Nick Wilde<br> UID: 1</p></div>
+        <li><a href="./index.html" title="" >Home</a></li>
+        <li><a href="./about.html" title="">About</a></li>
+        <li class="disabled"><a href="./services.html" title="">Services</a></li>
+        <li><a href="./contact.html" title="">Contact</a></li>
+        <li><a href="./components.html" title="">Components</a></li>
+        
+      </ul>
+
+      <nav class="nav-footer">
+        <p style="font-size: 12px;"> Enjoy our work? Tell us how you feel by</p>
         <ul class="nav">
-          <li><a href="./index.html" title="" >Home</a></li>
-          <li><a href="./about.html" title="">About</a></li>
-          <li><a href="./services.html" title="">Services</a></li>
-          <li><a href="./contact.html" title="">Contact</a></li>
-          <li><a href="./components.html" title="">Components</a></li>
-          
+          <li><a class="btn btn-default" onclick="load(event, 'login')"> Log in </a></li>
+          <li><a class="btn btn-primary" onclick="load(event, 'signUp')"> Sign up </a></li>
         </ul>
-  
-        <nav class="nav-footer">
-          <p> Enjoy our work? Tell us how you feel by</p>
-          <ul class="nav">
-            <li><a class="btn btn-default" onclick="load(event, 'login')"> Log in </a></li>
-            <li><a class="btn btn-primary" onclick="load(event, 'signUp')"> Sign up </a></li>
-          </ul>
-        </nav>  
-      </div> 
-    </nav>
-  </header>
-  <main class="" id="main-collapse">
+        <p>
+          <a class="btn btn-info btn-sm" onclick="load(event, 'forget')" style="display: inline; font-size: 10px;">Forget password</a>
+          <a class="btn btn-info btn-sm" onclick="load(event, 'cancel')" style="display: inline; font-size: 10px;">Cancel Account</a>
+        </p>
+      </nav>  
+    </div> 
+  </nav>
+</header>
+
+<main class="" id="main-collapse">
     <iframe src="" frameborder="0" name="iframeName"></iframe>
-    <div class="login-text-holder">
-      <div class="login-text-inner">
-        <div class="template-login">
-          <p class="template-login-title"> Sign Up </p>
-          <div class="form-group">
-            <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'register')" target="iframeName" method="get">  
-              <label for="Email"> Email </label>
-              <input type="text" class="form-control" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
-              <p class="alert alert-danger" id="email_e" hidden> some error happened</p>
-              
-              <label for="Password"> Password </label>
-              <input type="password" class="form-control" name="password" id="Password" placeholder="cherry is 2 awesome!" onfocus="" onblur="" required>
-              <p class="alert alert-danger" id="password_e" hidden> some error happened</p>
-              
-              <label for="Repeat"> Repeat Password </label>
-              <input type="password" class="form-control" name="repeat" id="Repeat" placeholder="cherry is 2 awesome!" onchange="" required>
-              <p class="alert alert-danger" id="repeat_e" hidden> some error happened</p>
-              
-              <button class="btn btn-default toggle_password" onclick="togglePasswordView(event, 'repeat')"> View Password</button>
-              <input class="btn btn-primary" type="submit" name="submit" id="Submit" value="Submit">
-              <p class="alert alert-success" id="input_success" hidden> Your message was successfully sent </p>
-            </form>
-            <div class="bottom_info">
-                <p> Already have an account? <a href="./login.html" style="display: inline;">Sign In</a></p>
-                <p class="version_number"> Version 0.0.0 </p>
-            </div>
+    <div class="hero-full-wrapper">
+      <div class="login-desciprtion" style="width: inherit; height: calc(100vh - 80px);">
+        <div class="wrapper-ver">
+          <div class="wrapper-form">
+            <p class="wrapper-form-title"> Sign Up </p>
+            <div class="form-group">
+              <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'register')" target="iframeName" method="get">  
+                <label for="Email"> Email </label>
+                <input type="text" class="form-control" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
+                <p class="alert alert-danger" id="email_e" hidden> some error happened</p>
+                
+                <label for="Password"> Password </label>
+                <input type="password" class="form-control" name="password" id="Password" placeholder="cherry is 2 awesome!" onfocus="" onblur="" required>
+                <p class="alert alert-danger" id="password_e" hidden> some error happened</p>
+                
+                <label for="Repeat"> Repeat Password </label>
+                <input type="password" class="form-control" name="repeat" id="Repeat" placeholder="cherry is 2 awesome!" onchange="" required>
+                <p class="alert alert-danger" id="repeat_e" hidden> some error happened</p>
+                
+                <button class="btn btn-default toggle_password" onclick="togglePasswordView(event, 'repeat')"> View Password</button>
+                <input class="btn btn-primary" type="submit" name="submit" id="Submit" value="Submit">
+                <p class="alert alert-success" id="input_success" hidden> Your message was successfully sent </p>
+              </form>
+              <div class="bottom_info">
+                  <p> Already have an account? <a href="./login.html" style="display: inline;">Sign In</a></p>
+                  <p class="version_number"> Version 0.0.0 </p>
+              </div>
+            </div> 
           </div> 
-        </div> 
+        </div>
       </div>
     </div>
   </main>

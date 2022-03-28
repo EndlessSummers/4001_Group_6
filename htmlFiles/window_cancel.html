@@ -4,11 +4,10 @@
 </head>
 <body> 
     <iframe src="" frameborder="0" name="iframeName"></iframe>
-    <div class="login-text-holder">
+    <div class="wrapper-ver">
       <span id='close' onclick='close(event)'>x</span>
-      <div class="login-text-inner">
-        <div class="template-login">
-          <p class="template-login-title" style="font-size: 32px;"> Be sure to cancel your account?</p>
+        <div class="wrapper-form">
+          <p class="wrapper-form-title"> cancel your account?</p>
           <!-- TODO get account infomation from the user -->
           <div class="form-group">
             <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'cancel')" target="iframeName" method="get">  
@@ -21,6 +20,9 @@
               <input class="btn btn-primary" type="submit" name="submit" id="Submit" value="Submit">
               <p class="alert alert-success" id="input_success" hidden> Your Account has been cancelled successfully</p>
             </form>
+            <div class="bottom_info">
+              <p class="version_number"> Version 0.0.0 </p>
+          </div>
           </div>
         </div>
       </div> 
