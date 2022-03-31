@@ -25,6 +25,33 @@ function myOnSubmit(e, info) {
     }
 }
 
+function openNav() {
+    document.getElementById("mySidenav").style.width = "100%";
+}
+
+function changeV(rangename) {
+    if(rangename === 'Time') {
+        var v = document.getElementById("Timerange").value;
+        if (v === '0') {
+            document.getElementById("Timevalue").innerHTML = "1 hours-";
+        } else if (v === '9') {
+            document.getElementById("Timevalue").innerHTML = "8 hours+";
+        } else {
+            document.getElementById("Timevalue").innerHTML = v + " hours";
+        }
+    } else if (rangename === 'Participant') {
+        var v = document.getElementById("Participantrange").value;
+        document.getElementById("Participantvalue").innerHTML = v;
+    } else if (rangename === 'Place') {
+        var v = document.getElementById("Placerange").value;
+        document.getElementById("Placevalue").innerHTML = v;
+    }
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
 function validate_email() {
     let email = document.forms["form"]["email"].value;
     let p_email = document.getElementById("error");
