@@ -157,26 +157,6 @@ function load(e, info) {
       console.log('window closed');
       return false;
     }
-
-    if (info === "edit") {
-      $(document).ready(function () {
-        $("#chg_usr_p").click(function () {
-          console.log("img btn clicked");
-          $("#img_slt").click();
-        });
-      });
-      
-      $("#img_slt").on("change", function(){
-        console.log("changePic() called");
-        var selectedFile = document.getElementById('img_slt').files[0];
-        var img = document.getElementById('chg_usr_p');
-        var reader = new FileReader();
-        reader.onload = function() {
-          img.src = this.result
-        }
-        reader.readAsDataURL(selectedFile);
-      });
-    }
   };
 
   if (info === "login") {
@@ -194,4 +174,69 @@ function load(e, info) {
 
   console.log("btn clicked");
 }
+
+function edit_usr_p(e) {
+  console.log('function ' + edit_usr_p.name);
+
+  $("#chg_usr_p").click(function () {
+    console.log("img btn clicked");
+    $("#img_slt").click();
+  });
+
+  var pic_change_flag = false;
+  $("#img_slt").on("change", function(){
+    console.log("changePic() called");
+    pic_change_flag = true;
+    var selectedFile = document.getElementById('img_slt').files[0];
+    var img = document.getElementById('chg_usr_p');
+    var reader = new FileReader();
+    reader.onload = function() {
+      img.src = this.result
+    //   document.getElementById('user_picture').src = this.result;
+    }
+    reader.readAsDataURL(selectedFile);
+  });
+  
+  var box = document.getElementById('event_box')
+  var infos = box.getElementsByTagName('p');
+  var inputs = [];
+  for (i=0; i<infos.length; i++) {
+    let inputText = "<input type='text' value='' style='width: 100%;'>";
+    let input = infos[i].innerHTML;
+    inputs.push(input);
+    infos[i].innerHTML = inputText.replace(/value=''/, function(x) {
+      return x.slice(0, x.length-1) + input + x.slice(x.length-1);
+    })
+    // replace does not modify the original text;
+  }
+
+  console.log(inputs);
+  $("#save").click(function () {
+    console.log('function save called');
+    for (i=0; i<infos.length; i++) {
+      let input = infos[i].firstChild.value;
+      infos[i].innerHTML = input;
+    }
+
+    if (infos[0].innerHTML != inputs[0]) { // user name changed
+      var user_name = document.getElementById("user-profile").getElementsByTagName('p')[0];
+      var new_name = user_name.innerHTML.replace(inputs[0], infos[0].innerHTML);
+      user_name.innerHTML = new_name;
+    }
+
+    if (pic_change_flag) { // user profile changed
+      document.getElementById('user_picture').src = document.getElementById('chg_usr_p').src;
+    }
+  });
+}
+
+// function save_usr_p(e) {
+//   console.log('function ' + save_usr_p.name);
+//   var box = document.getElementById('event_box')
+//   var infos = box.getElementsByTagName('p');
+//   for (i=0; i<infos.length; i++) {
+//     let input = infos[i].firstChild.value;
+//     infos[i].innerHTML = input;
+//   }
+// }
 
