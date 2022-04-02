@@ -8,6 +8,12 @@ label{
 	font-weight:400;
 }
 
+.sidenav label{
+	display: inline;
+	width:100%;
+    font-size: 14px;
+}
+
 .sidenav {
     height: 100%;
     width: 0%;
