@@ -18,13 +18,10 @@
             <!-- TODO: add action target scripts for submission-->
             <div class="form_align">
                 <form name="form" action="/login/" autocomplete="off" onsubmit="return myOnSubmit(event, 'login')" target="_blank" method="post">
-                    {% if message %}
-                    <div class="alert alert-warning">{{ message }}</div>
-                    {% endif %}   
                     {% csrf_token %}
                     <label for="Email"> Email </label>
                     <input type="email" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
-                    <p class="error_msg" id="email_e" hidden> some error happened</p>
+                    <p class="error_msg" id="email_e" style="{{something}}"> some error happened {{message}}</p>
                 
                     <label for="Password"> Password </label>
                     <input type="password" name="password" id="Password" placeholder="cherry is 2 awesome!" onfocus="" onblur="" required>

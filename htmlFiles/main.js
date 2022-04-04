@@ -1,3 +1,7 @@
+// global variable for help window
+var _index=0;
+var clearTime = null;
+
 function myOnSubmit(e, info) {
     var state;
     if (info === "login") {
@@ -155,9 +159,17 @@ function load(e, info) {
       this.parentNode.parentNode.setAttribute("hidden", "True");
       this.parentNode.parentNode.removeChild(this.parentNode);
       console.log('window closed');
+      _index = 0;
+      clearInterval(clearTime);
       return false;
     }
   };
+
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      xhttp.addEventListener("load", help);
+    }
+  }
 
   if (info === "login") {
     xhttp.open("GET", "./window_login.html");
@@ -169,7 +181,10 @@ function load(e, info) {
     xhttp.open("GET", "./window_cancel.html");
   } else if (info === "edit") {
     xhttp.open("GET", "./window_user.html");
+  } else if (info === "help") {
+    xhttp.open("GET", "./window_help.html");
   }
+  
   xhttp.send();
 
   console.log("btn clicked");
@@ -178,13 +193,13 @@ function load(e, info) {
 function edit_usr_p(e) {
   console.log('function ' + edit_usr_p.name);
 
-  $("#chg_usr_p").click(function () {
+  $("#chg_usr_p").off().click(function () {
     console.log("img btn clicked");
     $("#img_slt").click();
   });
 
   var pic_change_flag = false;
-  $("#img_slt").on("change", function(){
+  $("#img_slt").off().on("change", function(){
     console.log("changePic() called");
     pic_change_flag = true;
     var selectedFile = document.getElementById('img_slt').files[0];
@@ -211,10 +226,11 @@ function edit_usr_p(e) {
   }
 
   console.log(inputs);
-  $("#save").click(function () {
+  $("#save").off().click(function () {
     console.log('function save called');
     for (i=0; i<infos.length; i++) {
       let input = infos[i].firstChild.value;
+      console.log("input " + i + " " + input);
       infos[i].innerHTML = input;
     }
 
@@ -229,6 +245,37 @@ function edit_usr_p(e) {
     }
   });
 }
+
+function help() {
+  console.log("function help called");
+
+  $(".bottom ul li").off().hover(function(){
+    console.log("entered");
+    $(".bottom ul li").eq(_index).toggleClass("isActive");
+    _index = $(this).index();
+    console.log("index " + _index);
+    clearInterval(clearTime);
+    $(".help .top .img").eq(_index).fadeIn(200).siblings().fadeOut(200);
+    $(".bottom ul li").eq(_index).toggleClass("isActive");
+    $(".bottom #helpText").html($(".help .top .img").eq(_index).html());
+  },auto);
+
+  function auto(){
+    console.log("_index " + _index);
+    clearTime = setInterval(function(){
+      $(".bottom ul li").eq(_index).toggleClass("isActive");
+      _index++;
+      if(_index>4) _index=0;
+      $(".help .top .img").eq(_index).fadeIn(200).siblings().fadeOut(200);
+      $(".bottom ul li").eq(_index).toggleClass("isActive");
+      $(".bottom #helpText").html($(".help .top .img").eq(_index).html());
+    },3000);
+  }
+
+  auto();
+}
+
+
 
 // function save_usr_p(e) {
 //   console.log('function ' + save_usr_p.name);

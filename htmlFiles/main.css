@@ -261,3 +261,81 @@ iframe {
   margin-bottom: 10px;
   color: #919aa3;
 }
+
+.help {
+    height: 85%;
+    width: 95%;
+}
+
+.help .top{
+    height: 85%;
+    box-sizing: border-box;
+    overflow: hidden;
+    /* background-color: burlywood; */
+}
+
+.help .bottom{
+    /* height: 25%; */
+    text-align: center;
+    font-size: 24px;
+    /* border: black 2px solid; */
+}
+
+/* for help information */
+.bottom ul {
+    overflow: hidden;
+    display: flex;
+    list-style-type: none;
+    padding-inline-start: 12px;
+    width: 100%;
+}
+  
+.top .img {
+  display: none;
+  height: 100%;
+  position: relative;
+  background-position: center;
+  /* background-size: cover; */
+  background-repeat: no-repeat;
+}
+
+@media (max-width:991px) {
+  .top .img {
+    background-size: cover;
+  }
+}
+
+@media (min-width:992px) {
+  .top .img {
+    background-size: contain;
+  }
+}
+
+.bottom li {
+  display: inline-block;
+  height: 10px;
+  margin: 0 3px;
+  border-radius: 4px;
+  background-color: rgba(255,255,255,.4);
+  overflow: hidden;
+  cursor: pointer;
+  transition: width .3s;
+
+  z-index: 2;
+}
+
+.bottom li, .bottom li>div {
+  width: 7.7%;
+  background-color: #f8bb56;
+}
+
+.bottom li.isActive, .bottom li.isActive>div {
+  width: 22.2%;
+  background-color: #ff6360;
+}
+
+.bottom li:first-child {
+  margin-left: 0px;
+}
+
+/* help information end */
