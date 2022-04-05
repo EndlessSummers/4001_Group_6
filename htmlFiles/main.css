@@ -25,7 +25,7 @@ label{
     overflow-x: hidden;
     transition: 0.7s;
     padding-top: 60px;
-	opacity: 0.9;
+	  opacity: 0.9;
 }
 
 .sidenav a {
@@ -40,6 +40,16 @@ label{
     color: #111;
 }
 
+.Tagsbox {
+    text-align: justify;
+}
+
+.Tagsbox label {
+    margin-right: 20px;
+    color: #111;
+    font-weight: 550;
+}
+
 .sidenav .closebtn:hover, .offcanvas .closebtn:focus{
     color: #111;
 
@@ -50,12 +60,12 @@ label{
     position: absolute;
     left: 300px;
     flex-wrap: wrap;
-    width: 510px;
+    width: 560px;
     text-align: center;
 }
 
 input[type=range] {
-    width: 300px;
+    width: 360px;
 }
 
 .sidenav .closebtn {

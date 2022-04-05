@@ -46,10 +46,37 @@ function changeV(rangename) {
     } else if (rangename === 'Participant') {
         var v = document.getElementById("Participantrange").value;
         document.getElementById("Participantvalue").innerHTML = v;
-    } else if (rangename === 'Place') {
-        var v = document.getElementById("Placerange").value;
-        document.getElementById("Placevalue").innerHTML = v;
     }
+}
+
+function ClearTags() {
+  document.getElementById("Timerange").value = "-1";
+  document.getElementById("Timevalue").innerHTML = "";
+  document.getElementById("Participantrange").value = "-1";
+  document.getElementById("Participantvalue").innerHTML = "";
+  var Place = ["Home", "Outdoor", "Center", "Interest"];
+  for (var j = 0; j < Place.length; j++) {
+    document.getElementById(Place[j]).checked = false;
+  }
+  var Tags = ["Film", "Game", "Music", "Cooking", "Sports", "Handwork"];
+  for (var i = 0; i < Tags.length; i++) {
+    document.getElementById(Tags[i] + "tag").style.color = "#111";
+    document.getElementById(Tags[i]).value = "0";
+  }
+}
+
+function ChangeTags(Tagname) {
+  var v = document.getElementById(Tagname).value;
+  if(v === '0') {
+    document.getElementById(Tagname+"tag").style.color = "#00ff00";
+    document.getElementById(Tagname).value = "1";
+  } else if (v === '1') {
+    document.getElementById(Tagname + "tag").style.color = "#ff0000";
+    document.getElementById(Tagname).value = "2";
+  } else if (v === '2') {
+    document.getElementById(Tagname + "tag").style.color = "#111";
+    document.getElementById(Tagname).value = "0";
+  }
 }
 
 function closeNav() {
