@@ -30,7 +30,7 @@ function myOnSubmit(e, info) {
 }
 
 function openNav() {
-    document.getElementById("mySidenav").style.width = "100%";
+    document.getElementById("mySidenav").style.width = "64%";
 }
 
 function changeV(rangename) {
@@ -68,13 +68,16 @@ function ClearTags() {
 function ChangeTags(Tagname) {
   var v = document.getElementById(Tagname).value;
   if(v === '0') {
-    document.getElementById(Tagname+"tag").style.color = "#00ff00";
+    document.getElementById(Tagname + "tag").style.color = "#00ff00";
+    document.getElementById(Tagname + "tag").title = "Dislike";
     document.getElementById(Tagname).value = "1";
   } else if (v === '1') {
     document.getElementById(Tagname + "tag").style.color = "#ff0000";
+    document.getElementById(Tagname + "tag").title = "Remove";
     document.getElementById(Tagname).value = "2";
   } else if (v === '2') {
     document.getElementById(Tagname + "tag").style.color = "#111";
+    document.getElementById(Tagname + "tag").title = "Like";
     document.getElementById(Tagname).value = "0";
   }
 }
