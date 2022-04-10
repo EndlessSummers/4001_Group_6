@@ -190,3 +190,11 @@ def window_forget_e(request):
 def window_cancel(request):
     if request.method == "GET":
         return render(request,'windows/window_cancel.html')
+
+def window_user(request):
+    if request.method == "GET":
+        return render(request,'windows/window_user.html')
+
+def chat(request):
+    if request.method == "GET":
+        return render(request,'chat.html')
