@@ -163,7 +163,13 @@ def index(request):
     if request.method == "GET":
         return render(request,'index.html')
     if request.method == "POST":
-        return render(request,'index.html')
+        i_email = request.POST.get("email")
+        user_list = UserInfo.objects.all()
+        for object in user_list:
+            if object.user_id == i_email:
+                message = "用户已存在！"
+                render(request, "windows/window_reg_e.html", {"message":message})
+        return render(request, "index.html")
 
 def project(request):
     if request.method == "GET":
@@ -180,8 +186,10 @@ def window_login(request):
         return render(request,'windows/window_login.html')
 
 def window_reg_e(request):
-    if request.method == "GET":
+    if request.method == "GET": 
         return render(request,'windows/window_reg_e.html')
+    
+    
 
 def window_forget_e(request):
     if request.method == "GET":
