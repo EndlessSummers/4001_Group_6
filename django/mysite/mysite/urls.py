@@ -22,6 +22,14 @@ from Funbox import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),#系统默认创建的
+    path('', views.index), # ADD_JHIN, index page
+    # path('', views.index, name="index"), # ADD_JHIN, index page
+    path('project/', views.project), # ADD_JHIN, project page
+    path('windows/window_login/', views.window_login),
+    path('windows/window_reg_e/', views.window_reg_e),
+    path('windows/window_forget_e/', views.window_forget_e),
+    path('windows/window_help/', views.window_help),
+    path('windows/window_cancel/', views.window_cancel),
     path('login/',views.login),#用于打开登录页面
     path('login/reg_email/',views.reg_email),#用于打开注册邮箱
     path('login/input_email/',views.input_email),#用于打开输入邮箱界面
