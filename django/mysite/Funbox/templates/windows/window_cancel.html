@@ -11,6 +11,7 @@
           <!-- TODO get account infomation from the user -->
           <div class="form-group">
             <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'cancel')" target="iframeName" method="post">  
+              {% csrf_token %}
               <p style="text-align: center;">
                 <input type="radio" name="Cancel_check" id="Yes" name="Yes" value="1" style="display: inline; margin-left: 10px;" required>
                 <label for="Yes" style="display: inline; margin-left: 10px;">Yes</label>
