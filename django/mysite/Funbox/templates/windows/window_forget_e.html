@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+  <body> 
+    <iframe src="" frameborder="0" name="iframeName"></iframe>
+    <div class="wrapper-ver">
+      <span id='close' onclick=''>x</span>
+        <div class="wrapper-form">
+          <p class="wrapper-form-title"> Find Password</p>
+          <div class="form-group">
+            <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'email')" target="iframeName" method="post">  
+              <label for="Email"> Email </label>
+              <input type="email" class="form-control" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
+              <input type="text" class="form-control" name="hint" value="email" style="display: none;" required>
+              <p class="alert alert-danger" id="error"> {{message}} </p>
+              <input class="btn btn-primary" type="submit" name="submit" id="Submit" value="Submit">
+              <p class="alert alert-success" id="success" style="display: none;"> We've sent a verification to your email. Please Check!</p>
+            </form>
+            <div class="bottom_info">
+                <p> Already have an account? <a href="./login.html" style="display: inline;">Sign In</a></p>
+                <p class="version_number"> Version 0.0.0 </p>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </body>
+</html>
