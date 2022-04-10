@@ -198,7 +198,6 @@ def window_reg_e(request):
     if request.method == "GET": 
         return render(request,'windows/window_reg_e.html')
     if request.method == "POST":
-        print("here")
         i_email = request.POST.get("email")
         user_list = UserInfo.objects.all()
         for object in user_list:
