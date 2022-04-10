@@ -157,36 +157,3 @@ def query(request):
         return HttpResponse('登录成功')
     else:
         return HttpResponse('用户名或密码有误')
-
-# ADD_JHIN
-def index(request):
-    if request.method == "GET":
-        return render(request,'index.html')
-    if request.method == "POST":
-        return render(request,'index.html')
-
-def project(request):
-    if request.method == "GET":
-        return render(request,'project.html')
-    if request.method == "POST":
-        return render(request,'project.html')
-
-def window_help(request):
-    if request.method == "GET":
-        return render(request,'windows/window_help.html')
-
-def window_login(request):
-    if request.method == "GET":
-        return render(request,'windows/window_login.html')
-
-def window_reg_e(request):
-    if request.method == "GET":
-        return render(request,'windows/window_reg_e.html')
-
-def window_forget_e(request):
-    if request.method == "GET":
-        return render(request,'windows/window_forget_e.html')
-
-def window_cancel(request):
-    if request.method == "GET":
-        return render(request,'windows/window_cancel.html')
