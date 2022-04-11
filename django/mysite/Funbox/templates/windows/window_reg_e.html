@@ -9,7 +9,7 @@
             <div class="wrapper-form">
                 <p class="wrapper-form-title"> Sign Up </p>
                 <div class="form-group">
-                    <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'email')"  target="iframeName" method="post">
+                    <form name="form" action="/windows/window_reg_e/" autocomplete="off" onsubmit="return myOnSubmit(event, 'email')" target="iframeName" method="post">
                         {% csrf_token %}
                         <label for="Email"> Email </label>
                         <input type="email" class="form-control" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
@@ -20,7 +20,7 @@
                     </form>
                 
                     <div class="bottom_info">
-                        <p> Already have an account? <a href="./login.html" style="display: inline;">Sign In</a></p>
+                        <p> Already have an account? <a onclick="load(event, 'login')" style="display: inline;">Sign In</a></p>
                         <p class="version_number"> Version 0.0.0 </p>
                     </div>
                 </div> 

@@ -3,10 +3,7 @@ from django.http import JsonResponse
 import pymysql
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from Funbox.models import UserInfo
-
-# def is_ajax(request):
-#     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
-# 
+from django.core.mail import send_mail
 
 # Create your views here.
 #登录页面
@@ -41,7 +38,7 @@ def input_email(request):
 #+
 def reg_email(request):
     if request.method == "GET": 
-        return  render(request,'reg_email.html')
+        return  render(request,'/windows/window_reg_e.html')
     if request.method == "POST":
         i_email = request.POST.get("email")
         user_list = UserInfo.objects.all()
@@ -49,6 +46,15 @@ def reg_email(request):
             if object.user_id == i_email:
                 message = "用户已存在！"
                 return render(request, "reg_email.html", {"message":message})
+        subject = 'Funbox Activation Email'
+        message = '''
+        Welcome to Funbox! 
+        <br> <a href = ''>Click here </a>
+        If the hyperlink is not available, you can copy this to your explorer
+        
+                                                            Funbox Team
+        '''
+        send_mail(subject=subject, message= message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])   
         return render(request, "email.html")
     
 #+
@@ -203,6 +209,7 @@ def window_reg_e(request):
 def window_forget_e(request):
     if request.method == "GET":
         return render(request,'windows/window_forget_e.html')
+    
 
 def window_cancel(request):
     if request.method == "GET":
