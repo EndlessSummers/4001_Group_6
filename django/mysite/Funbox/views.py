@@ -184,7 +184,8 @@ def index(request):
                 message = "用户已存在！"
                 return JsonResponse({'status':status, 'message': message})
         status = "success"
-        return JsonResponse('status', status)
+        message = "你的邮箱已成功提交"
+        return JsonResponse({'status':status, 'message':message})
     else:
         print("NO ENTER")
 
@@ -214,6 +215,10 @@ def window_forget_e(request):
 def window_cancel(request):
     if request.method == "GET":
         return render(request,'windows/window_cancel.html')
+
+def window_user(request):
+    if request.method == "GET":
+        return render(request,'windows/window_user.html')
 
 def ajax_submit(request):
     print("AJAX_SUBMIT called")

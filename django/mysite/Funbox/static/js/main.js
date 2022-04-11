@@ -41,8 +41,10 @@ function ajaxSubmit(info) {
       if (args["status"] == "failure") {
         $("#error").html(args["message"])
         $("#error").removeAttr('style').css("style", "");
+      } else if (args['status'] == 'success') {
+        $("#success").html(args['message'])
+        $("#success").removeAttr('style').css("style", "");
       }
-      console.log(args["message"]);
     },
     error: function(args) {
       console.log("!!!ajax failure!!!");

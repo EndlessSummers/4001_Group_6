@@ -1,11 +1,5 @@
 <html>
     <head>
-        <script>
-            $(function () {
-                if(window !=top){
-                  top.location.href=location.href;
-             }
-        </script>
     </head>
     <body>
         <iframe src="" frameborder="0" name="iframeName"></iframe>
@@ -14,18 +8,18 @@
                 <div class="wrapper-form">
                     <p class="wrapper-form-title"> Sign In </p>
                     <div class="form-group">
-                        <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'login')"  method="get">
+                        <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'login')"  method="post">
                             {% csrf_token %}   
                             <label for="Email"> Email </label>
                             <input type="email" class="form-control" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
                             <label for="Password"> Password </label>
                             <input type="password" class="form-control" name="password" id="Password" placeholder="cherry is 2 awesome!" onfocus="" onblur="" required>
                             <input type="text" class="form-control" name="hint" value="login" style="display: none;" required>
-                            <p class="alert alert-danger" id="error"> {{message}} </p>
+                            <p class="alert alert-danger" id="error" style="display: none;"></p>
 
                             <button class="btn btn-default toggle_password" onclick="togglePasswordView(event, 'normal')"> View Password</button>
                             <input class="btn btn-primary" type="submit" name="submit" id="Submit" value="Login">
-                            <p class="alert alert-success" id="success" style="display: none;"> Your message was successfully sent </p>
+                            <p class="alert alert-success" id="success" style="display: none;"></p>
                         </form>
 
                         <div class="bottom_info">
