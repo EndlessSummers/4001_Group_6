@@ -32,6 +32,7 @@ def input_email(request):
             if object.user_id == i_email:
                 return render(request, "email.html")
         message = "用户不存在！"
+        # 修改密码的时候
         return render(request, "input_email.html", {"message":message})
     
                 
@@ -176,6 +177,16 @@ def index(request):
         print("METHOD IS GET")
         return render(request,'index.html')
     elif request.method == "POST":
+        if (request.POST.hint == "email") {
+            # 注册时第一次输入邮箱
+        } else if (request.POST.hint == "login") {
+            # 用户登陆
+        } else if (request.POST.hint == "cancel") {
+            # 用户注销账户
+        } else if (request.POST.hint == "forget_email") {
+            # 通过邮箱找回密码
+        } else if (request.POST.hint == "email") {
+        }
         i_email = request.POST.get("email")
         user_list = UserInfo.objects.all()
         for object in user_list:

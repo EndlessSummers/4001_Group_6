@@ -32,6 +32,8 @@ function myOnSubmit(e, info) {
 
 function ajaxSubmit(info) {
   console.log("ajax function called");
+  $("#error").removeAttr('style').css("display", "none");
+  $("#success").removeAttr('style').css("display", "none");
   $.ajax({
     url: "/",
     method: "POST",
@@ -40,10 +42,10 @@ function ajaxSubmit(info) {
       console.log("ajax success");
       if (args["status"] == "failure") {
         $("#error").html(args["message"])
-        $("#error").removeAttr('style').css("style", "");
+        $("#error").removeAttr('style').css("display", "block");
       } else if (args['status'] == 'success') {
         $("#success").html(args['message'])
-        $("#success").removeAttr('style').css("style", "");
+        $("#success").removeAttr('style').css("display", "block");
       }
     },
     error: function(args) {
@@ -247,6 +249,8 @@ function load(e, info) {
 function edit_usr_p(e) {
   console.log('function ' + edit_usr_p.name);
 
+  $("#chg_usr_p").css("cursor", "pointer");
+
   $("#chg_usr_p").off().click(function () {
     console.log("img btn clicked");
     $("#img_slt").click();
@@ -281,6 +285,8 @@ function edit_usr_p(e) {
 
   console.log(inputs);
   $("#save").off().click(function () {
+    $("#chg_usr_p").off();
+    $("#chg_usr_p").removeAttr("style");
     console.log('function save called');
     for (i=0; i<infos.length; i++) {
       let input = infos[i].firstChild.value;
@@ -328,8 +334,6 @@ function help() {
 
   auto();
 }
-
-
 
 // function save_usr_p(e) {
 //   console.log('function ' + save_usr_p.name);
