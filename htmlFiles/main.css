@@ -3,7 +3,7 @@
 label{
 	display:inline-block;
 	width:100%;
-    font-size: 24px;
+  font-size: 24px;
 	margin-bottom:5px;
 	font-weight:400;
 }
@@ -11,34 +11,51 @@ label{
 .sidenav label{
 	display: inline;
 	width:100%;
-    font-size: 14px;
+  font-size: 14px;
+}
+
+.note {
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #f6f6f6;
+}
+
+.note .like {
+  position: absolute;
+  bottom: 0;
+  right: 25px;
+  margin-left: 50px;
+  color: #818181;
 }
 
 .sidenav {
-    height: 100%;
-    width: 0%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #fff;
-    overflow-x: hidden;
-    transition: 0.7s;
-    padding-top: 60px;
-	  opacity: 0.9;
+  height: 100%;
+  width: 0%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  overflow-x: hidden;
+  transition: 0.7s;
+  padding-top: 60px;
+  opacity: 0.9;
 }
 
 .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    transition: 0.3s;
-    float: left;
-    opacity: 1;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  transition: 0.3s;
+  float: left;
+  opacity: 1;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .rangevalue {
@@ -65,7 +82,7 @@ label{
     position: absolute;
     left: 300px;
     flex-wrap: wrap;
-    width: 560px;
+    width: 580px;
     text-align: center;
 }
 

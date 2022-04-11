@@ -35,22 +35,80 @@
     <a href="./index.html" class="navbar-brand"> FunBox </a>
   </div>
 
+  <!-- The sidebar for recommendation filter -->
   <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <div class="range">
-      <a href="#">Time&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-      <input id="Timerange" type="range" value="-1" oninput="changeV('Time')" onchange="changeV('Time')" min=0 max=9
-        step=1>
-      <a class="rangevalue" id="Timevalue"></span>
-        <a href="#">Participant</a>
-        <input id="Participantrange" type="range" value="-1" oninput="changeV('Participant')"
-          onchange="changeV('Participant')" min=1 max=11 step=1>
-        <a class="rangevalue" id="Participantvalue"></span>
-          <a href="#">Place&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-          <!-- <input id="Placerange" type="range" value="-1" oninput="changeV('Place')" onchange="changeV('Place')" min=0
-            max=10 step=1>
-          <a class="rangevalue" id="Placevalue"></span> -->
-    </div>
+    <!-- The close button -->
+    <label for="filtersubmit">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    </label>
+    <!-- Use form to submit the information of recommendation filter -->
+    <form name="filterset" action="" autocomplete="off" target="iframeName" method="get">
+      <div class="range">
+        <a>Time&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+        <input name="time" id="Timerange" type="range" value="-1" oninput="changeV('Time')" onchange="changeV('Time')"
+          min=0 max=9 step=1>
+        <a class="rangevalue" id="Timevalue"></span>
+          <a>Participant</a>
+          <input name="participant" id="Participantrange" type="range" value="-1" oninput="changeV('Participant')" min=1
+            max=11 step=1>
+          <a class="rangevalue" id="Participantvalue"></span>
+            <a>Place&nbsp&nbsp&nbsp&#8195&#8195
+              <label for="Home">
+                <input type="checkbox" name="place" value="Home" id="Home">&nbspHome&#8195
+              </label>
+              <label for="Outdoor">
+                <input type="checkbox" name="place" value="Outdoor" id="Outdoor">&nbspOutdoor&#8195
+              </label>
+              <label for="Center">
+                <input type="checkbox" name="place" value="Center" id="Center">&nbspCity Center&#8195
+              </label>
+              <label for="Interest">
+                <input type="checkbox" name="place" value="Interest" id="Interest">&nbspPlace of interest&#8195
+              </label>
+            </a>
+            <a>Tags&nbsp&nbsp&nbsp</a>
+            <a style="color: rgb(163, 163, 163); font-weight: 100;">Click a tag to like it, Double click a tag to dislike
+              it.</a>
+            <a class="Tagsbox">
+              <label for="Film">
+                <input name="film" type="button" id="Film" class="rangevalue" onclick="ChangeTags('Film')" value="0"
+                  hidden>
+                <i id="Filmtag" title="Like">Film & TV</i>
+              </label>
+              <label for="game">
+                <input name="Game" type="button" id="Game" class="rangevalue" onclick="ChangeTags('Game')" value="0"
+                  hidden>
+                <i id="Gametag" title="Like">Game</i>
+              </label>
+              <label for="Music">
+                <input name="music" type="button" id="Music" class="rangevalue" onclick="ChangeTags('Music')" value="0"
+                  hidden>
+                <i id="Musictag" title="Like">Music</i>
+              </label>
+              <label for="Cooking">
+                <input name="cooking" type="button" id="Cooking" class="rangevalue" onclick="ChangeTags('Cooking')"
+                  value="0" hidden>
+                <i id="Cookingtag" title="Like">Cooking & Food</i>
+              </label>
+              <label for="Sports">
+                <input name="sports" type="button" id="Sports" class="rangevalue" onclick="ChangeTags('Sports')" value="0"
+                  hidden>
+                <i id="Sportstag" title="Like">Sports</i>
+              </label>
+              <label for="Handwork">
+                <input name="handwork" type="button" id="Handwork" class="rangevalue" onclick="ChangeTags('Handwork')"
+                  value="0" hidden>
+                <i id="Handworktag" title="Like">Handwork</i>
+              </label>
+            </a>
+            &#8195&#8195
+            <a class="btn btn-primary btn-sm" style="width: 150px; padding-left: 0%; padding-right: 0%;"
+              onclick="ClearTags()">
+              Clear all choices
+            </a>
+      </div>
+      <input type="submit" id="filtersubmit" hidden>
+    </form>
   </div>
 
 
@@ -67,11 +125,9 @@
           <img alt="" src="./imgs/Nick_Wilde.jpeg" id="user_picture">
           <p>Nick Wilde<br> UID: 1</p>
         </div>
-        <li><a href="./index.html" title="" >Home</a></li>
-        <li><a href="./about.html" title="">About</a></li>
-        <li class="disabled"><a href="./services.html" title="">Services</a></li>
-        <li><a href="./contact.html" title="">Contact</a></li>
-        <li><a href="./components.html" title="">Components</a></li>
+        <li><a href="./index.html" title="">Home</a></li>
+        <!-- <li><a href="./about.html" title="">About</a></li> -->
+        <li><a onclick="load(event, 'help', help)" title="">Help</a></li>
         <li><a onclick="openNav()" title="">Recommendation</a></li>
         
       </ul>
@@ -123,7 +179,32 @@
     <p> Duis aute irure dolor in reprehenderit in voluptate velit esse
     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  </div>
+
+    <div class="note">
+      <!-- <img class="img-responsive" alt="" src="./assets/images/img-05.jpg"> -->
+      <a href="./project.html">
+        <div>
+          <div>
+            <h3>Vivamus vestibulum</h3>
+            <p>Discover more</p>
+          </div>
+          <p class="like">Likes: </p>
+        </div>
+      </a>
+    </div>
+    
+    <div class="note">
+      <!-- <img class="img-responsive" alt="" src="./assets/images/img-05.jpg"> -->
+      <a href="./project.html">
+        <div>
+          <div>
+            <h3>Vivamus vestibulum</h3>
+            <p>Discover more</p>
+          </div>
+          <p class="like">Likes: </p>
+        </div>
+      </a>
+    </div>
   
 </div>
     
