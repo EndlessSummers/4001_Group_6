@@ -19,14 +19,36 @@ function myOnSubmit(e, info) {
     }
 
     if (!state) {
-        console.log("INVALID INPUT");
-        e.preventDefault();
-        return false;
+      console.log("INVALID INPUT");
+      $("#error").removeAttr('style').css("style", "");
+      e.preventDefault();
+      return false;
     } else {
-        document.getElementById("success").setAttribute("display", "block");
-        console.log("VALID INPUT");
-        return true;
+      document.getElementById("success").setAttribute("display", "block");
+      console.log("VALID INPUT");
+      return ajaxSubmit(info);
     }
+}
+
+function ajaxSubmit(info) {
+  console.log("ajax function called");
+  $.ajax({
+    url: "/",
+    method: "POST",
+    data: $('form').serialize(),
+    success: function(args) {
+      console.log("ajax success");
+      if (args["status"] == "failure") {
+        $("#error").html(args["message"])
+        $("#error").removeAttr('style').css("style", "");
+      }
+      console.log(args["message"]);
+    },
+    error: function(args) {
+      console.log("!!!ajax failure!!!");
+    }
+  })
+  return false;
 }
 
 function openNav() {

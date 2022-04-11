@@ -1,7 +1,12 @@
 from django.shortcuts import render,HttpResponse,redirect
+from django.http import JsonResponse
 import pymysql
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from Funbox.models import UserInfo
 
+# def is_ajax(request):
+#     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+# 
 
 # Create your views here.
 #登录页面
@@ -160,16 +165,22 @@ def query(request):
 
 # ADD_JHIN
 def index(request):
+    print("index function called")
     if request.method == "GET":
+        print("METHOD IS GET")
         return render(request,'index.html')
-    if request.method == "POST":
+    elif request.method == "POST":
         i_email = request.POST.get("email")
         user_list = UserInfo.objects.all()
         for object in user_list:
-            if object.user_id == i_email:
+            if object.user_email == i_email:
+                status = "failure"
                 message = "用户已存在！"
-                render(request, "windows/window_reg_e.html", {"message":message})
-        return render(request, "index.html")
+                return JsonResponse({'status':status, 'message': message})
+        status = "success"
+        return JsonResponse('status', status)
+    else:
+        print("NO ENTER")
 
 def project(request):
     if request.method == "GET":
@@ -189,8 +200,6 @@ def window_reg_e(request):
     if request.method == "GET": 
         return render(request,'windows/window_reg_e.html')
     
-    
-
 def window_forget_e(request):
     if request.method == "GET":
         return render(request,'windows/window_forget_e.html')
@@ -198,3 +207,16 @@ def window_forget_e(request):
 def window_cancel(request):
     if request.method == "GET":
         return render(request,'windows/window_cancel.html')
+
+def ajax_submit(request):
+    print("AJAX_SUBMIT called")
+    if request.method == "GET":
+        print("通讯成功GET")
+        return JsonResponse({"Info": "通讯成功"})
+    elif request.method == "POST":
+        print("通讯成功POST")
+        return JsonResponse({"Info": "通讯成功"})
+    else:
+        print("通讯成功NONE")
+        return JsonResponse({"Info": "通讯成功"})
+        

@@ -30,6 +30,7 @@ urlpatterns = [
     path('windows/window_forget_e/', views.window_forget_e),
     path('windows/window_help/', views.window_help),
     path('windows/window_cancel/', views.window_cancel),
+    # path('ajax_submit/', views.ajax_submit),
     path('login/',views.login),#用于打开登录页面
     path('login/reg_email/',views.reg_email),#用于打开注册邮箱
     path('login/input_email/',views.input_email),#用于打开输入邮箱界面

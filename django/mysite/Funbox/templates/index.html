@@ -134,7 +134,6 @@
 <main class="" id="main-collapse">
 
 <!-- Add your site or app content here -->
- 
   <div class="hero-full-wrapper">
     <div class="login-description" id="event_box" hidden></div>
   </div>
@@ -276,5 +275,16 @@ document.addEventListener("scroll", function (event) {
 
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/external.js' %}"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function (event) {
+    $(document).ajaxSend(function(event, xhr, settings){
+      console.log("FUNCTIONING");
+      if (settings.type == "POST") {
+        console.log($("input[name=csrfmiddlewaretoken]").val());
+        xhr.setRequestHeader("X-CSRFToken", $("input[name=csrfmiddlewaretoken]").val());
+      }
+    });
+  });
+</script>
 </body>
 </html>
