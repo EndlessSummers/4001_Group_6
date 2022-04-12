@@ -183,12 +183,14 @@ def query(request):
 def index(request):
     print("views.py.index() called")
     if request.method == "GET":
-        print('aaa')
-        status = request.COOKIES.get('is_login')
-        print(request.session['user1'])
-        print(status)
-        print("METHOD IS GET")
-        return render(request,'index.html')
+        status = request.session['is_login']
+        if status:
+            user_infor = request.session['user1']
+            pro_style = "display:block;"
+            return render(request,'index.html',{"profile_style" : pro_style, "user_email":user_infor})
+        else:
+            pro_style = "display:none;"
+            return render(request,'index.html',{"profile_style" : pro_style}) 
     elif request.method == "POST":
         print("METHOD IS POST")
         print(request.POST)
