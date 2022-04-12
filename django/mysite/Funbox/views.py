@@ -183,7 +183,7 @@ def query(request):
 def index(request):
     print("views.py.index() called")
     if request.method == "GET":
-        status = request.session['is_login']
+        status = request.session.get('is_login')
         if status:
             user_infor = request.session['user1']
             pro_style = "display:block;"

@@ -144,3 +144,5 @@ EMAIL_USER_TLS = True
 # 以上这个配置信息，Django会自动读取，
 # 使用账号以及授权码进行登录，
 # 如果登录成功，可以发送邮件
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
