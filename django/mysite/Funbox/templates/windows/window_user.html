@@ -4,6 +4,9 @@
   <body>
   <div class="wrapper-hor">
   <span id='close' onclick=''>x</span>
+    <form>
+      {% csrf_token %}
+    </form>
     <div class="left">
         <img src="/static/imgs/Nick_Wilde.jpeg" id="chg_usr_p" alt="user" width="100">
         <input type="file" id="img_slt" onchange="" style="display: none;" accept="image/*">

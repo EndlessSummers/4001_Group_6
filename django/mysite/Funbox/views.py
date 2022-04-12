@@ -208,6 +208,9 @@ def index(request):
             forget_mail(i_email)
             print(1)
             return HttpResponse('登录成功')
+        elif (hint == "profile"):
+            print(1)
+            return HttpResponse('登录成功')
         
     else:
         print("NO ENTER")

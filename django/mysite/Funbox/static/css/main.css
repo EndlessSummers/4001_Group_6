@@ -224,7 +224,7 @@ iframe {
 }
 
 .wrapper-hor .left{
-  width: 35%;
+  width: 34.5%;
   background: linear-gradient(to right,#fff,#eee);
   padding: 30px 25px;
   border-top-left-radius: 5px;
@@ -242,7 +242,7 @@ iframe {
 }
 
 .wrapper-hor .right{
-  width: 65%;
+  width: 64.5%;
   background: #fff;
   padding: 30px 25px;
   border-top-right-radius: 5px;

@@ -56,6 +56,7 @@ function ajaxSubmit(info) {
     }
   })
   if (info === "login") return true;
+  return false;
 }
 
 function openNav() {
@@ -307,6 +308,7 @@ function edit_usr_p(e) {
     dict["likes"] = inputs[4];
     dict["want"] = inputs[5];
     dict["hint"] = "profile";
+    dict['csrfmiddlewaretoken'] = $("input[name=csrfmiddlewaretoken]").val();
 
     $.ajax({
       url: "/",
