@@ -12,7 +12,7 @@ class Activity(models.Model):
     activities_id = models.IntegerField(db_column='Activity_id', primary_key=True)  # Field name made lowercase.
     activity_desc = models.CharField(db_column='Activity_desc', max_length=45, blank=True, null=True)  # Field name made lowercase.
     activity_timelength = models.IntegerField(db_column='Activity_timeLength', blank=True, null=True)  # Field name made lowercase.
-    activity_photo = models.ImageField(upload_to='photos', default='user1.jpg')
+    #activity_photo = models.ImageField(upload_to='photos', default='user1.jpg')
     class Meta:
         db_table = 'activity'
 
@@ -20,9 +20,9 @@ class Activities(models.Model):
     activities_id = models.IntegerField(db_column='Activities_id', primary_key=True)  # Field name made lowercase.
     activity_desc = models.CharField(db_column='Activity_desc', max_length=45, blank=True, null=True)  # Field name made lowercase.
     activity_timelength = models.IntegerField(db_column='Activity_timeLength', blank=True, null=True)  # Field name made lowercase.
-    activity_photo = models.ImageField(upload_to='photos', default='user1.jpg')
+    activity_photo = models.ImageField(blank = True, upload_to='photos', default='activity.jpg')
     class Meta:
-        managed = False
+        managed = True
         db_table = 'activities'
 
 
@@ -109,9 +109,10 @@ class UserInfo(models.Model):
     password = models.CharField(db_column='Password', max_length=45)  # Field name made lowercase.
     user_email = models.CharField(db_column='User_Email', max_length=45)  # Field name made lowercase.
     user_name = models.CharField(db_column='User_Name', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    user_photo = models.ImageField(blank = True, upload_to='photos_user', default='user1.jpg')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'user_info'
 
 

@@ -38,14 +38,15 @@ def input_email(request):
         message = "用户不存在！"
         # 修改密码的时候
         return render(request, "input_email.html", {"message":message})
-    
-                
+                   
 #+
 def reg_email(i_email):
     user_list = UserInfo.objects.all()
     print("entered i_email")
+    print(i_email)
     for object in user_list:
-        if object.user_email == i_email:
+        print(object.user_id)
+        if object.user_id == i_email:
             message = "用户已存在！"
             status = "failure"
             return JsonResponse({'status':status, 'message': message})
@@ -71,7 +72,9 @@ def reg_form(request):
         i_password = request.POST.get("password")
         user_list = UserInfo.objects.all()
         flag = 0
+        print("hithere")
         for object in user_list:
+            print(object.user_id, end='\n')
             if object.user_id == i_email:
                 object.password = i_password
                 object.save()
@@ -179,11 +182,12 @@ def query(request):
 
 # ADD_JHIN
 def index(request):
-    print("index function called")
+    print("views.py.index() called")
     if request.method == "GET":
         print("METHOD IS GET")
         return render(request,'index.html')
     elif request.method == "POST":
+        print("METHOD IS POST")
         hint = request.POST['hint']
         if (hint == "email"):
             # 注册时第一次输入邮箱

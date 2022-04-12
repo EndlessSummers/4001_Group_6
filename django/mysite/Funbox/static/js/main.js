@@ -20,12 +20,15 @@ function myOnSubmit(e, info) {
 
     if (!state) {
       console.log("INVALID INPUT");
-      $("#error").removeAttr('style').css("style", "");
+      $("#error").removeAttr('style');
       e.preventDefault();
       return false;
     } else {
-      document.getElementById("success").setAttribute("display", "block");
       console.log("VALID INPUT");
+      e.preventDefault();
+      // return false;
+      // console.log(info);
+      // console.log("checkpoint1");
       return ajaxSubmit(info);
     }
 }
@@ -52,7 +55,6 @@ function ajaxSubmit(info) {
       console.log("!!!ajax failure!!!");
     }
   })
-  return false;
 }
 
 function openNav() {
