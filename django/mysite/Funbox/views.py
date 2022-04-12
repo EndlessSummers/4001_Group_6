@@ -37,26 +37,24 @@ def input_email(request):
     
                 
 #+
-def reg_email(request):
-    if request.method == "GET": 
-        return  render(request,'/windows/window_reg_e.html')
-    if request.method == "POST":
-        i_email = request.POST.get("email")
-        user_list = UserInfo.objects.all()
-        for object in user_list:
-            if object.user_id == i_email:
-                message = "用户已存在！"
-                return render(request, "reg_email.html", {"message":message})
-        subject = 'Funbox Activation Email'
-        message = '''
-        Welcome to Funbox! 
-        <br> <a href = ''>Click here </a>
-        If the hyperlink is not available, you can copy this to your explorer
-        
-                                                            Funbox Team
-        '''
-        send_mail(subject=subject, message= message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])   
-        return render(request, "email.html")
+def reg_email(i_email):
+    user_list = UserInfo.objects.all()
+    for object in user_list:
+        if object.user_id == i_email:
+            message = "用户已存在！"
+            return JsonResponse({'status':status, 'message': message})
+    subject = 'Funbox Activation Email'
+    email_message = '''
+    Welcome to Funbox! 
+    <br> <a href = ''>Click here </a>
+    If the hyperlink is not available, you can copy this to your explorer
+    
+                                                        Funbox Team
+    '''
+    send_mail(subject=subject, message= email_message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
+    status = "success"
+    message = "你的邮箱已成功提交"   
+    return  JsonResponse({'status':status, 'message':message})
     
 #+
 def reg_form(request):
@@ -177,26 +175,21 @@ def index(request):
         print("METHOD IS GET")
         return render(request,'index.html')
     elif request.method == "POST":
-        if (request.POST.hint == "email") {
+        hint = request.POST['hint']
+        if (hint == "email"):
             # 注册时第一次输入邮箱
-        } else if (request.POST.hint == "login") {
+            i_email = request.POST.get("email")
+            reg_email(i_email) 
+        elif (hint == "login"):
             # 用户登陆
-        } else if (request.POST.hint == "cancel") {
+            print(1)
+        elif (hint == "cancel"):
             # 用户注销账户
-        } else if (request.POST.hint == "forget_email") {
+            print(1)
+        elif (hint == "forget_email"):
             # 通过邮箱找回密码
-        } else if (request.POST.hint == "email") {
-        }
-        i_email = request.POST.get("email")
-        user_list = UserInfo.objects.all()
-        for object in user_list:
-            if object.user_email == i_email:
-                status = "failure"
-                message = "用户已存在！"
-                return JsonResponse({'status':status, 'message': message})
-        status = "success"
-        message = "你的邮箱已成功提交"
-        return JsonResponse({'status':status, 'message':message})
+            print(1)
+        
     else:
         print("NO ENTER")
 
