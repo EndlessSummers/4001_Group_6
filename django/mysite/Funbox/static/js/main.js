@@ -35,27 +35,36 @@ function myOnSubmit(e, info) {
 
 function ajaxSubmit(info) {
   console.log("ajax function called");
+  let string = {};
   $("#error").removeAttr('style').css("display", "none");
   $("#success").removeAttr('style').css("display", "none");
   $.ajax({
     url: "/",
     method: "POST",
+    async: false,
     data: $('form').serialize(),
     success: function(args) {
       console.log("ajax success");
+      string["status"] = args["status"];
       if (args["status"] == "failure") {
         $("#error").html(args["message"])
         $("#error").removeAttr('style').css("display", "block");
+        // return false;
       } else if (args['status'] == 'success') {
         $("#success").html(args['message'])
         $("#success").removeAttr('style').css("display", "block");
+        // return true;
       }
     },
     error: function(args) {
       console.log("!!!ajax failure!!!");
     }
   })
-  if (info === "login") return true;
+  if (info == "login") {
+    console.log(string["status"]);
+    if (string["status"] == "failure") return false;
+    else return true;
+  }
   return false;
 }
 

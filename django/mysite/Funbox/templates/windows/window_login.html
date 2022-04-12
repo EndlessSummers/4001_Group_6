@@ -8,7 +8,7 @@
                 <div class="wrapper-form">
                     <p class="wrapper-form-title"> Sign In </p>
                     <div class="form-group">
-                        <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'login')" target="_self" method="post">
+                        <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'login')" target="_blank" method="post">
                             {% csrf_token %}   
                             <label for="Email"> Email </label>
                             <input type="email" class="form-control" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
