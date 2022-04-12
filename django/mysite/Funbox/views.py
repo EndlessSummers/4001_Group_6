@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponse,redirect
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 import pymysql
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from Funbox.models import UserInfo
@@ -18,7 +18,10 @@ def login(request, i_email, i_password):
             print(object.user_id)
             if object.user_id == i_email and object.password == i_password:
                 print("success! refresh")
-                return render(request, "index.html")
+                rep = HttpResponseRedirect('/')
+                request.session["is_login"] = True
+                request.session["user1"] = object.user_id
+                return rep
         message = "user email or password error!"
         status = "failure"
         return JsonResponse({'status':status, 'message': message})
@@ -180,6 +183,10 @@ def query(request):
 def index(request):
     print("views.py.index() called")
     if request.method == "GET":
+        print('aaa')
+        status = request.COOKIES.get('is_login')
+        print(request.session['user1'])
+        print(status)
         print("METHOD IS GET")
         return render(request,'index.html')
     elif request.method == "POST":
