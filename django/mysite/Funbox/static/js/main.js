@@ -55,6 +55,7 @@ function ajaxSubmit(info) {
       console.log("!!!ajax failure!!!");
     }
   })
+  if (info === "login") return true;
 }
 
 function openNav() {

@@ -11,19 +11,17 @@ from django.urls import reverse
 
 # Create your views here.
 #登录页面
-def login(request):
+def login(request, i_email, i_password):
     #指定要访问的页面，render的功能：讲请求的页面结果提交给客户端
-    if request.method == "GET":
-        return render(request,'login.html')
-    if request.method == "POST":
-        i_email = request.POST.get("email")
-        i_password = request.POST.get("password")
         user_list = UserInfo.objects.all()
         for object in user_list:
+            print(object.user_id)
             if object.user_id == i_email and object.password == i_password:
-                return render(request, "userpage.html")
-        message = "用户名或密码错误！"
-        return render(request, "login.html", {"message":message}) 
+                print("success! refresh")
+                return render(request, "index.html")
+        message = "user email or password error!"
+        status = "failure"
+        return JsonResponse({'status':status, 'message': message})
     
 #+
 def input_email(request):
@@ -42,8 +40,6 @@ def input_email(request):
 #+
 def reg_email(i_email):
     user_list = UserInfo.objects.all()
-    print("entered i_email")
-    print(i_email)
     for object in user_list:
         print(object.user_id)
         if object.user_id == i_email:
@@ -195,9 +191,12 @@ def index(request):
             print("entered email")
             return reg_email(i_email) 
         elif (hint == "login"):
+            i_email = request.POST.get("email")
+            i_psd = request.POST.get("password")
+            
             # 用户登陆
-            print(1)
-            return HttpResponse('登录成功')
+            print("login ing")
+            return login(request, i_email, i_psd)
         elif (hint == "cancel"):
             # 用户注销账户
             print(1)
