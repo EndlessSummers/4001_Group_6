@@ -43,9 +43,11 @@ def input_email(request):
 #+
 def reg_email(i_email):
     user_list = UserInfo.objects.all()
+    print("entered i_email")
     for object in user_list:
-        if object.user_id == i_email:
+        if object.user_email == i_email:
             message = "用户已存在！"
+            status = "failure"
             return JsonResponse({'status':status, 'message': message})
     subject = 'Funbox Activation Email'
     email_message = '''
@@ -186,6 +188,7 @@ def index(request):
         if (hint == "email"):
             # 注册时第一次输入邮箱
             i_email = request.POST.get("email")
+            print("entered email")
             return reg_email(i_email) 
         elif (hint == "login"):
             # 用户登陆
