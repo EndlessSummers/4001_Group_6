@@ -1,9 +1,20 @@
+<<<<<<< Updated upstream
 from django.shortcuts import render,HttpResponse,redirect
 from django.http import JsonResponse
+=======
+from django.shortcuts import render,HttpResponse,redirect, HttpResponseRedirect
+>>>>>>> Stashed changes
 import pymysql
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from Funbox.models import UserInfo
+<<<<<<< Updated upstream
 from django.core.mail import send_mail
+=======
+
+from django.contrib import messages
+from django.urls import reverse
+
+>>>>>>> Stashed changes
 
 # Create your views here.
 #登录页面
@@ -177,6 +188,7 @@ def index(request):
     if request.method == "GET":
         print("METHOD IS GET")
         return render(request,'index.html')
+<<<<<<< Updated upstream
     elif request.method == "POST":
         hint = request.POST['hint']
         if (hint == "email"):
@@ -201,6 +213,18 @@ def index(request):
     else:
         print("NO ENTER")
         return HttpResponse('登录成功')
+=======
+    if request.method == "POST":
+        i_email = request.POST.get("email")
+        user_list = UserInfo.objects.all()
+        for object in user_list:
+            if object.user_id == i_email:
+                messages.error(request, '用户名或密码不正确') 
+                return render(request, "index.html")
+                #return HttpResponse(message)
+                #render(request, "windows/window_reg_e.html", {"message":message})
+        return render(request, "index.html")
+>>>>>>> Stashed changes
 
 def project(request):
     if request.method == "GET":

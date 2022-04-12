@@ -6,12 +6,21 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.db.models import Model
+
+class Activity(models.Model):
+    activities_id = models.IntegerField(db_column='Activity_id', primary_key=True)  # Field name made lowercase.
+    activity_desc = models.CharField(db_column='Activity_desc', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    activity_timelength = models.IntegerField(db_column='Activity_timeLength', blank=True, null=True)  # Field name made lowercase.
+    activity_photo = models.ImageField(upload_to='photos', default='user1.jpg')
+    class Meta:
+        db_table = 'activity'
 
 class Activities(models.Model):
     activities_id = models.IntegerField(db_column='Activities_id', primary_key=True)  # Field name made lowercase.
     activity_desc = models.CharField(db_column='Activity_desc', max_length=45, blank=True, null=True)  # Field name made lowercase.
     activity_timelength = models.IntegerField(db_column='Activity_timeLength', blank=True, null=True)  # Field name made lowercase.
-
+    activity_photo = models.ImageField(upload_to='photos', default='user1.jpg')
     class Meta:
         managed = False
         db_table = 'activities'
