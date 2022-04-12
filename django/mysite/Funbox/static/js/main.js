@@ -25,7 +25,7 @@ function myOnSubmit(e, info) {
       return false;
     } else {
       console.log("VALID INPUT");
-      e.preventDefault();
+      // e.preventDefault();
       // return false;
       // console.log(info);
       // console.log("checkpoint1");
@@ -275,31 +275,61 @@ function edit_usr_p(e) {
   
   var box = document.getElementById('event_box')
   var infos = box.getElementsByTagName('p');
-  var inputs = [];
+  var origin = [];
   for (i=0; i<infos.length; i++) {
     let inputText = "<input type='text' value='' style='width: 100%;'>";
     let input = infos[i].innerHTML;
-    inputs.push(input);
+    origin.push(input);
     infos[i].innerHTML = inputText.replace(/value=''/, function(x) {
       return x.slice(0, x.length-1) + input + x.slice(x.length-1);
     })
     // replace does not modify the original text;
   }
 
-  console.log(inputs);
+  console.log(origin);
   $("#save").off().click(function () {
+    var inputs = [];
     $("#chg_usr_p").off();
     $("#chg_usr_p").removeAttr("style");
     console.log('function save called');
     for (i=0; i<infos.length; i++) {
       let input = infos[i].firstChild.value;
+      inputs.push(input);
       console.log("input " + i + " " + input);
       infos[i].innerHTML = input;
     }
 
-    if (infos[0].innerHTML != inputs[0]) { // user name changed
+    var dict = {};
+    dict["name"] = inputs[0];
+    dict["title"] = inputs[1];
+    dict["email"] = inputs[2];
+    dict["phone"] = inputs[3];
+    dict["likes"] = inputs[4];
+    dict["want"] = inputs[5];
+    dict["hint"] = "profile";
+
+    $.ajax({
+      url: "/",
+      method: "POST",
+      data: dict,
+      success: function(args) {
+        console.log("ajax success");
+        if (args["status"] == "failure") {
+          $("#error").html(args["message"])
+          $("#error").removeAttr('style').css("display", "block");
+        } else if (args['status'] == 'success') {
+          $("#success").html(args['message'])
+          $("#success").removeAttr('style').css("display", "block");
+        }
+      },
+      error: function(args) {
+        console.log("!!!ajax failure!!!");
+      }
+    })
+
+    if (infos[0].innerHTML != origin[0]) { // user name changed
       var user_name = document.getElementById("user-profile").getElementsByTagName('p')[0];
-      var new_name = user_name.innerHTML.replace(inputs[0], infos[0].innerHTML);
+      var new_name = user_name.innerHTML.replace(origin[0], infos[0].innerHTML);
       user_name.innerHTML = new_name;
     }
 

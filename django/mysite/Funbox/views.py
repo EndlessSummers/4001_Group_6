@@ -184,6 +184,7 @@ def index(request):
         return render(request,'index.html')
     elif request.method == "POST":
         print("METHOD IS POST")
+        print(request.POST)
         hint = request.POST['hint']
         if (hint == "email"):
             # 注册时第一次输入邮箱
