@@ -74,6 +74,9 @@ def reg_form(request):
             UserInfo.objects.create(user_id = i_email, password = i_password)
         return render(request, "success.html")
 
+def forget_mail(i_email):
+    #to do
+    return 1
 #+
 def user_page(request):
     return render(request, 'userpage.html')
@@ -179,19 +182,25 @@ def index(request):
         if (hint == "email"):
             # 注册时第一次输入邮箱
             i_email = request.POST.get("email")
-            reg_email(i_email) 
+            return reg_email(i_email) 
         elif (hint == "login"):
             # 用户登陆
             print(1)
+            return HttpResponse('登录成功')
         elif (hint == "cancel"):
             # 用户注销账户
             print(1)
+            return HttpResponse('登录成功')
         elif (hint == "forget_email"):
             # 通过邮箱找回密码
+            i_email = request.POST.get("email")
+            forget_mail(i_email)
             print(1)
+            return HttpResponse('登录成功')
         
     else:
         print("NO ENTER")
+        return HttpResponse('登录成功')
 
 def project(request):
     if request.method == "GET":

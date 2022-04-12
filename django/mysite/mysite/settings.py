@@ -83,7 +83,7 @@ DATABASES = {
         'PORT': 3306,  # 数据库端口
         'USER': 'root',  # 数据库用户名
         'PASSWORD': '51526665',  # 数据库用户密码
-        'NAME': 'funbox'  # 数据库名字
+        'NAME': 'mydb'  # 数据库名字
     }
 }
 
