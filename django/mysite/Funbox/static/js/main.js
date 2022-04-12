@@ -56,6 +56,7 @@ function ajaxSubmit(info) {
     }
   })
   if (info === "login") return true;
+  return false;
 }
 
 function openNav() {

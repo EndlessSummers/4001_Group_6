@@ -19,6 +19,7 @@ from django.shortcuts import render
 from django.shortcuts import HttpResponse
 import pymysql
 from Funbox import views
+#from cookie import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),#系统默认创建的
