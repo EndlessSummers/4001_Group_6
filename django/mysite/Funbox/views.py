@@ -231,17 +231,12 @@ def index(request):
         elif (hint == "forget_email"):
             # 通过邮箱找回密码
             i_email = request.POST.get("email")
-<<<<<<< Updated upstream
             forget_mail(i_email)
             print(1)
             return HttpResponse('登录成功')
         elif (hint == "profile"):
             print(1)
             return HttpResponse('登录成功')
-=======
-    
-            return forget_mail(i_email)
->>>>>>> Stashed changes
         
     else:
         print("NO ENTER")
