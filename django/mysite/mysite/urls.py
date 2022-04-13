@@ -33,13 +33,6 @@ urlpatterns = [
     path('windows/window_help/', views.window_help),
     path('windows/window_cancel/', views.window_cancel),
     path('windows/window_user/', views.window_user),
-    path('login/',views.login),#用于打开登录页面
-    path('login/reg_email/',views.reg_email),#用于打开注册邮箱
-    path('login/input_email/',views.input_email),#用于打开输入邮箱界面
-    path('userpage/',views.user_page, name= "userpage"),
-    path('userpage/input_changepassword/', views.change_pswd,name = "cg_pswd"),
-    path('userpage/input_cancelcheck/', views.cancel_check, name = "cg_cchk"),
-    path('login/reg_email/email/',views.email, name = "email"), #注册
-    path('login/reg_form/', views.reg_form, name = "reg_form"),
-    path('login/reg_form/success/', views.success, name = "success"),
+    # path('reg_form', views.reg_form),
+    path('reg_form/', views.reg_form, name = "reg_form"),
 ]

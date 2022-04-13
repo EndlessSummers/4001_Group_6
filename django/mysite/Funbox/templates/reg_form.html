@@ -1,44 +1,189 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-    <link rel="stylesheet" href="{% static 'css/input.css' %}">
-    <title>register_info</title>
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width,initial-scale=1" name="viewport">
+  <meta content="Page description" name="description">
+  <meta name="google" content="notranslate" />
+  <meta content="Mashup templates have been developped by Orson.io team" name="author">
+
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+  
+  <link href="./assets/apple-icon-180x180.png" rel="apple-touch-icon">
+  <link href="./assets/apple-icon-180x180.png" rel="icon">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
+
+  <title>Title page</title>  
+
+  <link href="{% static 'css/external.css' %}" rel="stylesheet">
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
 </head>
-<body onload="">
-        <div class="out_box">
-            <div class="logo"> </div>
-            <p class="center_bold"> Enter Your Information</p>
-            <!-- TODO: add action target scripts for submission-->
-            <div class="form_align">
-                <form name="form" action="/login/reg_form/" autocomplete="off" onsubmit="return myOnSubmit(event, 'register')" target="_blank" method="POST">
-                    {% csrf_token %}  
-                    <label for="Email"> Email </label>
-                    <input type="text" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
-                    <p class="error_msg" id="email_e" hidden> some error happened</p>
-                
-                    <label for="Password"> Password </label>
-                    <input type="password" name="password" id="Password" placeholder="cherry is 2 awesome!" onfocus="" onblur="" required>
-                    <p class="error_msg" id="password_e" hidden> some error happened</p>
-                
-                    <label for="Repeat"> Repeat Password </label>
-                    <input type="password" name="repeat" id="Repeat" placeholder="cherry is 2 awesome!" onchange="" required>
-                    <p class="error_msg" id="repeat_e" hidden> some error happened</p>
 
-                    <button class="toggle_password" onclick="togglePasswordView(event, 'repeat')"> View Password</button>
-                    <input class="btn-primary" type="submit" name="submit" id="Submit" value="Register">
-                </form>
+<body>
+<header class="">
+  <div class="navbar navbar-default visible-xs">
+    <button type="button" class="navbar-toggle collapsed">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a href="/" class="navbar-brand"> FunBox </a>
+  </div>
 
-                <div class="bottom_info">
-                    <p> Already have an account? <a href="/login" style="display: inline;">Sign In</a></p>
-                    <p class="version_number"> Version 0.0.0 </p>
-                </div>
-            </div> 
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="range">
+      <a>Time&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+      <input id="Timerange" type="range" value="-1" oninput="changeV('Time')" onchange="changeV('Time')" min=0 max=9
+        step=1>
+      <a class="rangevalue" id="Timevalue"></span>
+        <a>Participant</a>
+        <input id="Participantrange" type="range" value="-1" oninput="changeV('Participant')"
+          onchange="changeV('Participant')" min=1 max=11 step=1>
+        <a class="rangevalue" id="Participantvalue"></span>
+          <a>Place&nbsp&nbsp&nbsp&#8195&#8195
+            <label for="Home">
+              <input type="checkbox" name="PlaceChoice" value="Home" id="Home">&nbspHome&#8195
+            </label>
+            <label for="Outdoor">
+              <input type="checkbox" name="PlaceChoice" value="Outdoor" id="Outdoor">&nbspOutdoor&#8195
+            </label>
+            <label for="Center">
+              <input type="checkbox" name="PlaceChoice" value="Center" id="Center">&nbspCity Center&#8195
+            </label>
+            <label for="Interest">
+              <input type="checkbox" name="PlaceChoice" value="Interest" id="Interest">&nbspPlace of interest&#8195
+            </label>
+          </a>
+          <a>Tags&nbsp&nbsp&nbsp</a>
+          <a style="color: rgb(163, 163, 163); font-weight: 100;">Click a tag to like it, Double click a tag to dislike it.</a>
+          <a class="Tagsbox">
+            <label for="Film">
+              <input type="button" id="Film" class="rangevalue" onclick="ChangeTags('Film')" value="0" hidden>
+              <i id="Filmtag" title="Like">Film & TV</i>
+            </label>
+            <label for="Game">
+              <input type="button" id="Game" class="rangevalue" onclick="ChangeTags('Game')" value="0" hidden>
+              <i id="Gametag" title="Like">Game</i>
+            </label>
+            <label for="Music">
+              <input type="button" id="Music" class="rangevalue" onclick="ChangeTags('Music')" value="0" hidden>
+              <i id="Musictag" title="Like">Music</i>
+            </label>
+            <label for="Cooking">
+              <input type="button" id="Cooking" class="rangevalue" onclick="ChangeTags('Cooking')" value="0" hidden>
+              <i id="Cookingtag" title="Like">Cooking & Food</i>
+            </label>
+            <label for="Sports">
+              <input type="button" id="Sports" class="rangevalue" onclick="ChangeTags('Sports')" value="0" hidden>
+              <i id="Sportstag" title="Like">Sports</i>
+            </label>
+            <label for="Handwork">
+              <input type="button" id="Handwork" class="rangevalue" onclick="ChangeTags('Handwork')" value="0" hidden>
+              <i id="Handworktag" title="Like">Handwork</i>
+            </label>
+          </a>
+          &#8195&#8195
+          <a class="btn btn-primary btn-sm" style="width: 150px; padding-left: 0%; padding-right: 0%;"
+            onclick="ClearTags()">
+            Clear all choices
+          </a>
+    </div>
+  </div>
+
+
+  <nav class="sidebar">
+    <div class="navbar-collapse" id="navbar-collapse">
+      <div class="site-header hidden-xs">
+          <a class="site-brand" href="/" title="">
+            <img class="img-responsive site-logo" alt="" src="/static/imgs/funbox.png" style="width: 200px; height: 100px;">
+            FunBox
+          </a>
+      </div>
+      <ul class="nav">
+        <div class="user-profile" onclick="load(event, 'edit')" id="user-profile" style="display: none;">
+          <img alt="" src="/static/imgs/Nick_Wilde.jpeg" id="user_picture">
+          <p>Nick_Wilde<br> {{user_email}} </p>
         </div>
-    <script src="{% static 'js/main.js' %}" type="text/javascript"></script>
+        <li><a href="/" title="" >Home</a></li>
+        <li><a onclick="openNav()" title="">Recommendation</a></li>
+        <li><a onclick="load(event, 'help')" title="">Help</a></li>
+      </ul>
+
+      <nav class="nav-footer">
+        <p style="font-size: 12px;"> Enjoy our work? Tell us how you feel by</p>
+        <ul class="nav">
+          <li><a class="btn btn-default" onclick="load(event, 'login')"> Log in </a></li>
+          <li><a class="btn btn-primary" onclick="load(event, 'signUp')"> Sign up </a></li>
+        </ul>
+        <p>
+          <a class="btn btn-info btn-sm" onclick="load(event, 'forget')" style="display: inline; font-size: 10px;">Forget password</a>
+          <a class="btn btn-info btn-sm" onclick="load(event, 'cancel')" style="display: inline; font-size: 10px;">Cancel Account</a>
+        </p>
+      </nav>  
+    </div> 
+  </nav>
+</header>
+
+<main class="" id="main-collapse">
+    <iframe src="" frameborder="0" name="iframeName"></iframe>
+    <div class="hero-full-wrapper">
+      <div class="login-desciprtion" style="width: inherit; height: calc(100vh - 80px);">
+        <div class="wrapper-ver">
+          <div class="wrapper-form">
+            <p class="wrapper-form-title"> Sign Up </p>
+            <div class="form-group">
+              {% csrf_token %}
+              <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'register')" target="iframeName" method="post">  
+                <label for="Email"> Email </label>
+                <input type="text" class="form-control" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
+
+                <label for="Password"> Password </label>
+                <input type="password" class="form-control" name="password" id="Password" placeholder="cherry is 2 awesome!" onfocus="" onblur="" required>
+
+                <label for="Repeat"> Repeat Password </label>
+                <input type="password" class="form-control" name="repeat" id="Repeat" placeholder="cherry is 2 awesome!" onchange="" required>
+                <input type="text" class="form-control" name="hint" value="register" style="display: none;" required>
+                <p class="alert alert-danger" id="error" style="display: none;"></p>
+                
+                <button class="btn btn-default toggle_password" onclick="togglePasswordView(event, 'repeat')"> View Password</button>
+                <input class="btn btn-primary" type="submit" name="submit" id="Submit" value="Submit">
+                <p class="alert alert-success" id="success" style="display: none;"></p>
+              </form>
+              <div class="bottom_info">
+                  <p> Already have an account? <a href="./login.html" style="display: inline;">Sign In</a></p>
+                  <p class="version_number"> Version 0.0.0 </p>
+              </div>
+            </div> 
+          </div> 
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+      navbarToggleSidebar();
+      navActivePage();
+    });
+  </script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/external.js' %}"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function (event) {
+    $(document).ajaxSend(function(event, xhr, settings){
+      console.log("FUNCTIONING");
+      if (settings.type == "POST") {
+        console.log($("input[name=csrfmiddlewaretoken]").val());
+        xhr.setRequestHeader("X-CSRFToken", $("input[name=csrfmiddlewaretoken]").val());
+      }
+    });
+  });
+</script>
 </body>
 </html>

@@ -289,4 +289,7 @@ def ajax_submit(request):
 def activate(request):
     return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
 
+# def reg_email(request):
+#     if (request.method == "GET"):
+#         return render(request, 'reg_form.html')
         
