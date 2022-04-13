@@ -139,8 +139,8 @@
           <div class="wrapper-form">
             <p class="wrapper-form-title"> Sign Up </p>
             <div class="form-group">
-              {% csrf_token %}
-              <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'register')" target="iframeName" method="post">  
+              <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'register')" target="_self" method="post">
+                {% csrf_token %}  
                 <label for="Email"> Email </label>
                 <input type="text" class="form-control" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
 

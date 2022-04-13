@@ -29,6 +29,7 @@ function myOnSubmit(e, info) {
       // return false;
       // console.log(info);
       // console.log("checkpoint1");
+      if (info == "register") return true;
       return ajaxSubmit(info);
     }
 }
@@ -60,10 +61,14 @@ function ajaxSubmit(info) {
       console.log("!!!ajax failure!!!");
     }
   })
+  console.log(info);
   if (info == "login") {
     console.log(string["status"]);
     if (string["status"] == "failure") return false;
     else return true;
+  } else if (info == "register") {
+    console.log("entered register");
+    return true;
   }
   return false;
 }

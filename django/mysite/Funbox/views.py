@@ -20,7 +20,7 @@ def login(request, i_email, i_password):
         user_list = UserInfo.objects.all()
         for object in user_list:
             print(object.user_id)
-            if object.user_email == i_email and object.password == i_password:
+            if object.user_id == i_email and object.password == i_password:
                 print("success! refresh")
                 rep = HttpResponseRedirect('/')
                 request.session["is_login"] = True
@@ -49,7 +49,7 @@ def reg_email(request, i_email):
     user_list = UserInfo.objects.all()
     for object in user_list:
         print(object.user_id)
-        if object.user_email == i_email:
+        if object.user_id == i_email:
             message = "用户已存在！"
             status = "failure"
             return JsonResponse({'status':status, 'message': message})
@@ -69,20 +69,13 @@ def reg_form(request):
     if (request.method == "GET"):
         return render(request, 'reg_form.html')
     if request.method == "POST":
+        print("jinlaile")
         i_email = request.POST.get("email")
         i_password = request.POST.get("password")
-        user_list = UserInfo.objects.all()
-        flag = 0
-        print("hithere")
-        for object in user_list:
-            print(object.user_id, end='\n')
-            if object.user_id == i_email:
-                object.password = i_password
-                object.save()
-                flag = 1
-        if flag == 0:
-            UserInfo.objects.create(user_id = i_email, password = i_password)
-        return render(request, "success.html")
+        UserInfo.objects.create(user_id = i_email, password = i_password)
+
+        rep = redirect('/',True)
+        return rep
 
 def forget_mail(i_email):
     #to do
@@ -238,6 +231,8 @@ def index(request):
         elif (hint == "profile"):
             print(1)
             return HttpResponse('登录成功')
+        elif (hint == "register"):
+            return reg_form(request)
         
     else:
         print("NO ENTER")
