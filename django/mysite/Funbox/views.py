@@ -4,6 +4,7 @@ import pymysql
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from Funbox.models import UserInfo
 from django.core.mail import send_mail
+import random
 
 from django.contrib import messages
 from django.urls import reverse
@@ -84,7 +85,23 @@ def reg_form(request):
 
 def forget_mail(i_email):
     #to do
-    return 1
+    user_list = UserInfo.objects.all()
+    for object in user_list:
+        if object.user_id == i_email:
+            message = "用户已存在！"
+            return JsonResponse({'status':status, 'message': message})
+    subject = 'Funbox Activation Email'
+    email_message = '''
+    This is FUNBOX team. Click here to reset your password
+    <br> <a href = ''>Click here </a>
+    If the hyperlink is not available, you can copy this to your explorer
+    
+                                                        Funbox Team
+    '''
+    send_mail(subject=subject, message= email_message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
+    status = "success"
+    message = "你的邮箱已成功提交"   
+    return JsonResponse({'status':status, 'message':message})
 #+
 def user_page(request):
     return render(request, 'userpage.html')
@@ -214,12 +231,17 @@ def index(request):
         elif (hint == "forget_email"):
             # 通过邮箱找回密码
             i_email = request.POST.get("email")
+<<<<<<< Updated upstream
             forget_mail(i_email)
             print(1)
             return HttpResponse('登录成功')
         elif (hint == "profile"):
             print(1)
             return HttpResponse('登录成功')
+=======
+    
+            return forget_mail(i_email)
+>>>>>>> Stashed changes
         
     else:
         print("NO ENTER")

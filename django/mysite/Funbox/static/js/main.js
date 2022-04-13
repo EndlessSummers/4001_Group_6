@@ -69,7 +69,7 @@ function ajaxSubmit(info) {
 }
 
 function openNav() {
-    document.getElementById("mySidenav").style.width = "64%";
+    document.getElementById("mySidenav").style.width = "100%";
 }
 
 function changeV(rangename) {
