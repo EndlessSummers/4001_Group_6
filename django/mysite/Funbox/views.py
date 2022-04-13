@@ -6,6 +6,9 @@ from Funbox.models import UserInfo
 from django.core.mail import send_mail
 import random
 
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+# from .tokens import account_activation_token
 from django.contrib import messages
 from django.urls import reverse
 
@@ -42,23 +45,21 @@ def input_email(request):
         return render(request, "input_email.html", {"message":message})
                    
 #+
-def reg_email(i_email):
+def reg_email(request, i_email):
     user_list = UserInfo.objects.all()
     for object in user_list:
         print(object.user_id)
-        if object.user_id == i_email:
+        if object.user_email == i_email:
             message = "用户已存在！"
             status = "failure"
             return JsonResponse({'status':status, 'message': message})
     subject = 'Funbox Activation Email'
-    email_message = '''
-    Welcome to Funbox! 
-    <br> <a href = ''>Click here </a>
-    If the hyperlink is not available, you can copy this to your explorer
-    
-                                                        Funbox Team
-    '''
-    send_mail(subject=subject, message= email_message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
+    current_site = get_current_site(request)
+    message = render_to_string('email_template.html', {
+        'user': i_email,
+        'domain': current_site.domain,
+    })
+    send_mail(subject=subject, message=message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
     status = "success"
     message = "你的邮箱已成功提交"   
     return  JsonResponse({'status':status, 'message':message})
@@ -216,7 +217,7 @@ def index(request):
             # 注册时第一次输入邮箱
             i_email = request.POST.get("email")
             print("entered email")
-            return reg_email(i_email) 
+            return reg_email(request, i_email)
         elif (hint == "login"):
             i_email = request.POST.get("email")
             i_psd = request.POST.get("password")
@@ -284,4 +285,8 @@ def ajax_submit(request):
     else:
         print("通讯成功NONE")
         return JsonResponse({"Info": "通讯成功"})
+
+def activate(request):
+    return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+
         

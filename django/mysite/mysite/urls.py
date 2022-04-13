@@ -26,6 +26,7 @@ urlpatterns = [
     path('', views.index), # ADD_JHIN, index page
     # path('', views.index, name="index"), # ADD_JHIN, index page
     path('project/', views.project), # ADD_JHIN, project page
+    path('activate/', views.activate, name="activate"),
     path('windows/window_login/', views.window_login),
     path('windows/window_reg_e/', views.window_reg_e),
     path('windows/window_forget_e/', views.window_forget_e),
