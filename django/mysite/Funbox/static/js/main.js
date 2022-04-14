@@ -330,6 +330,7 @@ function edit_usr_p(e) {
       data: dict,
       success: function(args) {
         console.log("ajax success");
+        console.log(args["message"]);
         if (args["status"] == "failure") {
           $("#error").html(args["message"])
           $("#error").removeAttr('style').css("display", "block");

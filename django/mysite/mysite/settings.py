@@ -146,3 +146,6 @@ EMAIL_USER_TLS = True
 # 如果登录成功，可以发送邮件
 SESSION_SAVE_EVERY_REQUEST = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 设置静态文件路径为主目录下的media文件夹
+MEDIA_URL = '/media/'

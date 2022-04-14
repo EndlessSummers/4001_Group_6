@@ -105,6 +105,25 @@ def forget_mail(i_email):
     return JsonResponse({'status':status, 'message':message})
 #+
 
+def set_profile(request):
+    curr_id = request.session.get("user1")
+    new_photo = request.FILES.get("photo")
+    new_name = request.POST.get("name")
+    print(new_name)
+    user_list = UserInfo.objects.all()
+    for object in user_list:
+        if object.user_id == curr_id:
+            object.user_photo = new_photo
+            object.user_name = new_name
+            object.save()
+    status = "success"
+    message = "no message"
+    return JsonResponse({"status": status, "message": message})
+#+
+    
+
+    
+
 def user_page(request):
     return render(request, 'userpage.html')
 
@@ -151,7 +170,7 @@ def index(request):
     elif request.method == "POST":
         print("METHOD IS POST")
         print(request.POST)
-        hint = request.POST['hint']
+        hint = request.POST.get('hint')
         if (hint == "email"):
             # 注册时第一次输入邮箱
             i_email = request.POST.get("email")
@@ -175,8 +194,8 @@ def index(request):
             print(1)
             return HttpResponse('登录成功')
         elif (hint == "profile"):
-            print(1)
-            return HttpResponse('登录成功')
+            print("this is profile")
+            return set_profile(request)
         elif (hint == "register"):
             return reg_form(request)
         

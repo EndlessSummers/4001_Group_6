@@ -19,6 +19,11 @@ from django.shortcuts import render
 from django.shortcuts import HttpResponse
 import pymysql
 from Funbox import views
+from django.contrib import admin
+from django.urls import path
+from Funbox import views
+from django.conf.urls.static import static
+from django.conf import settings
 #from cookie import views
 
 urlpatterns = [
@@ -36,4 +41,4 @@ urlpatterns = [
     # path('reg_form', views.reg_form),
     path('reg_form/', views.reg_form, name = "reg_form"),
     path("logout/", views.log_out, name="logout"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
