@@ -35,5 +35,5 @@ urlpatterns = [
     path('windows/window_user/', views.window_user),
     # path('reg_form', views.reg_form),
     path('reg_form/', views.reg_form, name = "reg_form"),
-    path("logout/", views.log_out),
+    path("logout/", views.log_out, name="logout"),
 ]

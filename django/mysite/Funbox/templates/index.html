@@ -120,8 +120,8 @@
         <p style="font-size: 12px;"> Enjoy our work? Tell us how you feel by</p>
         <ul class="nav">
           <li><a class="btn btn-default" onclick="load(event, 'login')" style="{{reverse_style}}"> Log in </a></li>
-          <li><a class="btn btn-default" onclick="log_out(event)" style="{{profile_style}}"> Log out </a></li>
-          <li><a class="btn btn-primary" onclick="load(event, 'signUp')"> Sign up </a></li>
+          <li><a class="btn btn-default" href="{%url 'logout' %}" style="{{profile_style}}"> Log out </a></li>
+          <li><a class="btn btn-primary" onclick="load(event, 'signUp')" style="{{reverse_style}}"> Sign up </a></li>
         </ul>
         <p>
           <a class="btn btn-info btn-sm" onclick="load(event, 'forget')" style="display: inline; font-size: 10px;">Forget password</a>
