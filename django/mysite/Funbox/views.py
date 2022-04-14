@@ -20,7 +20,7 @@ def login(request, i_email, i_password):
         user_list = UserInfo.objects.all()
         for object in user_list:
             print(object.user_id)
-            if object.user_id == i_email and object.password == i_password:
+            if object.user_email == i_email and object.password == i_password:
                 print("success! refresh")
                 rep = HttpResponseRedirect('/')
                 request.session["is_login"] = True
@@ -196,12 +196,14 @@ def index(request):
     if request.method == "GET":
         status = request.session.get('is_login')
         if status:
-            user_infor = request.session['user1']
+            user_info = request.session['user1']
             pro_style = "display:block;"
-            return render(request,'index.html',{"profile_style" : pro_style, "user_email":user_infor})
+            rev_style = "display:none;"
+            return render(request,'index.html',{"profile_style" : pro_style, "user_email":user_info, "reverse_style": rev_style})
         else:
             pro_style = "display:none;"
-            return render(request,'index.html',{"profile_style" : pro_style}) 
+            rev_style = "display:block;"
+            return render(request,'index.html',{"profile_style" : pro_style, "reverse_style": rev_style}) 
     elif request.method == "POST":
         print("METHOD IS POST")
         print(request.POST)
