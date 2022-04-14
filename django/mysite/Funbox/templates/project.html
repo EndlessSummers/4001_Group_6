@@ -102,25 +102,26 @@
     <div class="navbar-collapse" id="navbar-collapse">
       <div class="site-header hidden-xs">
           <a class="site-brand" href="/" title="">
-            <img class="img-responsive site-logo" alt="" src="{% static 'imgs/funbox.png' %}" style="width: 200px; height: 100px;">
+            <img class="img-responsive site-logo" alt="" src="/static/imgs/funbox.png" style="width: 200px; height: 100px;">
             FunBox
           </a>
       </div>
       <ul class="nav">
-        <div class="user-profile" onclick="load(event, 'edit')" id="user-profile">
-          <img alt="" src="{% static 'imgs/Nick_Wilde.jpeg' %}" id="user_picture">
-          <p>Nick Wilde<br> UID: 1</p>
+        <div class="user-profile" onclick="load(event, 'edit')" id="user-profile" style="{{profile_style}}">
+          <img alt="" src="/static/imgs/Nick_Wilde.jpeg" id="user_picture">
+          <p>Nick_Wilde<br><br><br> {{user_email}} </p>
         </div>
         <li><a href="/" title="" >Home</a></li>
         <li><a onclick="openNav()" title="">Recommendation</a></li>
-        <li><a onclick="load(event, 'help', help)" title="">Help</a></li>
+        <li><a onclick="load(event, 'help')" title="">Help</a></li>
       </ul>
 
       <nav class="nav-footer">
         <p style="font-size: 12px;"> Enjoy our work? Tell us how you feel by</p>
         <ul class="nav">
-          <li><a class="btn btn-default" onclick="load(event, 'login')"> Log in </a></li>
-          <li><a class="btn btn-primary" onclick="load(event, 'signUp')"> Sign up </a></li>
+          <li><a class="btn btn-default" onclick="load(event, 'login')" style="{{reverse_style}}"> Log in </a></li>
+          <li><a class="btn btn-default" href="{%url 'logout' %}" style="{{profile_style}}"> Log out </a></li>
+          <li><a class="btn btn-primary" onclick="load(event, 'signUp')" style="{{reverse_style}}"> Sign up </a></li>
         </ul>
         <p>
           <a class="btn btn-info btn-sm" onclick="load(event, 'forget')" style="display: inline; font-size: 10px;">Forget password</a>

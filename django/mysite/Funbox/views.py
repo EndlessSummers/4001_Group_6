@@ -185,8 +185,19 @@ def index(request):
         return HttpResponse('登录成功')
 
 def project(request):
+    print("views.py.project() called")
     if request.method == "GET":
-        return render(request,'project.html')
+        status = request.session.get('is_login')
+        print("status is:", status)
+        if status:
+            user_info = request.session['user1']
+            pro_style = "display:block;"
+            rev_style = "display:none;"
+            return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info, "reverse_style": rev_style})
+        else:
+            pro_style = "display:none;"
+            rev_style = "display:block;"
+            return render(request,'project.html',{"profile_style" : pro_style, "reverse_style": rev_style}) 
     if request.method == "POST":
         return render(request,'project.html')
 
