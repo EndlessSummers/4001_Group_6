@@ -32,7 +32,7 @@ class Comment(models.Model):
     createdat = models.DateTimeField(db_column='CreatedAt', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'comment'
         unique_together = (('user_info_commentor', 'note_note'),)
 
@@ -42,7 +42,7 @@ class Group(models.Model):
     group_name = models.CharField(db_column='Group_name', max_length=45, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'group'
 
 
@@ -65,7 +65,7 @@ class Message(models.Model):
     content = models.CharField(max_length=1000, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'message'
         unique_together = (('user_info_sender', 'user_info_receiver_id'),)
 
@@ -77,7 +77,7 @@ class Note(models.Model):
     content = models.CharField(max_length=1000, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'note'
 
 
@@ -88,7 +88,7 @@ class Rankings(models.Model):
     created_at = models.DateTimeField(db_column='Created_At', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'rankings'
         unique_together = (('activities_activities', 'user_info_user'),)
 
@@ -99,7 +99,7 @@ class UserHistory(models.Model):
     created_at = models.DateTimeField(db_column='Created_at', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'user_history'
         unique_together = (('user_info_user', 'activities_activities'),)
 
@@ -121,7 +121,7 @@ class UserInfoHasGroup(models.Model):
     group_group = models.ForeignKey(Group, models.DO_NOTHING, db_column='Group_Group_id')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'user_info_has_group'
         unique_together = (('user_info_user', 'group_group'),)
 
@@ -131,7 +131,7 @@ class UserPreference(models.Model):
     activities_activities = models.ForeignKey(Activities, models.DO_NOTHING, db_column='Activities_Activities_id')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'user_preference'
         unique_together = (('user_info_user', 'activities_activities'),)
 
