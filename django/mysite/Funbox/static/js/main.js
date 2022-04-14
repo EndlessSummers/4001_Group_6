@@ -355,6 +355,13 @@ function edit_usr_p(e) {
   });
 }
 
+function log_out(e) {
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "/logout/");
+  console.log("logout request send")
+  xhttp.send();
+}
+
 function help() {
   console.log("function help called");
 
