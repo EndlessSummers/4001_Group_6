@@ -142,13 +142,13 @@
               <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'register')" target="_self" method="post">
                 {% csrf_token %}  
                 <label for="Email"> Email </label>
-                <input type="text" class="form-control" name="email" id="Email" placeholder="you@some.com" onfocus="" onblur="" required>
+                <input type="text" class="form-control" name="email" id="Email" placeholder="you@some.com" value="11@qq.com" required>
 
                 <label for="Password"> Password </label>
-                <input type="password" class="form-control" name="password" id="Password" placeholder="cherry is 2 awesome!" onfocus="" onblur="" required>
+                <input type="password" class="form-control" name="password" id="Password" placeholder="cherry is 2 awesome!" value="qq111111" required>
 
                 <label for="Repeat"> Repeat Password </label>
-                <input type="password" class="form-control" name="repeat" id="Repeat" placeholder="cherry is 2 awesome!" onchange="" required>
+                <input type="password" class="form-control" name="repeat" id="Repeat" placeholder="cherry is 2 awesome!" value="qq111111" required>
                 <input type="text" class="form-control" name="hint" value="register" style="display: none;" required>
                 <p class="alert alert-danger" id="error" style="display: none;"></p>
                 

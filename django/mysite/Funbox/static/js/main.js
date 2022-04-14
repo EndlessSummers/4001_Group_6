@@ -33,6 +33,7 @@ function myOnSubmit(e, info) {
       // console.log("checkpoint1");
       if (info == "register") return true;
       if (info == "user") return true;
+      if (info == "cancel") return true;
       return ajaxSubmit(info);
     }
 }

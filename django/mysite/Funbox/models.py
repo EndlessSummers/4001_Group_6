@@ -8,6 +8,7 @@
 from django.db import models
 from django.db.models import Model
 
+
 class Activity(models.Model):
     activities_id = models.IntegerField(db_column='Activity_id', primary_key=True)  # Field name made lowercase.
     activity_desc = models.CharField(db_column='Activity_desc', max_length=45, blank=True, null=True)  # Field name made lowercase.
@@ -108,8 +109,8 @@ class UserInfo(models.Model):
     user_id = models.CharField(db_column='User_ID', primary_key=True, max_length=45)  # Field name made lowercase.
     password = models.CharField(db_column='Password', max_length=45)  # Field name made lowercase.
     #user_email = models.CharField(db_column='User_Email', max_length=45)  # Field name made lowercase.
-    user_name = models.CharField(db_column='User_Name', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    user_photo = models.ImageField(blank = True, upload_to='photos_user/', default='user1.jpg')
+    user_name = models.CharField(db_column='User_Name', max_length=45, blank=True, null=True, default="null")  # Field name made lowercase.
+    user_photo = models.ImageField(blank = True, upload_to='photos_user/', default='Nick_Wilde.jpg')
 
     class Meta:
         managed = True

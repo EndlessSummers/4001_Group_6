@@ -11,7 +11,10 @@ from django.contrib.sites.shortcuts import get_current_site
 # from .tokens import account_activation_token
 from django.contrib import messages
 from django.urls import reverse
+from pathlib import Path
+import os
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Create your views here.
 #登录页面
@@ -158,6 +161,12 @@ def email(request):
 def success(request):
     return render (request, 'success.html')
 
+def cancel_account(request):
+    curr_id = request.session.get("user1")
+    cur_obj = UserInfo.objects.get(user_id = curr_id)
+    cur_obj.delete()
+    return log_out(request)
+
 
 # ADD_JHIN
 def index(request):
@@ -166,10 +175,13 @@ def index(request):
         status = request.session.get('is_login')
         print("status is:", status)
         if status:
-            user_info = request.session['user1']
+            user_info = request.session.get('user1')
+            curr_obj = UserInfo.objects.get(user_id = user_info)
+            current_photo = curr_obj.user_photo
+            current_name = curr_obj.user_name
             pro_style = "display:block;"
             rev_style = "display:none;"
-            return render(request,'index.html',{"profile_style" : pro_style, "user_email":user_info, "reverse_style": rev_style})
+            return render(request,'index.html',{"profile_style" : pro_style, "user_email":user_info, "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo })
         else:
             pro_style = "display:none;"
             rev_style = "display:block;"
@@ -193,7 +205,7 @@ def index(request):
         elif (hint == "cancel"):
             # 用户注销账户
             print(1)
-            return HttpResponse('登录成功')
+            return cancel_account(request)
         elif (hint == "forget_email"):
             # 通过邮箱找回密码
             i_email = request.POST.get("email")

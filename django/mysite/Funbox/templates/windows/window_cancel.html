@@ -10,7 +10,7 @@
           <p class="wrapper-form-title"> cancel your account?</p>
           <!-- TODO get account infomation from the user -->
           <div class="form-group">
-            <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'cancel')" target="iframeName" method="post">  
+            <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'cancel')" target="_self" method="post">  
               {% csrf_token %}
               <p style="text-align: center;">
                 <input type="radio" name="Cancel_check" id="Yes" name="Yes" value="1" style="display: inline; margin-left: 10px;" required>
