@@ -301,6 +301,8 @@ function edit_usr_p(e) {
     // replace does not modify the original text;
   }
 
+  $("#edit").removeAttr("onclick");
+
   console.log(origin);
   $("#save").off().click(function () {
     var inputs = [];
@@ -322,6 +324,7 @@ function edit_usr_p(e) {
     dict["likes"] = inputs[4];
     dict["want"] = inputs[5];
     dict["hint"] = "profile";
+    dict["photo"] = $("#img_slt").src;
     dict['csrfmiddlewaretoken'] = $("input[name=csrfmiddlewaretoken]").val();
 
     $.ajax({
