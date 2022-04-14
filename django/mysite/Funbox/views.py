@@ -20,7 +20,7 @@ def login(request, i_email, i_password):
         user_list = UserInfo.objects.all()
         for object in user_list:
             print(object.user_id)
-            if object.user_email == i_email and object.password == i_password:
+            if object.user_id == i_email and object.password == i_password:
                 print("success! refresh")
                 rep = HttpResponseRedirect('/')
                 request.session["is_login"] = True
