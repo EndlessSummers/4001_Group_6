@@ -316,12 +316,12 @@ function edit_usr_p(e) {
     $("#chg_usr_p").off();
     $("#chg_usr_p").removeAttr("style");
     console.log('function save called');
-    // for (i=0; i<infos.length; i++) {
-    //   let input = infos[i].firstChild.value;
-    //   inputs.push(input);
-    //   console.log("input " + i + " " + input);
-    //   infos[i].innerHTML = input;
-    // }
+    for (i=0; i<infos.length; i++) {
+      let input = infos[i].firstChild.value;
+      inputs.push(input);
+      console.log("input " + i + " " + input);
+      infos[i].innerHTML = input;
+    }
 
     // var dict = {};
     // dict["name"] = inputs[0];
