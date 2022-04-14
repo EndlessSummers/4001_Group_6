@@ -199,7 +199,10 @@ def project(request):
             rev_style = "display:block;"
             return render(request,'project.html',{"profile_style" : pro_style, "reverse_style": rev_style}) 
     if request.method == "POST":
-        return render(request,'project.html')
+        user_info = request.session['user1']
+        pro_style = "display:block;"
+        rev_style = "display:none;"
+        return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info, "reverse_style": rev_style})
 
 def window_help(request):
     if request.method == "GET":
