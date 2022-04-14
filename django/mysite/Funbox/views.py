@@ -25,6 +25,11 @@ def login(request, i_email, i_password):
                 rep = HttpResponseRedirect('/')
                 request.session["is_login"] = True
                 request.session["user1"] = object.user_id
+                request.session["user_photo"] = object.user_photo
+                try:
+                    request.session["user_name"] = object.user_name
+                except:
+                    request.session["user_name"] = "QaQ"
                 return rep
         message = "user email or password error!"
         status = "failure"
@@ -242,6 +247,11 @@ def window_cancel(request):
 
 def window_user(request):
     if request.method == "GET":
+        user_info = request.session["user1"]
+        user_list = UserInfo.objects.all()
+        for object in user_list:
+            print(object.user_id)
+            if object.user_id == user_info:
         return render(request,'windows/window_user.html')
 
 def ajax_submit(request):
