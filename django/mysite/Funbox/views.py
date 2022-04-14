@@ -35,13 +35,13 @@ def login(request, i_email, i_password):
         status = "failure"
         return JsonResponse({'status':status, 'message': message})
     
+
 def log_out(request):
     try:
         request.session.flush()
         return redirect("/")
     except:
         return redirect("/")
-
 #+
 def input_email(request):
     if request.method == "GET": 
@@ -113,18 +113,23 @@ def forget_mail(i_email):
 def set_profile(request):
     curr_id = request.session.get("user1")
     new_photo = request.FILES.get("photo")
-    new_name = request.POST.get("name")
-    print(new_name)
+    print("photo is ", new_photo)
+    #new_name = request.POST.get("name")
+    #print(new_name)
     user_list = UserInfo.objects.all()
     for object in user_list:
         if object.user_id == curr_id:
             object.user_photo = new_photo
-            object.user_name = new_name
+            #object.user_name = new_name
             object.save()
+            break
     status = "success"
     message = "no message"
     return JsonResponse({"status": status, "message": message})
 #+
+    
+
+    
 
 def user_page(request):
     return render(request, 'userpage.html')
@@ -171,7 +176,7 @@ def index(request):
             return render(request,'index.html',{"profile_style" : pro_style, "reverse_style": rev_style}) 
     elif request.method == "POST":
         print("METHOD IS POST")
-        print(request.POST)
+        # print(request.POST)
         hint = request.POST.get('hint')
         if (hint == "email"):
             # 注册时第一次输入邮箱
@@ -240,6 +245,7 @@ def window_reg_e(request):
 def window_forget_e(request):
     if request.method == "GET":
         return render(request,'windows/window_forget_e.html')
+    
 
 def window_cancel(request):
     if request.method == "GET":

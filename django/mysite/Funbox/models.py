@@ -109,7 +109,7 @@ class UserInfo(models.Model):
     password = models.CharField(db_column='Password', max_length=45)  # Field name made lowercase.
     #user_email = models.CharField(db_column='User_Email', max_length=45)  # Field name made lowercase.
     user_name = models.CharField(db_column='User_Name', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    user_photo = models.ImageField(blank = True, upload_to='photos_user', default='user1.jpg')
+    user_photo = models.ImageField(blank = True, upload_to='photos_user/', default='user1.jpg')
 
     class Meta:
         managed = True

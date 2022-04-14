@@ -16,6 +16,8 @@ function myOnSubmit(e, info) {
         state = validate_change() && validate_passwd() && validate_repeat();
     } else if (info === "cancel") {
         state = true;
+    } else if (info === "user") {
+        state = true;
     }
 
     if (!state) {
@@ -30,6 +32,7 @@ function myOnSubmit(e, info) {
       // console.log(info);
       // console.log("checkpoint1");
       if (info == "register") return true;
+      if (info == "user") return true;
       return ajaxSubmit(info);
     }
 }
@@ -265,6 +268,7 @@ function load(e, info) {
 }
 
 function edit_usr_p(e) {
+  e.preventDefault()
   console.log('function ' + edit_usr_p.name);
 
   $("#chg_usr_p").css("cursor", "pointer");
@@ -274,7 +278,7 @@ function edit_usr_p(e) {
     $("#img_slt").click();
   });
 
-  var pic_change_flag = false;
+  // var pic_change_flag = false;
   $("#img_slt").off().on("change", function(){
     console.log("changePic() called");
     pic_change_flag = true;
@@ -312,55 +316,55 @@ function edit_usr_p(e) {
     $("#chg_usr_p").off();
     $("#chg_usr_p").removeAttr("style");
     console.log('function save called');
-    for (i=0; i<infos.length; i++) {
-      let input = infos[i].firstChild.value;
-      inputs.push(input);
-      console.log("input " + i + " " + input);
-      infos[i].innerHTML = input;
-    }
+    // for (i=0; i<infos.length; i++) {
+    //   let input = infos[i].firstChild.value;
+    //   inputs.push(input);
+    //   console.log("input " + i + " " + input);
+    //   infos[i].innerHTML = input;
+    // }
 
-    var dict = {};
-    dict["name"] = inputs[0];
-    dict["title"] = inputs[1];
-    dict["email"] = inputs[2];
-    dict["phone"] = inputs[3];
-    dict["likes"] = inputs[4];
-    dict["want"] = inputs[5];
-    dict["hint"] = "profile";
-    dict['csrfmiddlewaretoken'] = $("input[name=csrfmiddlewaretoken]").val();
+    // var dict = {};
+    // dict["name"] = inputs[0];
+    // dict["title"] = inputs[1];
+    // dict["email"] = inputs[2];
+    // dict["phone"] = inputs[3];
+    // dict["likes"] = inputs[4];
+    // dict["want"] = inputs[5];
+    // dict["hint"] = "profile";
+    // dict["photo"] = document.getElementById('chg_usr_p').src;
+    // dict['csrfmiddlewaretoken'] = $("input[name=csrfmiddlewaretoken]").val();
 
-    $.ajax({
-      url: "/",
-      method: "POST",
-      async: false,
-      data: dict,
-      success: function(args) {
-        console.log("ajax success");
-        console.log(args["message"]);
-        if (args["status"] == "failure") {
-          $("#error").html(args["message"])
-          $("#error").removeAttr('style').css("display", "block");
-        } else if (args['status'] == 'success') {
-          $("#success").html(args['message'])
-          $("#success").removeAttr('style').css("display", "block");
-        }
-      },
-      error: function(args) {
-        console.log("!!!ajax failure!!!");
-      }
-    })
+    // $.ajax({
+    //   url: "/",
+    //   method: "POST",
+    //   async: false,
+    //   data: dict,
+    //   success: function(args) {
+    //     console.log("ajax success");
+    //     console.log(args["message"]);
+    //     if (args["status"] == "failure") {
+    //       $("#error").html(args["message"])
+    //       $("#error").removeAttr('style').css("display", "block");
+    //     } else if (args['status'] == 'success') {
+    //       $("#success").html(args['message'])
+    //       $("#success").removeAttr('style').css("display", "block");
+    //     }
+    //   },
+    //   error: function(args) {
+    //     console.log("!!!ajax failure!!!");
+    //   }
+    // })
+    
 
     var user_name = document.getElementById("user-profile").getElementsByTagName('p')[0];
-    console.log("all " + user_name.innerHTML);
-    console.log("before " + origin[0]);
-    console.log("after " + infos[0].innerHTML);
     var new_name = user_name.innerHTML.replace(origin[0], infos[0].innerHTML);
-    console.log("modified " + new_name);
     user_name.innerHTML = new_name;
 
     document.getElementById('user_picture').src = document.getElementById('chg_usr_p').src;
-  
+
+    // myOnSubmit(e, "user");
   });
+  return false;
 }
 
 function log_out(e) {
