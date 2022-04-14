@@ -30,6 +30,14 @@ def login(request, i_email, i_password):
         status = "failure"
         return JsonResponse({'status':status, 'message': message})
     
+
+def log_out(request):
+    try:
+        del request.sessions["is_login"]
+        del request.sessions["user_1"]
+        redirect("/")
+    except:
+        redirect("/")
 #+
 def input_email(request):
     if request.method == "GET": 
@@ -97,6 +105,7 @@ def forget_mail(i_email):
     message = "你的邮箱已成功提交"   
     return JsonResponse({'status':status, 'message':message})
 #+
+
 def user_page(request):
     return render(request, 'userpage.html')
 
