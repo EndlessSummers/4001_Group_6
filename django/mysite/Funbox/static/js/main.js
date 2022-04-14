@@ -304,7 +304,10 @@ function edit_usr_p(e) {
   $("#edit").removeAttr("onclick");
 
   console.log(origin);
-  $("#save").off().click(function () {
+  $("#save").one("click", function () {
+    $("#edit").one("click", function(event) {
+      edit_usr_p(event)
+    });
     var inputs = [];
     $("#chg_usr_p").off();
     $("#chg_usr_p").removeAttr("style");
@@ -324,12 +327,12 @@ function edit_usr_p(e) {
     dict["likes"] = inputs[4];
     dict["want"] = inputs[5];
     dict["hint"] = "profile";
-    dict["photo"] = $("#img_slt").src;
     dict['csrfmiddlewaretoken'] = $("input[name=csrfmiddlewaretoken]").val();
 
     $.ajax({
       url: "/",
       method: "POST",
+      async: false,
       data: dict,
       success: function(args) {
         console.log("ajax success");
@@ -347,15 +350,16 @@ function edit_usr_p(e) {
       }
     })
 
-    if (infos[0].innerHTML != origin[0]) { // user name changed
-      var user_name = document.getElementById("user-profile").getElementsByTagName('p')[0];
-      var new_name = user_name.innerHTML.replace(origin[0], infos[0].innerHTML);
-      user_name.innerHTML = new_name;
-    }
+    var user_name = document.getElementById("user-profile").getElementsByTagName('p')[0];
+    console.log("all " + user_name.innerHTML);
+    console.log("before " + origin[0]);
+    console.log("after " + infos[0].innerHTML);
+    var new_name = user_name.innerHTML.replace(origin[0], infos[0].innerHTML);
+    console.log("modified " + new_name);
+    user_name.innerHTML = new_name;
 
-    if (pic_change_flag) { // user profile changed
-      document.getElementById('user_picture').src = document.getElementById('chg_usr_p').src;
-    }
+    document.getElementById('user_picture').src = document.getElementById('chg_usr_p').src;
+  
   });
 }
 

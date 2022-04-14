@@ -133,13 +133,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 设置邮件域名 
 EMAIL_HOST = 'smtp.163.com'
 # 设置端口号，为数字
-EMAIL_PORT = 25
+EMAIL_PORT = 465
 #设置发件人邮箱
 EMAIL_HOST_USER = 'Funbox2022@163.com'
 # 设置发件人 授权码
 EMAIL_HOST_PASSWORD = 'WHNPGEDNZDZDLUUF'
 # 设置是否启用安全链接
-EMAIL_USER_TLS = True
+EMAIL_USE_SSL = True
 
 # 以上这个配置信息，Django会自动读取，
 # 使用账号以及授权码进行登录，
