@@ -198,7 +198,7 @@ def index(request):
             pro_style = "display:block;"
             rev_style = "display:none;"
             password_opt = "change password"
-            return render(request,'index.html',{"profile_style" : pro_style, "user_email":user_info, "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, "password_opt": password_opt })
+            return render(request,'index.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, "password_opt": password_opt })
         else:
             pro_style = "display:none;"
             rev_style = "display:block;"
@@ -255,7 +255,7 @@ def project(request):
             pro_style = "display:block;"
             rev_style = "display:none;"
             password_opt = "change password"
-            return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info, "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, "password_opt": password_opt })
+            return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, "password_opt": password_opt })
         else:
             pro_style = "display:none;"
             rev_style = "display:block;"

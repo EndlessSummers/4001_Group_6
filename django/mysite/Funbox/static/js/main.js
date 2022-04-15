@@ -430,7 +430,7 @@ function save_usr_p(e) {
   var user_name = document.getElementById("user-profile").getElementsByTagName('p')[0];
   var new_name = infos[0].getElementsByTagName("p")[0].innerHTML;
   // console.log(new_name+"<br>"+document.getElementsByName("email")[0].innerHTML);
-  user_name.innerHTML = new_name+"<br>"+document.getElementsByName("email")[0].innerHTML;
+  user_name.innerHTML = new_name+"<br>"+document.getElementsByName("email")[0].innerHTML.split('@')[0];
 
   document.getElementById('user_picture').src = document.getElementById('chg_usr_p').src;
 

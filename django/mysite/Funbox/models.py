@@ -54,7 +54,7 @@ class GroupMessage(models.Model):
     created_at = models.DateTimeField(db_column='Created_At', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'group_message'
         unique_together = (('group_group', 'user_info_user'),)
 
