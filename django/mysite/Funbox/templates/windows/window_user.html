@@ -7,7 +7,7 @@
     <span id='close' onclick=''>x</span>
     {% csrf_token %}
     <div class="left">
-      <img src="{{user_photo}}" id="chg_usr_p" alt="user" width="100">
+      <img src="{{user_photo}}" id="chg_usr_p" alt="user" width="100" height="100">
       <input type="file" id="img_slt" name="photo" onchange="" style="display: none;" accept="image/*">
       <div class="data_container">
         <p name="name" style="font-size: 19px; font-weight: 700; color: #000; margin-top: 12px; line-height: 1.1;">{{user_name}}</p>
