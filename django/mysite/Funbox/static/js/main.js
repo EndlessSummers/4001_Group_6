@@ -17,7 +17,7 @@ function myOnSubmit(e, info) {
     } else if (info === "cancel") {
         state = true;
     } else if (info === "user") {
-        state = true;
+        state = validate_username();
     }
 
     if (!state) {
@@ -31,6 +31,8 @@ function myOnSubmit(e, info) {
       // return false;
       // console.log(info);
       // console.log("checkpoint1");
+      $("#error").removeAttr('style').css("display", "none");
+      $("#success").removeAttr('style').css("display", "none");
       if (info == "register") return true;
       if (info == "user") {
         save_usr_p(e);
@@ -136,6 +138,23 @@ function ChangeTags(Tagname) {
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
+}
+
+function validate_username() {
+  let user_name = document.forms['myform']['name'].value;
+  console.log("user_name is "+user_name);
+  let error = document.getElementById("error");
+
+  if (user_name.length > 20) {
+    console.log("ERROR: USER_NAME: CANNOT EXCEED 20 CHARACTERS")
+    error.innerHTML = "USERNAME TOO LONG";
+    return false;
+  } else {
+    console.log("VALIE USER_NAME");
+    error.innerHTML = '';
+  }
+
+  return true;
 }
 
 function validate_email() {
