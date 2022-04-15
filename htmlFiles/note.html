@@ -155,7 +155,12 @@
               <div class="form-group">
                 <textarea class="form-control" rows="5" placeholder="Enter your message"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary" style="width: 100px; position: absolute; right: 30px;">Send</button>
+              <div id="image_view" class="image_upload"></div>
+              <label for="upload_click" class="invi_label">
+                <button type="submit" id="upload_click" class="btn btn-primary upload_button">Upload images</button>
+                <input type="file" id="note-image" class="btn btn-primary upload_button" style="opacity: 0;" accept = ".jpeg,.jpg,.gif,.png,.bmp" multiple>
+              </label>
+              <button type="submit" class="btn btn-primary upload_button" style="right: 30px; width: 100px;">Submit</button>
             </div>
             <!-- <div class="col-md-6">
               <ul class="list-unstyled address-container">
