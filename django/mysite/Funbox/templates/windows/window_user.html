@@ -3,17 +3,19 @@
   </head>
   <body>
   <iframe src="" frameborder="0" name="iframeName"></iframe>
-  <form name="form" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'user')" target="iframeName" method="post" enctype="multipart/form-data" class="wrapper-hor">
+  <form name="form" id="myform" action="" autocomplete="off" onsubmit="return myOnSubmit(event, 'user')" target="iframeName" method="post" enctype="multipart/form-data" class="wrapper-hor">
     <span id='close' onclick=''>x</span>
     {% csrf_token %}
     <div class="left">
-      <img src="/static/imgs/Nick_Wilde.jpeg" id="chg_usr_p" alt="user" width="100">
+      <img src="{{user_photo}}" id="chg_usr_p" alt="user" width="100">
       <input type="file" id="img_slt" name="photo" onchange="" style="display: none;" accept="image/*">
-      <p style="font-size: 19px; font-weight: 700; color: #000; margin-top: 12px; line-height: 1.1;">Nick_Wilde{{user_name}}</p>
-       <p> Officer of Zootopia{{user_title}}</p>
+      <div class="data_container">
+        <p name="name" style="font-size: 19px; font-weight: 700; color: #000; margin-top: 12px; line-height: 1.1;">{{user_name}}</p>
+        <input type="text" name="name" style="width: 100%; font-size: 19px; font-weight: 700; color: #000; margin-top: 12px; line-height: 1.1;" hidden required>
+      </div>
       <div class="bottom-btn">
         <button class="btn btn-info btn-sm" id="edit" onclick="edit_usr_p(event)"> edit </button>
-        <button class="btn btn-info btn-sm" id="save" type="submit"> save </button>
+        <button class="btn btn-primary btn-sm" id="save" type="submit" style="display: none;"> save </button>
       </div>
       <input type="text" name="hint" style="display: none;" value="profile">
     </div>
@@ -23,7 +25,7 @@
         <div class="info_data">
           <div class="data">
             <h4>Email</h4>
-            <p>Nick_Wilde@Zootopia.com{{user_email}}</p>
+            <p name="email">{{user_email}}</p>
           </div>
         </div>
       </div>
@@ -33,11 +35,17 @@
             <div class="projects_data">
                  <div class="data">
                     <h4>Likes</h4>
-                    <p>default likes{{user_likes}}</p>
+                    <div class="data_container">
+                    <p name="likes">default likes{{user_likes}}</p>
+                    <input type="text" name="likes" style="width: 100%;" hidden>
+                    </div>
                  </div>
                  <div class="data">
-                   <h4>Want To Try</h4>
-                    <p>default wants{{user_want}}</p>
+                  <h4>Want To Try</h4>
+                  <div class="data_container">
+                    <p name="want">default wants{{user_want}} </p>
+                    <input type="text" name="want" style="width: 100%;" hidden>
+                  </div>
               </div>
             </div>
       </div>

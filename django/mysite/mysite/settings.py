@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print("root", BASE_DIR)
+# print("root", BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production
@@ -149,5 +149,5 @@ SESSION_SAVE_EVERY_REQUEST = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 设置静态文件路径为主目录下的media文件夹
-print("media root", MEDIA_ROOT)
+# print("media root", MEDIA_ROOT)
 MEDIA_URL = '/media/'

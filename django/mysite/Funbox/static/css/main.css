@@ -249,6 +249,11 @@ iframe {
   border-bottom-right-radius: 5px;
 }
 
+/* .wrapper-hor .left p,
+.wrapper-hor .right p {
+  width: 100%;
+} */
+
 .wrapper-hor .right .info,
 .wrapper-hor .right .projects{
   margin-bottom: 25px;

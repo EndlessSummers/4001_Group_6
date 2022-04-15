@@ -32,7 +32,10 @@ function myOnSubmit(e, info) {
       // console.log(info);
       // console.log("checkpoint1");
       if (info == "register") return true;
-      if (info == "user") return true;
+      if (info == "user") {
+        save_usr_p(e);
+        return true;
+      }
       if (info == "cancel") return true;
       return ajaxSubmit(info);
     }
@@ -227,6 +230,8 @@ function togglePasswordView(e, info) {
 }
 
 function load(e, info) {
+  _index = 0;
+  clearInterval(clearTime);
   e.preventDefault();
   const xhttp = new XMLHttpRequest();
 
@@ -237,8 +242,6 @@ function load(e, info) {
       this.parentNode.parentNode.setAttribute("hidden", "True");
       this.parentNode.parentNode.removeChild(this.parentNode);
       console.log('window closed');
-      _index = 0;
-      clearInterval(clearTime);
       return false;
     }
   };
@@ -292,37 +295,40 @@ function edit_usr_p(e) {
     }
     reader.readAsDataURL(selectedFile);
   });
-  
-  var box = document.getElementById('event_box')
-  var infos = box.getElementsByTagName('p');
-  var origin = [];
+
+  // var form = document.getElementById('myform')
+  var infos = document.getElementsByClassName('data_container');
+  var datas = [];
   for (i=0; i<infos.length; i++) {
-    let inputText = "<input type='text' value='' style='width: 100%;'>";
-    let input = infos[i].innerHTML;
-    origin.push(input);
-    infos[i].innerHTML = inputText.replace(/value=''/, function(x) {
-      return x.slice(0, x.length-1) + input + x.slice(x.length-1);
-    })
-    // replace does not modify the original text;
+    let p = infos[i].getElementsByTagName("p")[0];
+    data = p.innerHTML;
+    p.setAttribute("hidden", "True");
+    datas.push(data);
+    input = infos[i].getElementsByTagName("input")[0]
+    input.setAttribute("value", data);
+    input.removeAttribute("hidden");
   }
 
-  $("#edit").removeAttr("onclick");
+  $("#edit").css("display", "none");
+  $("#save").removeAttr("style");
 
-  console.log(origin);
-  $("#save").one("click", function () {
-    $("#edit").one("click", function(event) {
-      edit_usr_p(event)
-    });
-    var inputs = [];
-    $("#chg_usr_p").off();
-    $("#chg_usr_p").removeAttr("style");
-    console.log('function save called');
-    for (i=0; i<infos.length; i++) {
-      let input = infos[i].firstChild.value;
-      inputs.push(input);
-      console.log("input " + i + " " + input);
-      infos[i].innerHTML = input;
-    }
+  console.log(datas);
+
+  // $("#save").one("click", function () {
+  //   $("#edit").one("click", function(event) {
+  //     edit_usr_p(event)
+  //   });
+  //   var inputs = [];
+  //   $("#chg_usr_p").off();
+  //   $("#chg_usr_p").removeAttr("style");
+  //   console.log('function save called');
+  //   for (i=0; i<infos.length; i++) {
+  //     if (infos[i].getAttribute("name") == "email") continue;
+  //     let input = infos[i].firstChild.value;
+  //     inputs.push(input);
+  //     console.log("input " + i + " " + input);
+  //     // infos[i].innerHTML = input;
+  //   }
 
     // var dict = {};
     // dict["name"] = inputs[0];
@@ -357,14 +363,10 @@ function edit_usr_p(e) {
     // })
     
 
-    var user_name = document.getElementById("user-profile").getElementsByTagName('p')[0];
-    var new_name = user_name.innerHTML.replace(origin[0], infos[0].innerHTML);
-    user_name.innerHTML = new_name;
 
-    document.getElementById('user_picture').src = document.getElementById('chg_usr_p').src;
 
     // myOnSubmit(e, "user");
-  });
+  // });
   return false;
 }
 
@@ -405,13 +407,33 @@ function help() {
   auto();
 }
 
-// function save_usr_p(e) {
-//   console.log('function ' + save_usr_p.name);
-//   var box = document.getElementById('event_box')
-//   var infos = box.getElementsByTagName('p');
-//   for (i=0; i<infos.length; i++) {
-//     let input = infos[i].firstChild.value;
-//     infos[i].innerHTML = input;
-//   }
-// }
+function save_usr_p(e) {
+  console.log('function ' + save_usr_p.name);
+  $("#chg_usr_p").off();
+  $("#chg_usr_p").removeAttr("style");
+
+  var infos = document.getElementsByClassName('data_container');
+  var datas = [];
+  for (i=0; i<infos.length; i++) {
+    input = infos[i].getElementsByTagName("input")[0];
+    data = input.value;
+    input.setAttribute("hidden", "True");
+    datas.push(data);
+    let p = infos[i].getElementsByTagName("p")[0];
+    p.innerHTML = data;
+    p.removeAttribute("hidden");
+    // input.removeAttribute("value");
+  }
+  console.log(datas);
+
+  var user_name = document.getElementById("user-profile").getElementsByTagName('p')[0];
+  var new_name = infos[0].getElementsByTagName("p")[0].innerHTML;
+  // console.log(new_name+"<br>"+document.getElementsByName("email")[0].innerHTML);
+  user_name.innerHTML = new_name+"<br>"+document.getElementsByName("email")[0].innerHTML;
+
+  document.getElementById('user_picture').src = document.getElementById('chg_usr_p').src;
+
+  $("#save").css("display", "none");
+  $("#edit").removeAttr("style");
+}
 

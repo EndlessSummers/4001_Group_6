@@ -11,10 +11,7 @@ from django.contrib.sites.shortcuts import get_current_site
 # from .tokens import account_activation_token
 from django.contrib import messages
 from django.urls import reverse
-from pathlib import Path
-import os
 
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Create your views here.
 #登录页面
@@ -117,13 +114,15 @@ def set_profile(request):
     curr_id = request.session.get("user1")
     new_photo = request.FILES.get("photo")
     print("photo is ", new_photo)
-    #new_name = request.POST.get("name")
+    print(request.POST)
+    new_name = request.POST.get("name")
     #print(new_name)
     user_list = UserInfo.objects.all()
     for object in user_list:
         if object.user_id == curr_id:
-            object.user_photo = new_photo
-            #object.user_name = new_name
+            if new_photo is not None:
+                object.user_photo = new_photo
+            object.user_name = new_name
             object.save()
             break
     status = "success"
@@ -177,7 +176,8 @@ def index(request):
         if status:
             user_info = request.session.get('user1')
             curr_obj = UserInfo.objects.get(user_id = user_info)
-            current_photo = curr_obj.user_photo
+            current_photo = curr_obj.user_photo.url
+            print("The url for a photo is ", current_photo)
             current_name = curr_obj.user_name
             pro_style = "display:block;"
             rev_style = "display:none;"
@@ -265,12 +265,11 @@ def window_cancel(request):
 
 def window_user(request):
     if request.method == "GET":
-        user_info = request.session["user1"]
-        user_list = UserInfo.objects.all()
-        for object in user_list:
-            print(object.user_id)
-            # if object.user_id == user_info:
-        return render(request,'windows/window_user.html')
+        user_info = request.session.get("user1")
+        curr_obj = UserInfo.objects.get(user_id = user_info)
+        current_photo = curr_obj.user_photo.url
+        current_name = curr_obj.user_name
+        return render(request,'windows/window_user.html', {"user_email":user_info, "user_name" : current_name, "user_photo" : current_photo })
 
 def ajax_submit(request):
     print("AJAX_SUBMIT called")
