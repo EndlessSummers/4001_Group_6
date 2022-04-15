@@ -1,0 +1,11 @@
+
+*.pyc
+django/mysite/Funbox/__pycache__/views.cpython-38.pyc
+django/mysite/Funbox/migrations/0001_initial.py
+django/mysite/Funbox/migrations/0002_alter_activities_activity_photo.py
+django/mysite/Funbox/migrations/0003_delete_activity_alter_activities_activities_id_and_more.py
+django/mysite/Funbox/migrations/0004_alter_activities_activity_photo.py
+django/mysite/Funbox/migrations/__pycache__/0001_initial.cpython-38.pyc
+django/mysite/Funbox/migrations/__pycache__/0002_alter_activities_activity_photo.cpython-38.pyc
+django/mysite/Funbox/migrations/__pycache__/0003_delete_activity_alter_activities_activities_id_and_more.cpython-38.pyc
+django/mysite/Funbox/migrations/__pycache__/0004_alter_activities_activity_photo.cpython-38.pyc
