@@ -182,6 +182,30 @@ def cancel_account(request):
     return log_out(request)
 
 def insert_database():
+    Activities.objects.create(activities_id = "Cake",
+    activity_desc = "Cake is an ancient pastry, usually made in an oven. The cake is made of eggs, sugar and wheat flour as the main raw materials. With milk, fruit juice, milk powder, fragrant powder, salad oil, water, shortening, baking powder as accessories. After stirring, mixing, and baking, a sponge-like snack is created."
+    activity_timelength = 30,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Cake.jpg",
+    activity_participant = 1,
+    activity_place = "Home",
+    activity_tag = "Cooking&Food")
+    
+    Activities.objects.create(activities_id = "Baguette",
+    activity_desc = "Baguette (French: /ba.ɡɛt/, English: /bæ'gɛt/) is one of the most traditional French breads and is rich in nutrients. The representative of French bread is 'baguette', baguette originally means a long gem."
+    activity_timelength = 180,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Baguette.jpg",
+    activity_participant = 1,
+    activity_place = "Home",
+    activity_tag = "Cooking&Food")
+
+    Activities.objects.create(activities_id = "Script_Kill",
+    activity_desc = "'Script Kill', the term originated from the Western banquet live role-playing 'Murder Mystery', is a project where players go to a live venue to experience a reasoning project. The rule of script killing is that players first select a character, read the script corresponding to the character, and collect clues to find the real murderer hidden in the activity. [1] [10] Script Killing is not only a game, but also an entertainment project that integrates knowledge attributes, psychological game attributes, and strong social attributes.
+    activity_timelength = 360,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Script_Kill.jpg",
+    activity_participant = 8,
+    activity_place = "Home",
+    activity_tag = "Game")
+
     Activities.objects.create(activities_id = "Texas_hold_em",
     activity_desc = "Texas Hold 'em is a card game, can be multiplayer participation, its gameplay is, the player each issued two hole cards, the desktop in turn issued 5 public cards, the player with their own two hole cards and 5 public cards free combination, according to the size of the decision.",
     activity_timelength = 120,  # Field name made lowercase.
@@ -198,6 +222,30 @@ def insert_database():
     activity_place = "Home",
     activity_tag = "Game")
 
+    Activities.objects.create(activities_id = "Spider_Man_No_Way_Home",
+    activity_desc = "'Spider-Man: Homeless Heroes' is the end of the hero series trilogy, and also marks the official opening of the Marvel multiverse. This time, Spider-Man and Doctor Strange joined forces to start a time-space melee again after 'Avengers 4'. Spider-Man uses Doctor Strange's ability to manipulate time and space to open the passage of time and space, causing an unprecedented crisis.",
+    activity_timelength = 148,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Spider_Man_No_Way_Home.jpg",
+    activity_participant = 1,
+    activity_place = "Home",
+    activity_tag = "Film&TV")
+
+    Activities.objects.create(activities_id = "LAVAIOXISEA",
+    activity_desc = "Alien Theme Music Album"
+    activity_timelength = 20,  # Field name made lowercase.
+    activity_photo = "/photos_activities/LAVAIOXISEA.jpg",
+    activity_participant = 1,
+    activity_place = "Home",
+    activity_tag = "Music")
+
+    Activities.objects.create(activities_id = "Basketball",
+    activity_desc = "Basketball is a physical confrontation sport centered on the hands, and it is the core event of the Olympic Games."
+    activity_timelength = 180,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Basketball.jpg",
+    activity_participant = 6,
+    activity_place = "Outdoor",
+    activity_tag = "Sports")
+
     Activities.objects.create(activities_id = "Hiking",
     activity_desc = "Trekking (Tramp) refers to the purpose of walking exercises in the suburbs of the city, rural areas or mountains, hiking is the most typical and common outdoor sports. Because short-distance hiking is relatively simple, it does not require too much skill and equipment, and is often considered a leisure activity.",
     activity_timelength = 480,  # Field name made lowercase.
@@ -211,16 +259,41 @@ def insert_database():
     activity_timelength = 180,  # Field name made lowercase.
     activity_photo = "/photos_activities/Wood.jpg",
     activity_participant = 2,
-    activity_place = "City Center",
+    activity_place = "Center",
     activity_tag = "Handcraft")
 
-    Activities.objects.create(activities_id = "punk",
+    Activities.objects.create(activities_id = "Pottery",
+    activity_desc = "Ceramic art, broadly speaking, is an art form that combines traditional Chinese ancient culture with modern art. It can be seen from the historical development that "ceramic art" is a comprehensive art, which has experienced a complex and long process of cultural accumulation. It has an inseparable relationship of inheritance and comparison with painting, sculpture, design, and other arts and crafts."
+    activity_timelength = 120,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Pottery.jpg",
+    activity_participant = 1,
+    activity_place = "Center",
+    activity_tag = "Handcraft")
+
+    Activities.objects.create(activities_id = "Origami",
+    activity_desc = "Origami is an artistic activity in which paper is folded into various shapes. Origami is not limited to just using paper. Origami lovers around the world have used a variety of materials, such as tin foil, napkins, acetate sheets, etc., while adhering to folding norms"
+    activity_timelength = 30,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Origami.jpg",
+    activity_participant = 1,
+    activity_place = "Home",
+    activity_tag = "Handcraft")
+
+    Activities.objects.create(activities_id = "Football",
+    activity_desc = 'The predecessor of modern football originated from the ball game "Cuju" in Zizhou, Shandong (now Zibo City) in ancient China. Later, it was spread from China to Europe by the Arabs and gradually evolved into modern football. Modern football started in England.'
+    activity_timelength = 240,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Football.jpg",
+    activity_participant = 12,
+    activity_place = "Outdoor",
+    activity_tag = "Sports")
+
+    Activities.objects.create(activities_id = "Punk",
     activity_desc = "Music Festival album",
     activity_timelength = 60,  # Field name made lowercase.
     activity_photo = "/photos_activities/Punk.jpg",
     activity_participant = 1,
     activity_place = "Home",
     activity_tag = "Music")
+
     Activities.objects.create(activities_id = "Turning_Red",
     activity_desc = "Xiaomei, a 13-year-old girl, grew up in a typical Asian family that runs an ancestral hall open to the public as a tourist attraction and enshrines the ancestors of the family. Xiaomei's mother is a caring and slightly neurotic woman who cares for her children, in front of her mother, Xiaomei always plays the role of a well-behaved woman, but in fact, Xiaomei, like all children of the same age, is naughty, active, and begins to be interested in the opposite sex. ",
     activity_timelength = 100,  # Field name made lowercase.
