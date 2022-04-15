@@ -22,7 +22,7 @@ def login(request, i_email, i_password):
             print(object.user_id)
             if object.user_id == i_email and object.password == i_password:
                 print("success! refresh")
-                rep = HttpResponseRedirect('/')
+                rep = HttpResponseRedirect('#')
                 request.session["is_login"] = True
                 request.session["user1"] = object.user_id
                 # request.session["user_photo"] = object.user_photo
@@ -35,13 +35,13 @@ def login(request, i_email, i_password):
         status = "failure"
         return JsonResponse({'status':status, 'message': message})
     
-
 def log_out(request):
     try:
         request.session.flush()
-        return redirect("/")
+        return HttpResponseRedirect('/')
     except:
-        return redirect("/")
+        return HttpResponseRedirect('/')
+
 #+
 def input_email(request):
     if request.method == "GET": 
@@ -260,12 +260,9 @@ def project(request):
             pro_style = "display:none;"
             rev_style = "display:block;"
             password_opt = "forget password"
-            return render(request,'project.html',{"profile_style" : pro_style, "reverse_style": rev_style,"password_opt": password_opt }) 
+            return render(request,'project.html',{"profile_style" : pro_style, "reverse_style": rev_style, "password_opt": password_opt}) 
     if request.method == "POST":
-        user_info = request.session['user1']
-        pro_style = "display:block;"
-        rev_style = "display:none;"
-        return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info, "reverse_style": rev_style})
+        return index(request)
 
 def window_help(request):
     if request.method == "GET":

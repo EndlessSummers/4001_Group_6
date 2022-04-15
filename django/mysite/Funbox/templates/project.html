@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-
+  
 <head>
   <meta charset="UTF-8">
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -16,9 +16,8 @@
   <link href="./assets/apple-icon-180x180.png" rel="apple-touch-icon">
   <link href="./assets/apple-icon-180x180.png" rel="icon">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
 
-  <title>Title page</title>  
+  <title>Project</title>
 
   <link href="{% static 'css/external.css' %}" rel="stylesheet">
   <link href="{% static 'css/main.css' %}" rel="stylesheet">
@@ -33,68 +32,83 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a href="/" class="navbar-brand"> FunBox </a>
+    <a href="./index.html" class="navbar-brand"> FunBox </a>
   </div>
 
+  <!-- The sidebar for recommendation filter -->
   <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <div class="range">
-      <a>Time&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-      <input id="Timerange" type="range" value="-1" oninput="changeV('Time')" onchange="changeV('Time')" min=0 max=9
-        step=1>
-      <a class="rangevalue" id="Timevalue"></span>
-        <a>Participant</a>
-        <input id="Participantrange" type="range" value="-1" oninput="changeV('Participant')"
-          onchange="changeV('Participant')" min=1 max=11 step=1>
-        <a class="rangevalue" id="Participantvalue"></span>
-          <a>Place&nbsp&nbsp&nbsp&#8195&#8195
-            <label for="Home">
-              <input type="checkbox" name="PlaceChoice" value="Home" id="Home">&nbspHome&#8195
-            </label>
-            <label for="Outdoor">
-              <input type="checkbox" name="PlaceChoice" value="Outdoor" id="Outdoor">&nbspOutdoor&#8195
-            </label>
-            <label for="Center">
-              <input type="checkbox" name="PlaceChoice" value="Center" id="Center">&nbspCity Center&#8195
-            </label>
-            <label for="Interest">
-              <input type="checkbox" name="PlaceChoice" value="Interest" id="Interest">&nbspPlace of interest&#8195
-            </label>
-          </a>
-          <a>Tags&nbsp&nbsp&nbsp</a>
-          <a style="color: rgb(163, 163, 163); font-weight: 100;">Click a tag to like it, Double click a tag to dislike it.</a>
-          <a class="Tagsbox">
-            <label for="Film">
-              <input type="button" id="Film" class="rangevalue" onclick="ChangeTags('Film')" value="0" hidden>
-              <i id="Filmtag" title="Like">Film & TV</i>
-            </label>
-            <label for="Game">
-              <input type="button" id="Game" class="rangevalue" onclick="ChangeTags('Game')" value="0" hidden>
-              <i id="Gametag" title="Like">Game</i>
-            </label>
-            <label for="Music">
-              <input type="button" id="Music" class="rangevalue" onclick="ChangeTags('Music')" value="0" hidden>
-              <i id="Musictag" title="Like">Music</i>
-            </label>
-            <label for="Cooking">
-              <input type="button" id="Cooking" class="rangevalue" onclick="ChangeTags('Cooking')" value="0" hidden>
-              <i id="Cookingtag" title="Like">Cooking & Food</i>
-            </label>
-            <label for="Sports">
-              <input type="button" id="Sports" class="rangevalue" onclick="ChangeTags('Sports')" value="0" hidden>
-              <i id="Sportstag" title="Like">Sports</i>
-            </label>
-            <label for="Handwork">
-              <input type="button" id="Handwork" class="rangevalue" onclick="ChangeTags('Handwork')" value="0" hidden>
-              <i id="Handworktag" title="Like">Handwork</i>
-            </label>
-          </a>
-          &#8195&#8195
-          <a class="btn btn-primary btn-sm" style="width: 150px; padding-left: 0%; padding-right: 0%;"
-            onclick="ClearTags()">
-            Clear all choices
-          </a>
-    </div>
+    <!-- The close button -->
+    <label for="filtersubmit">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    </label>
+    <!-- Use form to submit the information of recommendation filter -->
+    <form name="filterset" action="" autocomplete="off" target="iframeName" method="get">
+      <div class="range">
+        <a>Time&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+        <input name="time" id="Timerange" type="range" value="-1" oninput="changeV('Time')" onchange="changeV('Time')"
+          min=0 max=9 step=1>
+        <a class="rangevalue" id="Timevalue"></span>
+          <a>Participant</a>
+          <input name="participant" id="Participantrange" type="range" value="-1" oninput="changeV('Participant')" min=1
+            max=11 step=1>
+          <a class="rangevalue" id="Participantvalue"></span>
+            <a>Place&nbsp&nbsp&nbsp&#8195&#8195
+              <label for="Home">
+                <input type="checkbox" name="place" value="Home" id="Home">&nbspHome&#8195
+              </label>
+              <label for="Outdoor">
+                <input type="checkbox" name="place" value="Outdoor" id="Outdoor">&nbspOutdoor&#8195
+              </label>
+              <label for="Center">
+                <input type="checkbox" name="place" value="Center" id="Center">&nbspCity Center&#8195
+              </label>
+              <label for="Interest">
+                <input type="checkbox" name="place" value="Interest" id="Interest">&nbspPlace of interest&#8195
+              </label>
+            </a>
+            <a>Tags&nbsp&nbsp&nbsp</a>
+            <a style="color: rgb(163, 163, 163); font-weight: 100;">Click a tag to like it, Double click a tag to dislike
+              it.</a>
+            <a class="Tagsbox">
+              <label for="Film">
+                <input name="film" type="button" id="Film" class="rangevalue" onclick="ChangeTags('Film')" value="0"
+                  hidden>
+                <i id="Filmtag" title="Like">Film & TV</i>
+              </label>
+              <label for="game">
+                <input name="Game" type="button" id="Game" class="rangevalue" onclick="ChangeTags('Game')" value="0"
+                  hidden>
+                <i id="Gametag" title="Like">Game</i>
+              </label>
+              <label for="Music">
+                <input name="music" type="button" id="Music" class="rangevalue" onclick="ChangeTags('Music')" value="0"
+                  hidden>
+                <i id="Musictag" title="Like">Music</i>
+              </label>
+              <label for="Cooking">
+                <input name="cooking" type="button" id="Cooking" class="rangevalue" onclick="ChangeTags('Cooking')"
+                  value="0" hidden>
+                <i id="Cookingtag" title="Like">Cooking & Food</i>
+              </label>
+              <label for="Sports">
+                <input name="sports" type="button" id="Sports" class="rangevalue" onclick="ChangeTags('Sports')" value="0"
+                  hidden>
+                <i id="Sportstag" title="Like">Sports</i>
+              </label>
+              <label for="Handwork">
+                <input name="handwork" type="button" id="Handwork" class="rangevalue" onclick="ChangeTags('Handwork')"
+                  value="0" hidden>
+                <i id="Handworktag" title="Like">Handwork</i>
+              </label>
+            </a>
+            &#8195&#8195
+            <a class="btn btn-primary btn-sm" style="width: 150px; padding-left: 0%; padding-right: 0%;"
+              onclick="ClearTags()">
+              Clear all choices
+            </a>
+      </div>
+      <input type="submit" id="filtersubmit" hidden>
+    </form>
   </div>
 
 
@@ -108,7 +122,7 @@
       </div>
       <ul class="nav">
         <div class="user-profile" onclick="load(event, 'edit')" id="user-profile" style="{{profile_style}}">
-          <img alt="" src="{{user_photo}}" id="user_picture" alt="user_profile">
+          <img alt="" src="{{user_photo}}" id="user_picture" alt="user_profile" style="display: inline-block;">
           <p> {{user_name}} <br> {{user_email}} </p>
         </div>
         <li><a href="/" title="" >Home</a></li>
@@ -127,7 +141,7 @@
           <a class="btn btn-info btn-sm" onclick="load(event, 'forget')" style="display: inline; font-size: 9px;">{{password_opt}}</a>
           <a class="btn btn-info btn-sm" onclick="load(event, 'cancel')" style="display: inline; font-size: 9px;">Cancel Account</a>
         </p>
-      </nav>  
+      </nav>    
     </div> 
   </nav>
 </header>
@@ -150,13 +164,13 @@
     </div>
 
     <div class="section-container-spacer">
-      <p><img class="img-responsive" alt="" src="{% static 'assets/images/img-12.jpg' %}"></p>
+      <p><img class="img-responsive" alt="" src="/static/assets/images/img-12.jpg"></p>
       <div class="row">
           <div class="col-xs-12 col-md-6">
-              <p><img class="img-responsive" alt="" src="{% static 'assets/images/img-13.jpg' %}"></p>
+              <p><img class="img-responsive" alt="" src="/static/assets/images/img-13.jpg"></p>
           </div>
           <div class="col-xs-12 col-md-6">
-              <p><img class="img-responsive" alt="" src="{% static 'assets/images/img-14.jpg' %}"></p>
+              <p><img class="img-responsive" alt="" src="/static/assets/images/img-14.jpg"></p>
           </div>
       </div>
     </div>
@@ -164,8 +178,36 @@
     <p> Duis aute irure dolor in reprehenderit in voluptate velit esse
     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  </div>
+
+    <div class="note">
+      <!-- <img class="img-responsive" alt="" src="./assets/images/img-05.jpg"> -->
+      <a>
+        <div>
+          <h3>Vivamus vestibulum</h3>
+          <p style="color: #818181;">Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+      </a>
+      <a>Full Text</a>
+      <p class="like">Likes: 30</p>
+    </div>
+    
+    <div class="note">
+      <!-- <img class="img-responsive" alt="" src="./assets/images/img-05.jpg"> -->
+      <a>
+        <div>
+          <h3>Vivamus vestibulum</h3>
+          <p style="color: #818181;">Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+      </a>
+      <a>Full Text</a>
+      <p class="like">Likes: 30</p>
+    </div>
   
+    <a class="btn btn-primary" href = "./note.html" style="width: 20%; right: 30px; position: absolute;"> Create Note </a>
 </div>
     
 
@@ -180,6 +222,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/external.js' %}"></script>
 
 </body>
 </html>
