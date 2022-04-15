@@ -9,19 +9,14 @@ from django.db import models
 from django.db.models import Model
 
 
-class Activity(models.Model):
-    activities_id = models.IntegerField(db_column='Activity_id', primary_key=True)  # Field name made lowercase.
-    activity_desc = models.CharField(db_column='Activity_desc', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    activity_timelength = models.IntegerField(db_column='Activity_timeLength', blank=True, null=True)  # Field name made lowercase.
-    #activity_photo = models.ImageField(upload_to='photos', default='user1.jpg')
-    class Meta:
-        db_table = 'activity'
-
 class Activities(models.Model):
-    activities_id = models.IntegerField(db_column='Activities_id', primary_key=True)  # Field name made lowercase.
-    activity_desc = models.CharField(db_column='Activity_desc', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    activities_id = models.CharField(db_column='Activities_id', max_length = 45, primary_key=True)  # Field name made lowercase.
+    activity_desc = models.CharField(db_column='Activity_desc', max_length=1000, blank=True, null=True)  # Field name made lowercase.
     activity_timelength = models.IntegerField(db_column='Activity_timeLength', blank=True, null=True)  # Field name made lowercase.
-    activity_photo = models.ImageField(blank = True, upload_to='photos', default='activity.jpg')
+    activity_photo = models.ImageField(blank = True, upload_to='photos_activities', default='activity.jpg')
+    activity_participant = models.IntegerField(blank = True, null = False, default = 1)
+    activity_place = models.CharField(blank =True, max_length = 25, default = "Home")
+    activity_tag = models.CharField(blank = True, max_length = 20, default = "Game")
     class Meta:
         managed = True
         db_table = 'activities'
@@ -109,7 +104,7 @@ class UserInfo(models.Model):
     user_id = models.CharField(db_column='User_ID', primary_key=True, max_length=45)  # Field name made lowercase.
     password = models.CharField(db_column='Password', max_length=45)  # Field name made lowercase.
     #user_email = models.CharField(db_column='User_Email', max_length=45)  # Field name made lowercase.
-    user_name = models.CharField(db_column='User_Name', max_length=45, blank=True, null=True, default="null")  # Field name made lowercase.
+    user_name = models.CharField(db_column='User_Name', max_length=20, blank=True, null=True, default="null")  # Field name made lowercase.
     user_photo = models.ImageField(blank = True, upload_to='photos_user/', default='photos_user/Nick_Wilde.jpg')
 
     class Meta:

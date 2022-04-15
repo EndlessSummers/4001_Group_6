@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.http import HttpResponseRedirect, JsonResponse
 import pymysql
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
-from Funbox.models import UserInfo
+from Funbox.models import Activities, UserInfo
 from django.core.mail import send_mail
 import random
 
@@ -11,7 +11,6 @@ from django.contrib.sites.shortcuts import get_current_site
 # from .tokens import account_activation_token
 from django.contrib import messages
 from django.urls import reverse
-
 
 # Create your views here.
 #登录页面
@@ -182,23 +181,82 @@ def cancel_account(request):
     cur_obj.delete()
     return log_out(request)
 
+def insert_database():
+    Activities.objects.create(activities_id = "Texas hold 'em",
+    activity_desc = "Texas Hold 'em is a card game, can be multiplayer participation, its gameplay is, the player each issued two hole cards, the desktop in turn issued 5 public cards, the player with their own two hole cards and 5 public cards free combination, according to the size of the decision.",
+    activity_timelength = 120,  # Field name made lowercase.
+    activity_photo = "/media/photos_activities/texas.png",
+    activity_participant = 6,
+    activity_place = "Home",
+    activity_tag = "Game")
+    Activities.objects.create(activities_id = "Avalon",
+    activity_desc = "Avalon, formerly known as Avalon, usually requires 5-10 people to participate, is a casual puzzle game suitable for party dating and verbal reasoning.",
+    activity_timelength = 240,  # Field name made lowercase.
+    activity_photo = "/media/photos_activities/Avalon.png",
+    activity_participant = 7,
+    activity_place = "Home",
+    activity_tag = "Game")
+    Activities.objects.create(activities_id = "Hiking",
+    activity_desc = "Trekking (Tramp) refers to the purpose of walking exercises in the suburbs of the city, rural areas or mountains, hiking is the most typical and common outdoor sports. Because short-distance hiking is relatively simple, it does not require too much skill and equipment, and is often considered a leisure activity.",
+    activity_timelength = 480,  # Field name made lowercase.
+    activity_photo = "/media/photos_activities/Hiking.png",
+    activity_participant = 2,
+    activity_place = "Outdoor",
+    activity_tag = "Sports")
+    Activities.objects.create(activities_id = "Wood",
+    activity_desc = "Carpentry, is a craft, a unique technology, is also a commonly used technology in architecture, is one of the three elements of traditional Chinese (that is, carpentry, wood, carpenter). It is said that in ancient times, houses were built, and on the day the house was built, it was necessary to ask a carpenter to suppress evil!",
+    activity_timelength = 180,  # Field name made lowercase.
+    activity_photo = "/media/photos_activities/Wood.png",
+    activity_participant = 2,
+    activity_place = "City Center",
+    activity_tag = "Handcraft")
+    Activities.objects.create(activities_id = "punk",
+    activity_desc = "Music Festival album",
+    activity_timelength = 60,  # Field name made lowercase.
+    activity_photo = "/media/photos_activities/punk.png",
+    activity_participant = 1,
+    activity_place = "Home",
+    activity_tag = "Music")
+    Activities.objects.create(activities_id = "Turning Red",
+    activity_desc = "Xiaomei, a 13-year-old girl, grew up in a typical Asian family that runs an ancestral hall open to the public as a tourist attraction and enshrines the ancestors of the family. Xiaomei's mother is a caring and slightly neurotic woman who cares for her children, in front of her mother, Xiaomei always plays the role of a well-behaved woman, but in fact, Xiaomei, like all children of the same age, is naughty, active, and begins to be interested in the opposite sex. ",
+    activity_timelength = 100,  # Field name made lowercase.
+    activity_photo = "/media/photos_activities/Turning Red.png",
+    activity_participant = 1,
+    activity_place = "Home",
+    activity_tag = "Film&TV")
+    return print("hillll")
 
 # ADD_JHIN
 def index(request):
     print("views.py.index() called")
     if request.method == "GET":
         status = request.session.get('is_login')
-        print("status is:", status)
+        data_manage = request.session.get("data")
+        if not data_manage:
+            Activities.objects.all().delete()
+            insert_database()
+            request.session["data"] = 1
+        all_activities = Activities.objects.all
+        photo_list = []
+        desc_list = []
+        name_list = []
+        for object in all_activities:
+            photo_list.append(object.activity_photo.url)
+            desc_list.append(object.activity_desc)
+            name_list.append(object.activity_id)
         if status:
             user_info = request.session.get('user1')
             curr_obj = UserInfo.objects.get(user_id = user_info)
             current_photo = curr_obj.user_photo.url
+            image = "/media/photos_activities/d73dcada897a799f4bf1a5c0929fb1b.png"
             print("The url for a photo is ", current_photo)
             current_name = curr_obj.user_name
             pro_style = "display:block;"
             rev_style = "display:none;"
             password_opt = "change password"
-            return render(request,'index.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, "password_opt": password_opt })
+            return render(request,'index.html',{"image_1" : image, "profile_style" : pro_style, "user_email":user_info.split('@')[0], 
+                "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, "password_opt": password_opt,
+                 "images" : photo_list, "names" : name_list})
         else:
             pro_style = "display:none;"
             rev_style = "display:block;"
