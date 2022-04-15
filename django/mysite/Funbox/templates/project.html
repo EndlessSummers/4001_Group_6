@@ -42,7 +42,8 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     </label>
     <!-- Use form to submit the information of recommendation filter -->
-    <form name="filterset" action="" autocomplete="off" target="iframeName" method="get">
+    <form name="filterset" action="" autocomplete="off" target="_blank" method="post" onsubmit="return true">
+      {% csrf_token %}
       <div class="range">
         <a>Time&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
         <input name="time" id="Timerange" type="range" value="-1" oninput="changeV('Time')" onchange="changeV('Time')"
@@ -156,28 +157,25 @@
   <div class="col-xs-12 col-md-8">
 
     <div class="section-container-spacer">
-        <h1>Project</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat.</p>
+        <h1>{{projectlist.0}}</h1>
+        <p>{{projectlist.1}}</p>
     </div>
 
     <div class="section-container-spacer">
-      <p><img class="img-responsive" alt="" src="/static/assets/images/img-12.jpg"></p>
-      <div class="row">
+      <p><img class="img-responsive" alt="" src="{{projectlist.2}}"></p>
+      <!-- <div class="row">
           <div class="col-xs-12 col-md-6">
               <p><img class="img-responsive" alt="" src="/static/assets/images/img-13.jpg"></p>
           </div>
           <div class="col-xs-12 col-md-6">
               <p><img class="img-responsive" alt="" src="/static/assets/images/img-14.jpg"></p>
           </div>
-      </div>
+      </div> -->
     </div>
 
-    <p> Duis aute irure dolor in reprehenderit in voluptate velit esse
+    <!-- <p> Duis aute irure dolor in reprehenderit in voluptate velit esse
     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
 
     <div class="note">
       <!-- <img class="img-responsive" alt="" src="./assets/images/img-05.jpg"> -->

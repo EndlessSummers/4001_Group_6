@@ -138,6 +138,8 @@ function ChangeTags(Tagname) {
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
+    $("#filtersubmit").click(); 
+    console.log("save button clicked")
 }
 
 function validate_username() {
