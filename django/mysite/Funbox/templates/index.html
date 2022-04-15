@@ -46,11 +46,11 @@
       {% csrf_token %}
       <div class="range">
         <a>Time&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-        <input name="time" id="Timerange" type="range" value="1" oninput="changeV('Time')" onchange="changeV('Time')"
+        <input name="time" id="Timerange" type="range" value="0" oninput="changeV('Time')" onchange="changeV('Time')"
           min=0 max=9 step=1>
         <a class="rangevalue" id="Timevalue"></span>
           <a>Participant</a>
-          <input name="participant" id="Participantrange" type="range" value="1" oninput="changeV('Participant')" min=1
+          <input name="participant" id="Participantrange" type="range" value="0" oninput="changeV('Participant')" min=0
             max=11 step=1>
           <a class="rangevalue" id="Participantvalue"></span>
             <a>Place&nbsp&nbsp&nbsp&#8195&#8195
@@ -72,32 +72,32 @@
               it.</a>
             <a class="Tagsbox">
               <label for="Film">
-                <input name="film" type="button" id="Film" class="rangevalue" onclick="ChangeTags('Film')" value="0"
+                <input name="film" type="text" readonly id="Film" class="rangevalue" onclick="ChangeTags('Film')" value="0"
                   hidden>
                 <i id="Filmtag" title="Like">Film & TV</i>
               </label>
               <label for="Game">
-                <input name="game" type="button" id="Game" class="rangevalue" onclick="ChangeTags('Game')" value="0"
+                <input name="game" type="text" readonly id="Game" class="rangevalue" onclick="ChangeTags('Game')" value="0"
                   hidden>
                 <i id="Gametag" title="Like">Game</i>
               </label>
               <label for="Music">
-                <input name="music" type="button" id="Music" class="rangevalue" onclick="ChangeTags('Music')" value="0"
+                <input name="music" type="text" readonly id="Music" class="rangevalue" onclick="ChangeTags('Music')" value="0"
                   hidden>
                 <i id="Musictag" title="Like">Music</i>
               </label>
               <label for="Cooking">
-                <input name="cooking" type="button" id="Cooking" class="rangevalue" onclick="ChangeTags('Cooking')"
+                <input name="cooking" type="text" readonly id="Cooking" class="rangevalue" onclick="ChangeTags('Cooking')"
                   value="0" hidden>
                 <i id="Cookingtag" title="Like">Cooking & Food</i>
               </label>
               <label for="Sports">
-                <input name="sports" type="button" id="Sports" class="rangevalue" onclick="ChangeTags('Sports')" value="0"
+                <input name="sports" type="text" readonly id="Sports" class="rangevalue" onclick="ChangeTags('Sports')" value="0"
                   hidden>
                 <i id="Sportstag" title="Like">Sports</i>
               </label>
               <label for="Handwork">
-                <input name="handwork" type="button" id="Handwork" class="rangevalue" onclick="ChangeTags('Handwork')"
+                <input name="handwork" type="text" readonly id="Handwork" class="rangevalue" onclick="ChangeTags('Handwork')"
                   value="0" hidden>
                 <i id="Handworktag" title="Like">Handwork</i>
               </label>

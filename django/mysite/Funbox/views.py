@@ -181,6 +181,57 @@ def cancel_account(request):
     cur_obj.delete()
     return log_out(request)
 
+def filter_data(request):
+    all_act = Activities.objects.all()
+    my_dic = {}
+    filter_dic = {}
+    print(request.POST)
+    for object in all_act:
+        filter_dic[object.activities_id] = 0
+    filter_time = request.POST.get("time")
+    if filter_time:
+        my_dic["time"] = int(filter_time)
+    else:
+        my_dic["time"] == 0
+
+    filter_num = request.POST.get("participant")
+    if filter_num:
+        my_dic["participant"] = int(filter_num)
+    else:
+        my_dic["participant"] == 0
+    
+    filter_home = request.POST.get("Home")
+    filter_outdoor = request.POST.get("Outdoor")
+    filter_center = request.POST.get("City")
+
+    my_dic["Film&TV"] = int(request.POST.get("film"))
+    my_dic["Game"] = int(request.POST.get("game"))
+    my_dic["Music"] = int(request.POST.get("music"))
+    my_dic["Cooking"] = int(request.POST.get("cooking"))
+    my_dic["Sports"] = int(request.POST.get("sports"))
+    my_dic["Handcraft"] = int(request.POST.get("handwork"))
+
+    for obj in all_act:
+        if my_dic["time"] in range(obj.activity_timelength//60, obj.activity_timelength//60 + 1):
+            filter_dic[obj.activities_id] += 1
+        if my_dic["participant"] == obj.activity_participant:
+            filter_dic[obj.activities_id] += 1
+        if obj.activity_place in [filter_home, filter_outdoor, filter_center]:
+            filter_dic[obj.activities_id] += 1
+        print(obj.activities_id, filter_dic[obj.activities_id])
+        filter_dic[obj.activities_id] += my_dic[obj.activity_tag]
+    print(filter_dic)
+    newlist = sorted(filter_dic, key = filter_dic.get, reverse= True)
+    print(newlist)
+    request.session["sortedlist"] = newlist
+    print(newlist)
+
+    return redirect("/")
+
+    
+    
+
+
 def insert_database():
     Activities.objects.create(activities_id = "Cake",
     activity_desc = "Cake is an ancient pastry, usually made in an oven. The cake is made of eggs, sugar and wheat flour as the main raw materials. With milk, fruit juice, milk powder, fragrant powder, salad oil, water, shortening, baking powder as accessories. After stirring, mixing, and baking, a sponge-like snack is created.",
@@ -188,7 +239,7 @@ def insert_database():
     activity_photo = "/photos_activities/Cake.jpg",
     activity_participant = 1,
     activity_place = "Home",
-    activity_tag = "Cooking&Food")
+    activity_tag = "Cooking")
     
     Activities.objects.create(activities_id = "Baguette",
     activity_desc = "Baguette (French: /ba.ɡɛt/, English: /bæ'gɛt/) is one of the most traditional French breads and is rich in nutrients. The representative of French bread is 'baguette', baguette originally means a long gem.",
@@ -196,7 +247,7 @@ def insert_database():
     activity_photo = "/photos_activities/Baguette.jpg",
     activity_participant = 1,
     activity_place = "Home",
-    activity_tag = "Cooking&Food")
+    activity_tag = "Cooking")
 
     Activities.objects.create(activities_id = "Script_Kill",
     activity_desc = "'Script Kill', the term originated from the Western banquet live role-playing 'Murder Mystery', is a project where players go to a live venue to experience a reasoning project. The rule of script killing is that players first select a character, read the script corresponding to the character, and collect clues to find the real murderer hidden in the activity. [1] [10] Script Killing is not only a game, but also an entertainment project that integrates knowledge attributes, psychological game attributes, and strong social attributes.",
@@ -313,7 +364,14 @@ def index(request):
             Activities.objects.all().delete()
             insert_database()
             request.session["data"] = 1
-        all_activities = Activities.objects.all()
+        all_activities = []
+        if request.session.get("sortedlist"):
+            all_activities_names = request.session.get("sortedlist")
+            for item in all_activities_names:
+                all_activities.append(Activities.objects.get(activities_id = item))
+            
+        else:
+            all_activities = Activities.objects.all()
         photo_list = []
         desc_list = []
         name_list = []
@@ -373,6 +431,8 @@ def index(request):
             return change_pswd(request)
         elif (hint == "repeat"):
             return find_password(request)
+        elif (hint == "filter"):
+            return filter_data(request)
     else:
         print("NO ENTER")
         return HttpResponse('登录成功')

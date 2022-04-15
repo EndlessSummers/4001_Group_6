@@ -128,8 +128,8 @@ function ChangeTags(Tagname) {
   } else if (v === '1') {
     document.getElementById(Tagname + "tag").style.color = "#ff0000";
     document.getElementById(Tagname + "tag").title = "Remove";
-    document.getElementById(Tagname).value = "2";
-  } else if (v === '2') {
+    document.getElementById(Tagname).value = "-1";
+  } else if (v === '-1') {
     document.getElementById(Tagname + "tag").style.color = "#111";
     document.getElementById(Tagname + "tag").title = "Like";
     document.getElementById(Tagname).value = "0";
