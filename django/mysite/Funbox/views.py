@@ -79,13 +79,18 @@ def reg_email(request, i_email):
 #+
 def reg_form(request):
     if (request.method == "GET"):
-        return render(request, 'reg_form.html')
+        path = request.get_full_path()
+        try:
+            email = path.split("email=")[1]
+        except:
+            return HttpResponse("ERROR: please enter this page through email")
+        # print(email)
+        return render(request, 'reg_form.html', {"email": email})
     if request.method == "POST":
         print("jinlaile")
         i_email = request.POST.get("email")
         i_password = request.POST.get("password")
         UserInfo.objects.create(user_id = i_email, password = i_password)
-
         rep = redirect('/',True)
         return rep
 
@@ -129,16 +134,24 @@ def set_profile(request):
     message = "no message"
     return JsonResponse({"status": status, "message": message})
 #+
-    
-
-    
 
 def user_page(request):
     return render(request, 'userpage.html')
 
 #to do
 def change_pswd(request):
-    return render(request, 'input_changepassword.html')
+    user_info = request.session.get('user1')
+    curr_obj = UserInfo.objects.get(user_id = user_info)
+    old_password = curr_obj.password
+    if (request.POST.get('oldpassword') != old_password):
+        status = "failure"
+        message = "old password did not match"
+        return JsonResponse({'status':status, 'message': message})
+    curr_obj.password = request.POST.get("password")
+    curr_obj.save()
+    status = "success"
+    message = "Your password has been changed"
+    return JsonResponse({'status':status, 'message': message})
 
 #?
 def new_pswd(request):
@@ -181,11 +194,13 @@ def index(request):
             current_name = curr_obj.user_name
             pro_style = "display:block;"
             rev_style = "display:none;"
-            return render(request,'index.html',{"profile_style" : pro_style, "user_email":user_info, "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo })
+            password_opt = "change password"
+            return render(request,'index.html',{"profile_style" : pro_style, "user_email":user_info, "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, "password_opt": password_opt })
         else:
             pro_style = "display:none;"
             rev_style = "display:block;"
-            return render(request,'index.html',{"profile_style" : pro_style, "reverse_style": rev_style}) 
+            password_opt = "forget password"
+            return render(request,'index.html',{"profile_style" : pro_style, "reverse_style": rev_style,"password_opt": password_opt }) 
     elif request.method == "POST":
         print("METHOD IS POST")
         # print(request.POST)
@@ -217,6 +232,8 @@ def index(request):
             return set_profile(request)
         elif (hint == "register"):
             return reg_form(request)
+        elif (hint == "change"):
+            return change_pswd(request)
         
     else:
         print("NO ENTER")
@@ -228,14 +245,20 @@ def project(request):
         status = request.session.get('is_login')
         print("status is:", status)
         if status:
-            user_info = request.session['user1']
+            user_info = request.session.get('user1')
+            curr_obj = UserInfo.objects.get(user_id = user_info)
+            current_photo = curr_obj.user_photo.url
+            print("The url for a photo is ", current_photo)
+            current_name = curr_obj.user_name
             pro_style = "display:block;"
             rev_style = "display:none;"
-            return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info, "reverse_style": rev_style})
+            password_opt = "change password"
+            return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info, "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, "password_opt": password_opt })
         else:
             pro_style = "display:none;"
             rev_style = "display:block;"
-            return render(request,'project.html',{"profile_style" : pro_style, "reverse_style": rev_style}) 
+            password_opt = "forget password"
+            return render(request,'project.html',{"profile_style" : pro_style, "reverse_style": rev_style,"password_opt": password_opt }) 
     if request.method == "POST":
         user_info = request.session['user1']
         pro_style = "display:block;"
@@ -256,7 +279,13 @@ def window_reg_e(request):
     
 def window_forget_e(request):
     if request.method == "GET":
-        return render(request,'windows/window_forget_e.html')
+        status = request.session.get('is_login')
+        user_info = request.session.get('user1')
+        print("status is:", status)
+        if status:
+            return render(request, 'windows/window_change_password.html', {"user_email": user_info})
+        else:
+            return render(request,'windows/window_forget_e.html')
     
 
 def window_cancel(request):
