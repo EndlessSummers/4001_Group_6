@@ -282,7 +282,10 @@ document.addEventListener("scroll", function (event) {
   console.log("Y "+document.height);
   // may have problem
   if (totalY < lastY + 2*viewY) {
-    $(".grid").append("<div class='grid-item'><img class='img-responsive' alt='' src='{{images.8}}'><a href='/project?image={{names.8}}' class='project-description'><div class='project-text-holder'>    <div class='project-text-inner'>      <h3>{{names.8}}</h3>      <p>Discover more</p>    </div>  </div></a></div>")
+    string = "<div class='grid-item'><img class='img-responsive' alt='' src='{{images.7}}'><a href='/project?image={{names.7}}' class='project-description'><div class='project-text-holder'>    <div class='project-text-inner'>      <h3>{{names.7}}</h3>      <p>Discover more</p>    </div>  </div></a></div>";
+    string.replaceAll(img_index, img_index+1);
+    $(".grid").append(string);
+    img_index++;
   }
   masonryBuild();
 });

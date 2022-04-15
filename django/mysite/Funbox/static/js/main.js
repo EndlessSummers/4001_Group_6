@@ -1,6 +1,7 @@
 // global variable for help window
 var _index=0;
 var clearTime = null;
+var img_index = 7;
 
 function myOnSubmit(e, info) {
     var state;
