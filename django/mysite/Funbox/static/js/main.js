@@ -36,6 +36,7 @@ function myOnSubmit(e, info) {
         save_usr_p(e);
         return true;
       }
+      // if (info == "repeat") return true;
       if (info == "cancel") return true;
       return ajaxSubmit(info);
     }

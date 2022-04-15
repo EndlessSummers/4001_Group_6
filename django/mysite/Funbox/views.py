@@ -68,6 +68,8 @@ def reg_email(request, i_email):
     subject = 'Funbox Activation Email'
     current_site = get_current_site(request)
     message = render_to_string('email_template.html', {
+        'body': "to comfirm registration for user: ",
+        'url': "/reg_form/",
         'user': i_email,
         'domain': current_site.domain,
     })
@@ -87,33 +89,34 @@ def reg_form(request):
         # print(email)
         return render(request, 'reg_form.html', {"email": email})
     if request.method == "POST":
-        print("jinlaile")
+        # print("jinlaile")
         i_email = request.POST.get("email")
         i_password = request.POST.get("password")
         UserInfo.objects.create(user_id = i_email, password = i_password)
         rep = redirect('/',True)
         return rep
 
-def forget_mail(i_email):
+def forget_mail(request, i_email):
     #to do
     user_list = UserInfo.objects.all()
     for object in user_list:
         if object.user_id == i_email:
-            message = "用户已存在！"
-            return JsonResponse({'status':status, 'message': message})
-    subject = 'Funbox Activation Email'
-    email_message = '''
-    This is FUNBOX team. Click here to reset your password
-    <br> <a href = ''>Click here </a>
-    If the hyperlink is not available, you can copy this to your explorer
-    
-                                                        Funbox Team
-    '''
-    send_mail(subject=subject, message= email_message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
-    status = "success"
-    message = "你的邮箱已成功提交"   
-    return JsonResponse({'status':status, 'message':message})
-#+
+            subject = 'Funbox Find Password Email'
+            current_site = get_current_site(request)
+            message = render_to_string('email_template.html', {
+                'body': 'to set new password for user: ',
+                'url': "/find_password/",
+                'user': i_email,
+                'domain': current_site.domain,
+            })
+            send_mail(subject=subject, message=message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
+            status = "success"
+            message = "你的邮箱已成功提交"   
+            return  JsonResponse({'status':status, 'message':message})
+    message = "用户不存在！"
+    status = "failure"
+    return JsonResponse({'status':status, 'message': message})
+# +
 
 def set_profile(request):
     curr_id = request.session.get("user1")
@@ -221,12 +224,10 @@ def index(request):
             # 用户注销账户
             print(1)
             return cancel_account(request)
-        elif (hint == "forget_email"):
+        elif (hint == "forget"):
             # 通过邮箱找回密码
             i_email = request.POST.get("email")
-            forget_mail(i_email)
-            print(1)
-            return HttpResponse('登录成功')
+            return forget_mail(request, i_email)
         elif (hint == "profile"):
             print("this is profile")
             return set_profile(request)
@@ -234,7 +235,8 @@ def index(request):
             return reg_form(request)
         elif (hint == "change"):
             return change_pswd(request)
-        
+        elif (hint == "repeat"):
+            return find_password(request)
     else:
         print("NO ENTER")
         return HttpResponse('登录成功')
@@ -286,7 +288,6 @@ def window_forget_e(request):
             return render(request, 'windows/window_change_password.html', {"user_email": user_info})
         else:
             return render(request,'windows/window_forget_e.html')
-    
 
 def window_cancel(request):
     if request.method == "GET":
@@ -315,7 +316,22 @@ def ajax_submit(request):
 def activate(request):
     return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
 
-# def reg_email(request):
-#     if (request.method == "GET"):
-#         return render(request, 'reg_form.html')
+def find_password(request):
+    if (request.method == "GET"):
+        path = request.get_full_path()
+        try:
+            email = path.split("email=")[1]
+        except:
+            return HttpResponse("ERROR: please enter this page through email")
+        # print(email)
+        return render(request, 'find_password.html', {"email": email})
+    if request.method == "POST":
+        i_email = request.POST.get("email")
+        curr_obj = UserInfo.objects.get(user_id = i_email)
+        i_password = request.POST.get("password")
+        curr_obj.password = request.POST.get("password")
+        curr_obj.save()
+        status = "success"
+        message = "Your password has been changed"
+        return JsonResponse({'status':status, 'message': message})
         
