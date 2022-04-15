@@ -276,16 +276,17 @@ document.addEventListener("scroll", function (event) {
   var lastY = window.scrollY; // where user scrolls to
   var totalY = document.body.offsetHeight; // the total height of our document // 2571
   var viewY = window.innerHeight; // the height of the viewport //861
-  console.log("lastY "+lastY);
-  console.log("totalY "+totalY);
-  console.log("viewY "+viewY);
-  console.log("Y "+document.height);
-  // may have problem
+  var myNames = {};
+  {% for name in names %}
+    myNames[{{forloop.counter0}}] = "{{name}}";
+  {% endfor %}
   if (totalY < lastY + 2*viewY) {
-    string = "<div class='grid-item'><img class='img-responsive' alt='' src='{{images.7}}'><a href='/project?image={{names.7}}' class='project-description'><div class='project-text-holder'>    <div class='project-text-inner'>      <h3>{{names.7}}</h3>      <p>Discover more</p>    </div>  </div></a></div>";
-    string.replaceAll(img_index, img_index+1);
-    $(".grid").append(string);
-    img_index++;
+    newName = myNames[img_index+1];
+    if (newName !== undefined) {
+      string = '<div class="grid-item"> <img class="img-responsive" alt="" src="/media/photos_activities/{name}.jpg"><a href="/project?image={name}" class="project-description"><div class="project-text-holder"><div class="project-text-inner"><h3>{name}</h3><p>Discover more</p></div></div></a></div>';
+      $(".grid").append(string.replaceAll('{name}', newName));
+      img_index++;
+    }
   }
   masonryBuild();
 });

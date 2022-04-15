@@ -260,7 +260,7 @@ def insert_database():
     Activities.objects.create(activities_id = "Texas_hold_em",
     activity_desc = "Texas Hold 'em is a card game, can be multiplayer participation, its gameplay is, the player each issued two hole cards, the desktop in turn issued 5 public cards, the player with their own two hole cards and 5 public cards free combination, according to the size of the decision.",
     activity_timelength = 120,  # Field name made lowercase.
-    activity_photo = "/photos_activities/Texas.jpg",
+    activity_photo = "/photos_activities/Texas_hold_em.jpg",
     activity_participant = 6,
     activity_place = "Home",
     activity_tag = "Game")
