@@ -42,7 +42,7 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     </label>
     <!-- Use form to submit the information of recommendation filter -->
-    <form name="filterset" action="" autocomplete="off" target="_blank" method="post" onsubmit="return true">
+    <form name="filterset" action="" autocomplete="off" target="_self" method="post" onsubmit="return true">
       {% csrf_token %}
       <div class="range">
         <a>Time&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
@@ -282,7 +282,7 @@ document.addEventListener("scroll", function (event) {
   console.log("Y "+document.height);
   // may have problem
   if (totalY < lastY + 2*viewY) {
-    $(".grid").append("<div class='grid-item'><img class='img-responsive' alt='' src='{{image.8}}'><a href='./project.html' class='project-description'><div class='project-text-holder'>    <div class='project-text-inner'>      <h3>{{names.8}}</h3>      <p>Discover more</p>    </div>  </div></a></div>")
+    $(".grid").append("<div class='grid-item'><img class='img-responsive' alt='' src='{{images.8}}'><a href='/project?image={{names.8}}' class='project-description'><div class='project-text-holder'>    <div class='project-text-inner'>      <h3>{{names.8}}</h3>      <p>Discover more</p>    </div>  </div></a></div>")
   }
   masonryBuild();
 });
