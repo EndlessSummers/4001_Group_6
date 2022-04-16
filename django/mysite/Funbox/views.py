@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.http import HttpResponseRedirect, JsonResponse
 import pymysql
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
-from Funbox.models import Activities, UserHash, UserInfo
+from Funbox.models import Activities, UserHash, UserInfo, UserPreference
 from django.core.mail import send_mail
 import random
 
@@ -361,7 +361,8 @@ def project(request):
             curr_place = curr_obj.activity_place
             curr_tag = curr_obj.activity_tag
 
-        curr_list = [image, curr_time, curr_par, curr_place, curr_tag, curr_desc,curr_photo,]
+        likenum = UserPreference.objects.filter(activity = image).count()
+        curr_list = [image, curr_time, curr_par, curr_place, curr_tag, curr_desc,curr_photo, likenum]
         status = request.session.get('is_login')
         print("status is:", status)
         if status:

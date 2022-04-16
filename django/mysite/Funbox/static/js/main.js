@@ -469,23 +469,24 @@ function like(e, info) {
   // $()
 }
 
-function like(e) {
+function like(e, info) {
   $("#like_button").toggleClass("heart");
   console.log($(this).html);
-  var info;
+  var value;
   if ($("#like_button").hasClass("heart")) {
     $("#likes").html(parseInt($("#likes").html())+1);
-    info = "like";
+    value = 1;
   } else {
     $("#likes").html(parseInt($("#likes").html())-1);
-    info = "dislike";
+    value = -1;
   }
   $.ajax({
     url: "/project/",
     method: "GET",
     data: {
       "hint": "like",
-      "name": info,
+      "value": value,
+      "image": info,
     },
     success: function(args) {
       console.log("ajax success");
