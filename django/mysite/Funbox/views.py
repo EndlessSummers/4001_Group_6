@@ -404,6 +404,117 @@ def insert_database():
     activity_place = "Center",
     activity_tag = "Cooking")
 
+    Activities.objects.create(activities_id = "Jigsaw_puzzle",
+    activity_desc = "Jigsaw puzzles are a popular type of intellectual game, with many variations and varying levels of difficulty.",
+    activity_timelength = 600,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Jigsaw_puzzle.jpg",
+    activity_participant = 1,
+    activity_place = "Home",
+    activity_tag = "Handcraft")
+
+    Activities.objects.create(activities_id = "Lego",
+    activity_desc = "Lego bricks are children's favorite toys. This plastic building block has bumps on one end and holes on the other end that can be inserted into the bumps. There are more than 1,300 shapes, and each shape has 12 different colors, mainly red, yellow, blue, white, and green. It relies on children to use their own brains, and can create endlessly changing shapes.",
+    activity_timelength = 480,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Lego.jpg",
+    activity_participant = 2,
+    activity_place = "Center",
+    activity_tag = "Handcraft")
+
+    Activities.objects.create(activities_id = "Shadow_puppetry",
+    activity_desc = 'Shadow puppetry is an ancient traditional Chinese folk art. Old Beijingers call it "donkey shadow play". According to historical records, shadow play began in the Western Han Dynasty, flourished in the Tang Dynasty, flourished in the Qing Dynasty, and spread to West Asia and Europe during the Yuan Dynasty. It has a long history and a long history.',
+    activity_timelength = 180,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Shadow_puppetry.jpg",
+    activity_participant = 6,
+    activity_place = "Home",
+    activity_tag = "Handcraft")
+
+    Activities.objects.create(activities_id = "Housework",
+    activity_desc = 'Daily life affairs of the family. The language "Liang Shu·Zhang Su Zhuan": "Zhi is addicted to alcohol, forgives everything, and especially forgets about housework."',
+    activity_timelength = 120,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Housework.jpg",
+    activity_participant = 3,
+    activity_place = "Home",
+    activity_tag = "Handcraft")
+
+    Activities.objects.create(activities_id = "Dough_figurine",
+    activity_desc = 'Dough figurine is a kind of Chinese folk handicraft that is simple to make but highly artistic. The art of dough sculpture in China has been recorded in writing as early as the Han Dynasty. It uses flour and glutinous rice flour as the main raw materials, plus color, paraffin, honey and other ingredients, and is processed to prevent cracking and mildew to make soft dough of various colors.',
+    activity_timelength = 60,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Dough_figurine.jpg",
+    activity_participant = 2,
+    activity_place = "Center",
+    activity_tag = "Handcraft")
+
+    Activities.objects.create(activities_id = "Suger_figurine",
+    activity_desc = 'Blowing suger is an industry in Beijing in the old days. The hawkers walk the streets and alleys shoulder-to-shoulder. At one end of the pick is a rectangular cabinet with a shelf. Below the cabinet is a semi-circular open wooden cage with a small charcoal stove inside. A large spoon on the stove is full of Syrup (which is obtained by dissolving maltose).',
+    activity_timelength = 60,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Suger_figurine.jpg",
+    activity_participant = 4,
+    activity_place = "Center",
+    activity_tag = "Handcraft")
+
+    Activities.objects.create(activities_id = "Coding",
+    activity_desc = 'Programming is the process of letting computer code solve a problem, specifying a certain computing method for a computing system, making the computing system run according to the computing method, and finally getting the corresponding result.',
+    activity_timelength = 300,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Coding.jpg",
+    activity_participant = 4,
+    activity_place = "Home",
+    activity_tag = "Handcraft")
+
+    Activities.objects.create(activities_id = "Boxing",
+    activity_desc = "Boxing (French: Boxe) is a sport of fighting with boxing gloves. It has both amateur (also known as Olympic boxing) and professional competitions. The goal of the game is to score more points than the opponent in order to beat the opponent or knock the opponent down to end the game. At the same time, the competitors should try to avoid the opponent's blow.",
+    activity_timelength = 60,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Boxing.jpg",
+    activity_participant = 2,
+    activity_place = "Center",
+    activity_tag = "Sports")
+
+    Activities.objects.create(activities_id = "Street_workout",
+    activity_desc = "Street workout is a form of physical activity that uses parks or public facilities. Originated in Russia, Ukraine and other places, there are now many enthusiast groups around the world, as well as street fitness licenses and competitions.",
+    activity_timelength = 90,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Street_workout.jpg",
+    activity_participant = 1,
+    activity_place = "OutDoor",
+    activity_tag = "Sports")
+
+    Activities.objects.create(activities_id = "Swimming",
+    activity_desc = "Swimming is a skill in which a person floats upward under the action of the buoyancy of the water, and makes the body move regularly in the water through the regular movement of the limbs by means of the buoyancy.",
+    activity_timelength = 60,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Swimming.jpg",
+    activity_participant = 1,
+    activity_place = "Center",
+    activity_tag = "Sports")
+
+    Activities.objects.create(activities_id = "Fitness",
+    activity_desc = "Fitness is a kind of sports, such as various freehand aerobics, rhythmic gymnastics, shape gymnastics and various self-resistance movements, gymnastics, yoga can enhance strength, flexibility, increase endurance, improve coordination, and control the ability of various parts of the body, thereby Make the body strong. If you want to achieve the purpose of reducing stress, exercise at least 3 times a week.",
+    activity_timelength = 120,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Fitness.jpg",
+    activity_participant = 1,
+    activity_place = "Center",
+    activity_tag = "Sports")
+
+    Activities.objects.create(activities_id = "Badminton",
+    activity_desc = "Badminton is an indoor sport that uses a long-handled mesh racket to hit a small ball made of feathers and cork across a net. Badminton matches are played on rectangular courts.",
+    activity_timelength = 120,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Badminton.jpg",
+    activity_participant = 4,
+    activity_place = "Outdoor",
+    activity_tag = "Sports")
+
+    Activities.objects.create(activities_id = "Shuttlecock",
+    activity_desc = "Shuttlecock, also known as Shuttlecock, is a game tool made of chicken feathers inserted on a circular base. As one of the ancient traditional folk sports, shuttlecock originated in the Han Dynasty, and ancient Cuju developed. Popular in the Southern and Northern Dynasties and Sui and Tang Dynasties, it has a history of more than 2,000 years as a simple and easy fitness activity.",
+    activity_timelength = 90,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Shuttlecock.jpg",
+    activity_participant = 3,
+    activity_place = "Home",
+    activity_tag = "Sports")
+
+    Activities.objects.create(activities_id = "Tennis",
+    activity_desc = "Tennis is one of the ball sports. The effective tennis court is a rectangle with a length of 23.77 meters, a width of 8.23 meters for singles and a width of 10.97 meters for doubles. There is a net in the middle, each side of the game occupies one side of the court, and the players hit the ball with a tennis racket.",
+    activity_timelength = 180,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Tennis.jpg",
+    activity_participant = 2,
+    activity_place = "Outdoor",
+    activity_tag = "Sports")
     Activities.objects.create(activities_id = "LOL",
     activity_desc = "League of Legends (LOL) is a hero-fighting MOBA competitive online game developed by Riot Games and operated by Tencent Games Chinese mainland. The game has hundreds of personality heroes, and has a ranking system, rune system and other features.",
     activity_timelength = 40,  # Field name made lowercase.
