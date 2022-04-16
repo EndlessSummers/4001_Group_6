@@ -92,8 +92,8 @@
           <span> {{projectlist.4}}</span>         
           
         <div style="display: inline-block; position: absolute; right: 0; padding-right: 15px;">
-          <a onclick="like(event, '{{projectlist.0}}')" class="like" id="like_button" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
-          <i class="fa fa-heart {{projectlist.8}}" aria-hidden="true"></i> </a><span id="likes" style="font-size: 22px; ">{{projectlist.7}}</span>
+          <a onclick="like(event, '{{projectlist.0}}')" class="like {{projectlist.8}}" id="like_button" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+          <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="likes" style="font-size: 22px; ">{{projectlist.7}}</span>
         </div>
           </p>
         <!-- </div> -->
@@ -134,7 +134,7 @@
       <p class="like">Likes: 30</p>
     </div>
   
-    <a class="btn btn-primary" href = "./note.html" style="width: 20%; right: 30px; position: absolute;"> Create Note </a>
+    <a class="btn btn-primary" href = "/note?image={{projectlist.0}}" style="width: 20%; right: 30px; position: absolute;"> Create Note </a>
   </div>
 </main>
 

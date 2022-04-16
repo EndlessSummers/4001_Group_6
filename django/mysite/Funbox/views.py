@@ -350,8 +350,7 @@ def project(request):
             curr_par = curr_act.activity_participant
             curr_place = curr_act.activity_place
             curr_tag = curr_act.activity_tag
-
-            
+     
         except:
             curr_act = Activities.objects.get(activities_id = "Hiking")
             image = "Hiking"
@@ -400,7 +399,7 @@ def project(request):
             return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, 
             "password_opt": password_opt, "projectlist" : curr_list })
         else:
-            #if (like_state != None):
+            # if (like_state != None):
                 #弹出一个框
             pro_style = "display:none;"
             rev_style = "display:block;"
@@ -473,4 +472,52 @@ def find_password(request):
         status = "success"
         message = "Your password has been changed"
         return JsonResponse({'status':status, 'message': message})
+
+def note(request):
+    if request.method == "GET":
+        path = request.get_full_path()
+        try:
+            image = path.split("image=")[1]
+            curr_act = Activities.objects.get(activities_id = image)
+            curr_desc = curr_act.activity_desc
+            curr_photo = curr_act.activity_photo.url
+            curr_time = curr_act.activity_timelength
+            curr_par = curr_act.activity_participant
+            curr_place = curr_act.activity_place
+            curr_tag = curr_act.activity_tag
+     
+        except:
+            curr_act = Activities.objects.get(activities_id = "Hiking")
+            image = "Hiking"
+            curr_desc = curr_act.activity_desc
+            curr_photo = curr_act.activity_photo.url
+            curr_time = curr_act.activity_timelength
+            curr_par = curr_act.activity_participant
+            curr_place = curr_act.activity_place
+            curr_tag = curr_act.activity_tag
+
+        status = request.session.get('is_login')
+
+        if status:
+
+            user_info = request.session.get('user1')
+            curr_obj = UserInfo.objects.get(user_id = user_info)
+            current_photo = curr_obj.user_photo.url
+
+            current_name = curr_obj.user_name
+            pro_style = "display:block;"
+            rev_style = "display:none;"
+            password_opt = "change password"
+
+            return render(request,'note.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, 
+            "password_opt": password_opt})
+        else:
+
+            pro_style = "display:none;"
+            rev_style = "display:block;"
+            password_opt = "forget password"
+            return render(request,'note.html',{"profile_style" : pro_style, "reverse_style": rev_style, 
+            "password_opt": password_opt}) 
+    elif request.method == "POST":
+        return index(request)
         

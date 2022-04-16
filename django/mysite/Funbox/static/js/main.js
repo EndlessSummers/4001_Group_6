@@ -479,6 +479,7 @@ function like(e, info) {
     $("#likes").html(parseInt($("#likes").html())-1);
     value = -1;
   }
+
   $.ajax({
     url: "/project/",
     method: "GET",
