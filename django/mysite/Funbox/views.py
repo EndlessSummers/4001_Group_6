@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 import pymysql
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from urllib3 import HTTPResponse
-from Funbox.models import Activities, UserHash, UserInfo, UserPreference
+from Funbox.models import Activities, UserHash, UserInfo, UserPreference, Notes
 from django.core.mail import send_mail
 import random
 
@@ -252,6 +252,16 @@ def find_password(request):
 
 # 创建数据库
        
+def savenotes(request):
+    new_photo = request.FILES.get("photos")
+    new_title = request.POST.get("title")
+    new_body = request.POST.get("body")
+    act_name = request.POST.get("activity")
+    act_obj = Activities.objects.get(activities_id = act_name)
+    user_name = request.session.get("user1")
+    user_obj = UserInfo.objects.get(user_id = user_name)
+    Notes.objects.create(user = user_obj, activity = act_obj, title = new_title, note = new_body, activity_photo = new_photo)
+    return redirect("/project/?image=" + act_name)
 
 # 验证表单信息 进入首页
 def index(request):
@@ -333,9 +343,7 @@ def index(request):
         elif (hint == "filter"):
             return filter_data(request)
         elif (hint == "note"):
-            print("NOTE INFO BELOW:")
-            print(request.POST)
-            return JsonResponse({})
+            return savenotes(request)
     else:
         print("NO ENTER")
         return HttpResponse('登录成功')
@@ -369,6 +377,22 @@ def project(request):
         like_state = request.GET.get("value")
         print("like state: ", like_state)
 
+        note_users = []
+        note_titles = []
+        note_notes = []
+        note_photos = []
+
+
+        if Notes.objects.filter(activity = curr_act).count() != 0:
+            for i in (Notes.objects.filter(activity = curr_act)):
+                note_users.append(i.user)
+                note_titles.append(i.title)
+                note_notes.append(i.note)
+                if i.activity_photo == None:
+                    note_photos.append(None)
+                else:
+                    note_photos.append(i.activity_photo.url)
+
 
         likenum = UserPreference.objects.filter(activity = curr_act, likes = True).count()
         curr_list = [image, curr_time, curr_par, curr_place, curr_tag, curr_desc,curr_photo, likenum]
@@ -401,7 +425,8 @@ def project(request):
             else:
                 curr_list.append("")
             return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, 
-            "password_opt": password_opt, "projectlist" : curr_list })
+            "password_opt": password_opt, "projectlist" : curr_list, "noteusers" : note_users,
+            "notetiles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos})
         else:
             # if (like_state != None):
                 #弹出一个框
@@ -409,7 +434,9 @@ def project(request):
             rev_style = "display:block;"
             password_opt = "forget password"
             return render(request,'project.html',{"profile_style" : pro_style, "reverse_style": rev_style, 
-            "password_opt": password_opt, "projectlist" : curr_list}) 
+            "password_opt": password_opt, "projectlist" : curr_list, "noteusers" : note_users,
+            "notetiles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos}) 
+            
     if request.method == "POST":
         print("METHOD IS POST")
         return index(request)
@@ -514,23 +541,14 @@ def note(request):
             password_opt = "change password"
 
             return render(request,'note.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, 
-            "password_opt": password_opt, "activity": image})
+            "password_opt": password_opt, "activity" : image})
         else:
 
             pro_style = "display:none;"
             rev_style = "display:block;"
             password_opt = "forget password"
             return render(request,'note.html',{"profile_style" : pro_style, "reverse_style": rev_style, 
-            "password_opt": password_opt, "activity": image}) 
+            "password_opt": password_opt, "activity" : image}) 
     elif request.method == "POST":
-        print(request.get_full_path())
-        print("METHOD IS POST NOTE")
-        print("--------------------------------")
-        print(request.POST)
-        print("--------------------------------")
-        print(request.FILES)
-        return JsonResponse({})
-    else:
-        print("NO METHOD")
-        return JsonResponse({})
+        return index(request)
         

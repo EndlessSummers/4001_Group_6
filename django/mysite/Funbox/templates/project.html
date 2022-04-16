@@ -154,8 +154,8 @@
         alert("Login to create node!");
       });
     } else {
-      $("#create-note").attr("href") = "/note?image={{projectlist.0}}";
-      $("#create-note").attr("target") = "_blank";
+      $("#create-note").attr("href", "/note?image={{projectlist.0}}");
+      $("#create-note").attr("target", "_blank");
     }
   });
 </script>

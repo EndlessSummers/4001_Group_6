@@ -7,6 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.db.models import Model
+#from django.contrib.postgres.fields import ArrayField 
 
 
 class Activities(models.Model):
@@ -47,12 +48,13 @@ class UserPreference(models.Model):
 class Notes(models.Model):
     user = models.ForeignKey(UserInfo, models.CASCADE)  # Field name made lowercase.
     activity = models.ForeignKey(Activities, models.CASCADE, default = "Hiking")  # Field name made lowercase.
-    note = models.CharField(max_length = 200, default = "", null = True)
+    title = models.CharField(max_length = 50, default = "", null = True)
+    note = models.CharField(max_length = 500, default = "", null = True)
+    activity_photo = models.ImageField(blank = True, upload_to='photos_notes', default='notes.jpg')
 
     class Meta:
         managed = True
         db_table = 'notes'
-        unique_together = (('user', 'activity'),)
 
 
 class UserHash(models.Model):
