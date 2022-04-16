@@ -582,6 +582,7 @@ def index(request):
             Activities.objects.all().delete()
             insert_database()
             request.session["data"] = 1
+        
         all_activities = []
         if request.session.get("sortedlist"):
             all_activities_names = request.session.get("sortedlist")
