@@ -40,22 +40,9 @@ def log_out(request):
         return HttpResponseRedirect('/')
     except:
         return HttpResponseRedirect('/')
-
-#+
-def input_email(request):
-    if request.method == "GET": 
-        return render(request,'input_email.html')
-    if request.method == "POST":
-        i_email = request.POST.get("email")
-        user_list = UserInfo.objects.all()
-        for object in user_list:
-            if object.user_id == i_email:
-                return render(request, "email.html")
-        message = "用户不存在！"
-        # 修改密码的时候
-        return render(request, "input_email.html", {"message":message})
                    
-#+
+# 用户注册发送邮件
+# 验证用户不存在，生成HASH值，发送邮件
 def reg_email(request, i_email):
     user_list = UserInfo.objects.all()
     for object in user_list:
@@ -77,7 +64,8 @@ def reg_email(request, i_email):
     message = "你的邮箱已成功提交"   
     return  JsonResponse({'status':status, 'message':message})
     
-#+
+# 用户注册表单
+# 验证HASH值，生成网页，注册
 def reg_form(request):
     if (request.method == "GET"):
         path = request.get_full_path()
@@ -95,6 +83,8 @@ def reg_form(request):
         rep = redirect('/',True)
         return rep
 
+# 用户找回密码
+# 验证用户存在，生成HASH值，发送邮件
 def forget_mail(request, i_email):
     #to do
     user_list = UserInfo.objects.all()
@@ -115,8 +105,8 @@ def forget_mail(request, i_email):
     message = "用户不存在！"
     status = "failure"
     return JsonResponse({'status':status, 'message': message})
-# +
 
+# 用户修改用户名，修改头像 "profile"
 def set_profile(request):
     curr_id = request.session.get("user1")
     new_photo = request.FILES.get("photo")
@@ -132,15 +122,12 @@ def set_profile(request):
             object.user_name = new_name
             object.save()
             break
+    # BUGGY
     status = "success"
     message = "no message"
     return JsonResponse({"status": status, "message": message})
-#+
 
-def user_page(request):
-    return render(request, 'userpage.html')
-
-#to do
+# 登陆状态修改密码 "change"
 def change_pswd(request):
     user_info = request.session.get('user1')
     curr_obj = UserInfo.objects.get(user_id = user_info)
@@ -155,32 +142,8 @@ def change_pswd(request):
     message = "Your password has been changed"
     return JsonResponse({'status':status, 'message': message})
 
-#?
-def new_pswd(request):
-    return render(request, 'input_newpassword.html')
-
-#to do
-def cancel_check(request):
-    return render(request, 'input_cancelcheck.html')
-
-#?
-def pass_email(request):
-    return render (request, 'pass_email.html')
-
-#+
-def email(request):
-    return render (request, 'email.html')
-
-#+
-def success(request):
-    return render (request, 'success.html')
-
-def cancel_account(request):
-    curr_id = request.session.get("user1")
-    cur_obj = UserInfo.objects.get(user_id = curr_id)
-    cur_obj.delete()
-    return log_out(request)
-
+# 过滤函数
+# 返回排序后图片列表 "filter"
 def filter_data(request):
     all_act = Activities.objects.all()
     my_dic = {}
@@ -231,10 +194,27 @@ def filter_data(request):
 
     return redirect("/")
 
-    
-    
+# 通过邮件找回密码
+def find_password(request):
+    if (request.method == "GET"):
+        path = request.get_full_path()
+        try:
+            email = path.split("email=")[1]
+        except:
+            return HttpResponse("ERROR: please enter this page through email")
+        # print(email)
+        return render(request, 'find_password.html', {"email": email})
+    if request.method == "POST":
+        i_email = request.POST.get("email")
+        curr_obj = UserInfo.objects.get(user_id = i_email)
+        i_password = request.POST.get("password")
+        curr_obj.password = request.POST.get("password")
+        curr_obj.save()
+        status = "success"
+        message = "Your password has been changed"
+        return JsonResponse({'status':status, 'message': message})
 
-
+# 创建数据库
 def insert_database():
     Activities.objects.create(activities_id = "Cake",
     activity_desc = "Cake is an ancient pastry, usually made in an oven. The cake is made of eggs, sugar and wheat flour as the main raw materials. With milk, fruit juice, milk powder, fragrant powder, salad oil, water, shortening, baking powder as accessories. After stirring, mixing, and baking, a sponge-like snack is created.",
@@ -571,8 +551,7 @@ def insert_database():
     activity_place = "Home",
     activity_tag = "Film&TV")       
 
-
-# ADD_JHIN
+# 验证表单信息 进入首页
 def index(request):
     print("views.py.index() called")
     if request.method == "GET":
@@ -655,6 +634,7 @@ def index(request):
         print("NO ENTER")
         return HttpResponse('登录成功')
 
+# 进入工程页
 def project(request):
     print("views.py.project() called")
     if request.method == "GET":
@@ -695,18 +675,22 @@ def project(request):
         print("METHOD IS POST")
         return index(request)
 
+# 加载help窗口
 def window_help(request):
     if request.method == "GET":
         return render(request,'windows/window_help.html')
 
+# 加载login窗口
 def window_login(request):
     if request.method == "GET":
         return render(request,'windows/window_login.html')
 
+# 加载注册email窗口
 def window_reg_e(request):
     if request.method == "GET": 
         return render(request,'windows/window_reg_e.html')
     
+# 加载找回密码email窗口
 def window_forget_e(request):
     if request.method == "GET":
         status = request.session.get('is_login')
@@ -717,10 +701,12 @@ def window_forget_e(request):
         else:
             return render(request,'windows/window_forget_e.html')
 
+# 加载cancel窗口
 def window_cancel(request):
     if request.method == "GET":
         return render(request,'windows/window_cancel.html')
 
+# 加载user窗口
 def window_user(request):
     if request.method == "GET":
         user_info = request.session.get("user1")
@@ -728,38 +714,3 @@ def window_user(request):
         current_photo = curr_obj.user_photo.url
         current_name = curr_obj.user_name
         return render(request,'windows/window_user.html', {"user_email":user_info, "user_name" : current_name, "user_photo" : current_photo })
-
-def ajax_submit(request):
-    print("AJAX_SUBMIT called")
-    if request.method == "GET":
-        print("通讯成功GET")
-        return JsonResponse({"Info": "通讯成功"})
-    elif request.method == "POST":
-        print("通讯成功POST")
-        return JsonResponse({"Info": "通讯成功"})
-    else:
-        print("通讯成功NONE")
-        return JsonResponse({"Info": "通讯成功"})
-
-def activate(request):
-    return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
-
-def find_password(request):
-    if (request.method == "GET"):
-        path = request.get_full_path()
-        try:
-            email = path.split("email=")[1]
-        except:
-            return HttpResponse("ERROR: please enter this page through email")
-        # print(email)
-        return render(request, 'find_password.html', {"email": email})
-    if request.method == "POST":
-        i_email = request.POST.get("email")
-        curr_obj = UserInfo.objects.get(user_id = i_email)
-        i_password = request.POST.get("password")
-        curr_obj.password = request.POST.get("password")
-        curr_obj.save()
-        status = "success"
-        message = "Your password has been changed"
-        return JsonResponse({'status':status, 'message': message})
-        
