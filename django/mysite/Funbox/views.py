@@ -2,6 +2,7 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.http import HttpResponseRedirect, JsonResponse
 import pymysql
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
+from urllib3 import HTTPResponse
 from Funbox.models import Activities, UserHash, UserInfo, UserPreference
 from django.core.mail import send_mail
 import random
@@ -259,8 +260,8 @@ def index(request):
         status = request.session.get('is_login')
         data_manage = request.session.get("data")
         if not data_manage:
-            Activities.objects.all().delete()
-            insert_database()
+            #Activities.objects.all().delete()
+            #insert_database()
             request.session["data"] = 1
         
         all_activities = []
@@ -342,41 +343,65 @@ def project(request):
         path = request.get_full_path()
         try:
             image = path.split("image=")[1]
-            curr_obj = Activities.objects.get(activities_id = image)
-            curr_desc = curr_obj.activity_desc
-            curr_photo = curr_obj.activity_photo.url
-            curr_time = curr_obj.activity_timelength
-            curr_par = curr_obj.activity_participant
-            curr_place = curr_obj.activity_place
-            curr_tag = curr_obj.activity_tag
+            curr_act = Activities.objects.get(activities_id = image)
+            curr_desc = curr_act.activity_desc
+            curr_photo = curr_act.activity_photo.url
+            curr_time = curr_act.activity_timelength
+            curr_par = curr_act.activity_participant
+            curr_place = curr_act.activity_place
+            curr_tag = curr_act.activity_tag
 
             
         except:
-            curr_obj = Activities.objects.get(activities_id = "Hiking")
+            curr_act = Activities.objects.get(activities_id = "Hiking")
             image = "Hiking"
-            curr_desc = curr_obj.activity_desc
-            curr_photo = curr_obj.activity_photo.url
-            curr_time = curr_obj.activity_timelength
-            curr_par = curr_obj.activity_participant
-            curr_place = curr_obj.activity_place
-            curr_tag = curr_obj.activity_tag
+            curr_desc = curr_act.activity_desc
+            curr_photo = curr_act.activity_photo.url
+            curr_time = curr_act.activity_timelength
+            curr_par = curr_act.activity_participant
+            curr_place = curr_act.activity_place
+            curr_tag = curr_act.activity_tag
+        
+        print("I'm back")
+        like_state = request.GET.get("value")
+        print("like state: ", like_state)
 
-        likenum = UserPreference.objects.filter(activity = image).count()
+
+        likenum = UserPreference.objects.filter(activity = curr_act, likes = True).count()
         curr_list = [image, curr_time, curr_par, curr_place, curr_tag, curr_desc,curr_photo, likenum]
         status = request.session.get('is_login')
         print("status is:", status)
         if status:
+
             user_info = request.session.get('user1')
             curr_obj = UserInfo.objects.get(user_id = user_info)
             current_photo = curr_obj.user_photo.url
-            print("The url for a photo is ", current_photo)
+        
+            if UserPreference.objects.filter(user = curr_obj, activity = curr_act).count() == 0:
+                print("created again for ", curr_obj.user_id)
+                UserPreference.objects.create(user = curr_obj, activity = curr_act)
+            curr_like = UserPreference.objects.get(user = curr_obj, activity = curr_act)
+            if like_state == "1":
+
+                curr_like.likes = True
+                curr_like.save()
+            elif like_state == "-1":
+                curr_like.likes = False
+                curr_like.save()
+
             current_name = curr_obj.user_name
             pro_style = "display:block;"
             rev_style = "display:none;"
             password_opt = "change password"
+            if curr_like.likes == True:
+                curr_list.append("heart")
+            else:
+                curr_list.append("")
             return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, 
             "password_opt": password_opt, "projectlist" : curr_list })
         else:
+            #if (like_state != None):
+                #弹出一个框
             pro_style = "display:none;"
             rev_style = "display:block;"
             password_opt = "forget password"
