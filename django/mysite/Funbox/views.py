@@ -352,7 +352,55 @@ def insert_database():
     activity_participant = 1,
     activity_place = "Home",
     activity_tag = "Film&TV")
-    return print("hillll")
+
+    Activities.objects.create(activities_id = "Toast",
+    activity_desc = "Bread baked with a lid is sliced and squared, and sandwiched with ham or vegetables is sandwiched. The bread baked without a lid is rectangular and topped, resembling a large rectangular loaf of bread.",
+    activity_timelength = 180,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Toast.jpg",
+    activity_participant = 1,
+    activity_place = "Home",
+    activity_tag = "Cooking")
+
+    Activities.objects.create(activities_id = "Yangzhou_fried_rice",
+    activity_desc = "Egg fried rice is a common dish. The earliest records are found in 1972 in 1972 in Changsha, Hunan Province, on the bamboo tablets excavated from the Mawangdui Han Tomb. According to expert research, it is a food made of sticky rice and eggs. Some people speculate that this may be the predecessor of egg fried rice.",
+    activity_timelength = 20,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Friedrice.jpg",
+    activity_participant = 1,
+    activity_place = "Home",
+    activity_tag = "Cooking")
+
+    Activities.objects.create(activities_id = "Braised_prawns_in_oil",
+    activity_desc = "Braised prawns in oil is a famous dish in Shandong Province, which belongs to Lu cuisine; the main ingredient of this dish is the large shrimp of Bohai Bay before the Qingming Dynasty, using the unique oil braising technique of Lu cuisine. This is a famous dish with a long history, and the four flavors of fresh, sweet and salty complement each other, and the aftertaste is endless. In recent years, the popular oil braised prawns are from Hubei Qianjiang's Ecai, which is made using freshwater shrimp (commonly known as crayfish), which is different from the oil-braised prawns of Lucai.",
+    activity_timelength = 45,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Oil.jpg",
+    activity_participant = 1,
+    activity_place = "Home",
+    activity_tag = "Cooking")
+
+    Activities.objects.create(activities_id = "Japanese_food",
+    activity_desc = "Japanese cuisine originated in the Japanese archipelago and has gradually developed into a dish with unique Japanese characteristics. Japanese Japanese food requirements: natural ingredients, bright colors, diverse utensils, creating a visual sense of high-quality, and materials and conditioning methods also need to pay attention to seasonal changes, a dish needs to adapt to the seasons to use different cooking methods and presentation.",
+    activity_timelength = 120,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Japanese.jpg",
+    activity_participant = 2,
+    activity_place = "Center",
+    activity_tag = "Cooking")
+
+    Activities.objects.create(activities_id = "Korean_food",
+    activity_desc = "Koreans are generally divided into home-cooked dishes and feast dishes, each with its own flavor, spicy and fresh flavor, and many ingredients, no matter what kind of kimchi or kimchi flavor seasoning is a must-have dish in Korean cuisine. Traditional Korean food mostly takes the form of set food or rice bed, focuses on one juice and three dishes, and likes to grill meat, which also influenced the Asuka era cuisine of neighboring Japan during the Baekje period.",
+    activity_timelength = 120,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Korean.jpg",
+    activity_participant = 2,
+    activity_place = "Center",
+    activity_tag = "Cooking")
+
+    Activities.objects.create(activities_id = "Hotpot",
+    activity_desc = " pot generally refers to the cooking method of using the pot as a utensil, burning the pot with a heat source, and boiling water or soup to cook all kinds of food, and can also refer to the pot and pan used in this cooking method. It is characterized by eating while cooking, or the pot itself has a thermal insulation effect, and the food is still steaming when eating, and the soup is one.",
+    activity_timelength = 120,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Hotpot.jpg",
+    activity_participant = 2,
+    activity_place = "Center",
+    activity_tag = "Cooking")
+
 
 # ADD_JHIN
 def index(request):
@@ -410,7 +458,6 @@ def index(request):
         elif (hint == "login"):
             i_email = request.POST.get("email")
             i_psd = request.POST.get("password")
-            
             # 用户登陆
             print("login ing")
             return login(request, i_email, i_psd)
