@@ -48,8 +48,9 @@ def stand_est(data_mat, user, sim_means, item):
     else:
         return rat_sim_total/sim_total
 
-def recommend(data_mat, user, N=3, sim_means=cos_dis, est_method=stand_est):
+def recommend(data_mat, user, N, sim_means=cos_dis, est_method=stand_est):
     # Main Recommendation
+    print(np.nonzero(data_mat[user, :].A==0))
     un_rated_item = np.nonzero(data_mat[user, :].A==0)[1]
     if len(un_rated_item) == 0:
         return 'you rated everything'
@@ -80,7 +81,8 @@ def svd_est(data_mat, user, sim_means, item):
         return rate_sim_total/sim_total
 
 def loadExData2():
-    # To do: 将data导入
+    # To do: 将data导入 最好有评分
+
     # data= [[0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 5],
     #        [0, 0, 0, 3, 0, 4, 0, 0, 0, 0, 3],
     #        [0, 0, 0, 0, 4, 0, 0, 1, 0, 4, 0],
@@ -109,6 +111,6 @@ def loadExData2():
 data = loadExData2()
 data = np.mat(data)
 user = 3
-N = 10
-ans = recommend(data, user, N, sim_means=cos_dis, est_method=svd_est)
+N = 3
+ans = recommend(data, user, N, sim_means=cos_dis, est_method=stand_est)
 print(ans)#结果
