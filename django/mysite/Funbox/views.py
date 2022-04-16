@@ -185,9 +185,11 @@ def filter_data(request):
     all_act = Activities.objects.all()
     my_dic = {}
     filter_dic = {}
-    print(request.POST)
+    # print(request.POST)
     for object in all_act:
         filter_dic[object.activities_id] = 0
+        print(object.activities_id)
+
     filter_time = request.POST.get("time")
     if filter_time:
         my_dic["time"] = int(filter_time)
@@ -212,19 +214,20 @@ def filter_data(request):
     my_dic["Handcraft"] = int(request.POST.get("handwork"))
 
     for obj in all_act:
-        if my_dic["time"] == round(obj.activity_timelength//60):
+        print(obj.activities_id)
+        if my_dic["time"] == round((obj.activity_timelength)/60):
             filter_dic[obj.activities_id] += 1
+
         if my_dic["participant"] == obj.activity_participant:
             filter_dic[obj.activities_id] += 1
         if obj.activity_place in [filter_home, filter_outdoor, filter_center]:
             filter_dic[obj.activities_id] += 1
         print(obj.activities_id, filter_dic[obj.activities_id])
-        filter_dic[obj.activities_id] += my_dic[obj.activity_tag]
+        filter_dic[obj.activities_id] += my_dic[obj.activity_tag] * 2
     print(filter_dic)
     newlist = sorted(filter_dic, key = filter_dic.get, reverse= True)
     print(newlist)
     request.session["sortedlist"] = newlist
-    print(newlist)
 
     return redirect("/")
 
@@ -539,7 +542,7 @@ def insert_database():
     Activities.objects.create(activities_id = "The_Power_of_the_Dog",
     activity_desc = "The charismatic rancher Phil Burbank (Benedict Cumberbatch) makes those around him both respectful and fearful. When his brother brings home his new wife and her son, Phil torments them in every way until one day he discovers that he also has a glimmer of longing for love.",
     activity_timelength = 110,  # Field name made lowercase.
-    activity_photo = "/photos_activities/The_Power_of_the_Dog",
+    activity_photo = "/photos_activities/The_Power_of_the_Dog.jpg",
     activity_participant =1,
     activity_place = "Home",
     activity_tag = "Film&TV")
@@ -547,7 +550,7 @@ def insert_database():
     Activities.objects.create(activities_id = "Drive_my_Car",
     activity_desc = "Middle-aged stage actor Jia Fu breaks a derailment by his wife Yin, who is a screenwriter, however, he quietly closes the door and quietly leaves, as if nothing had happened, living with his wife harmoniously and lovingly as usual. Until his wife's death, Jiafu failed to be honest with his wife, which became a knot in his heart.",
     activity_timelength = 180,  # Field name made lowercase.
-    activity_photo = "/photos_activities/Drive_my_Car",
+    activity_photo = "/photos_activities/Drive_my_Car.jpg",
     activity_participant =1,
     activity_place = "Home",
     activity_tag = "Film&TV")
@@ -555,7 +558,7 @@ def insert_database():
     Activities.objects.create(activities_id = "King_Richard",
     activity_desc = "Richard Williams drafted a 78-page plan for his daughters' professional tennis careers, and the girls learned the sport on Compton's dilapidated, overgrown public courts. Before that, their father reportedly got into an argument with some young tough guys who didn't like the sport and wouldn't give up. The Williams sisters went on to become two of the greatest female players in tennis history.",
     activity_timelength = 144,  # Field name made lowercase.
-    activity_photo = "/photos_activities/King_Richard",
+    activity_photo = "/photos_activities/King_Richard.jpg",
     activity_participant =1,
     activity_place = "Home",
     activity_tag = "Film&TV")
@@ -563,14 +566,10 @@ def insert_database():
     Activities.objects.create(activities_id = "The_Adam_Project",
     activity_desc = "A pilot travels through time and space, confronting the past with his young self and his late father to save the future.",
     activity_timelength = 106,  # Field name made lowercase.
-    activity_photo = "/photos_activities/King_Richard",
+    activity_photo = "/photos_activities/The_Adam_Project.jpg",
     activity_participant =1,
     activity_place = "Home",
     activity_tag = "Film&TV")       
-
-
-
-    Activities.objects.create()
 
 
 # ADD_JHIN
