@@ -385,7 +385,7 @@ def project(request):
 
         if Notes.objects.filter(activity = curr_act).count() != 0:
             for i in (Notes.objects.filter(activity = curr_act)):
-                note_users.append(i.user)
+                note_users.append(i.user.user_id)
                 note_titles.append(i.title)
                 note_notes.append(i.note)
                 if i.activity_photo == None:
@@ -426,7 +426,7 @@ def project(request):
                 curr_list.append("")
             return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, 
             "password_opt": password_opt, "projectlist" : curr_list, "noteusers" : note_users,
-            "notetiles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos})
+            "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos})
         else:
             # if (like_state != None):
                 #弹出一个框

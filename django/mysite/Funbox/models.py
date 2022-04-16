@@ -64,3 +64,11 @@ class UserHash(models.Model):
         managed = True
         db_table = 'user_hash'
 
+class notelikes(models.Model):
+    user = models.ForeignKey(UserInfo, models.CASCADE)  # Field name made lowercase.
+    note = models.ForeignKey(Notes, models.CASCADE)  # Field name made lowercase.
+    likes = models.BooleanField(default = False)
+
+    class Meta:
+        managed = True
+        unique_together = (('user', 'note'),)
