@@ -428,3 +428,20 @@ iframe {
 .heart i.fa-heart {
   color: #f44336;
 }
+
+.heart i.fa-heart{
+  animation: heart_anim 0.5s linear;
+}
+
+@keyframes heart_anim {
+  0%{
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.project_info span{
+  padding-right: 24px;
+}
