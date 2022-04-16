@@ -212,7 +212,7 @@ def filter_data(request):
     my_dic["Handcraft"] = int(request.POST.get("handwork"))
 
     for obj in all_act:
-        if my_dic["time"] in range(obj.activity_timelength//60, obj.activity_timelength//60 + 1):
+        if my_dic["time"] == round(obj.activity_timelength//60):
             filter_dic[obj.activities_id] += 1
         if my_dic["participant"] == obj.activity_participant:
             filter_dic[obj.activities_id] += 1
@@ -400,6 +400,66 @@ def insert_database():
     activity_participant = 2,
     activity_place = "Center",
     activity_tag = "Cooking")
+
+    Activities.objects.create(activities_id = "LOL",
+    activity_desc = "League of Legends (LOL) is a hero-fighting MOBA competitive online game developed by Riot Games and operated by Tencent Games Chinese mainland. The game has hundreds of personality heroes, and has a ranking system, rune system and other features.",
+    activity_timelength = 40,  # Field name made lowercase.
+    activity_photo = "/photos_activities/LOL.jpg",
+    activity_participant = 5,
+    activity_place = "Home",
+    activity_tag = "Game")
+
+    Activities.objects.create(activities_id = "Flying_Kite",
+    activity_desc = "The kite was invented by the working people of ancient China during the Spring and Autumn period of the Eastern Zhou Dynasty, and has been more than 2,000 years old. According to legend, Mo Zhai made a wooden bird from wood and developed it in three years, which is the earliest origin of human kites. Later, Lu Ban used bamboo to improve the kite material of Mo Zhai, until the Eastern Han Dynasty, after Cai Lun improved papermaking, the market began to make kites from paper, called paper kites.",
+    activity_timelength = 60,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Flying_Kite.jpg",
+    activity_participant = 2,
+    activity_place = "Outdoor",
+    activity_tag = "Game")
+
+    Activities.objects.create(activities_id = "Downfall",
+    activity_desc = "In the chilling documentary A Fallen: The Boeing Survey, Oscar-nominated filmmaker Lori Kennedy exposes how corporate disregard and greed led to the crash of two Boeing MAX 737 planes in just five months. Led by aviation experts, journalists, former Boeing employees, the U.S. Congress and victims' families, the film unveils the culture behind a once-admired company that cut costs and hides its eyes.",
+    activity_timelength = 90,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Downfall.jpg",
+    activity_participant = 1,
+    activity_place = "Home",
+    activity_tag = "Film&TV")
+
+    Activities.objects.create(activities_id = "The_Power_of_the_Dog",
+    activity_desc = "The charismatic rancher Phil Burbank (Benedict Cumberbatch) makes those around him both respectful and fearful. When his brother brings home his new wife and her son, Phil torments them in every way until one day he discovers that he also has a glimmer of longing for love.",
+    activity_timelength = 110,  # Field name made lowercase.
+    activity_photo = "/photos_activities/The_Power_of_the_Dog",
+    activity_participant =1,
+    activity_place = "Home",
+    activity_tag = "Film&TV")
+
+    Activities.objects.create(activities_id = "Drive_my_Car",
+    activity_desc = "Middle-aged stage actor Jia Fu breaks a derailment by his wife Yin, who is a screenwriter, however, he quietly closes the door and quietly leaves, as if nothing had happened, living with his wife harmoniously and lovingly as usual. Until his wife's death, Jiafu failed to be honest with his wife, which became a knot in his heart.",
+    activity_timelength = 180,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Drive_my_Car",
+    activity_participant =1,
+    activity_place = "Home",
+    activity_tag = "Film&TV")
+
+    Activities.objects.create(activities_id = "King_Richard",
+    activity_desc = "Richard Williams drafted a 78-page plan for his daughters' professional tennis careers, and the girls learned the sport on Compton's dilapidated, overgrown public courts. Before that, their father reportedly got into an argument with some young tough guys who didn't like the sport and wouldn't give up. The Williams sisters went on to become two of the greatest female players in tennis history.",
+    activity_timelength = 144,  # Field name made lowercase.
+    activity_photo = "/photos_activities/King_Richard",
+    activity_participant =1,
+    activity_place = "Home",
+    activity_tag = "Film&TV")
+
+    Activities.objects.create(activities_id = "The_Adam_Project",
+    activity_desc = "A pilot travels through time and space, confronting the past with his young self and his late father to save the future.",
+    activity_timelength = 106,  # Field name made lowercase.
+    activity_photo = "/photos_activities/King_Richard",
+    activity_participant =1,
+    activity_place = "Home",
+    activity_tag = "Film&TV")       
+
+
+
+    Activities.objects.create()
 
 
 # ADD_JHIN
