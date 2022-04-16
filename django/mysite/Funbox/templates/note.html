@@ -82,7 +82,7 @@
       <p>Please edit your note here.</p>
     </div>
     <div class="section-container-spacer" >
-       <form name="noteset" action="/note/" class="reveal-content" autocomplete="off" target="_blank" method="post" enctype="multipart/form-data">
+       <form name="noteset" action="/note/?activity={{activity}}" class="reveal-content" autocomplete="off" target="_blank" method="post" enctype="multipart/form-data">
          {% csrf_token %}
           <div class="row">
             <div class="col-xs-8">
