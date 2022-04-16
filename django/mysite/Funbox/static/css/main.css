@@ -424,3 +424,7 @@ iframe {
 }
 
 /* help information end */
+
+.heart i.fa-heart {
+  color: #f44336;
+}
