@@ -464,3 +464,34 @@ function save_usr_p(e) {
   $("#edit").removeAttr("style");
 }
 
+function like(e, info) {
+
+  // $()
+}
+
+function like(e) {
+  $("#like_button").toggleClass("heart");
+  console.log($(this).html);
+  var info;
+  if ($("#like_button").hasClass("heart")) {
+    $("#likes").html(parseInt($("#likes").html())+1);
+    info = "like";
+  } else {
+    $("#likes").html(parseInt($("#likes").html())-1);
+    info = "dislike";
+  }
+  $.ajax({
+    url: "/project/",
+    method: "GET",
+    data: {
+      "hint": "like",
+      "name": info,
+    },
+    success: function(args) {
+      console.log("ajax success");
+    },
+    error: function(args) {
+      console.log("!!!ajax failure!!!");
+    }
+  })
+}
