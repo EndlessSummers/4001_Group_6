@@ -465,11 +465,10 @@ function save_usr_p(e) {
 }
 
 function like(e, info) {
-
-  // $()
-}
-
-function like(e, info) {
+  if ($("#user-profile").attr("style") == "display:none;"){
+    alert("You cannot like a event when not logging in");
+    return;
+  }
   $("#like_button").toggleClass("heart");
   console.log($(this).html);
   var value;
