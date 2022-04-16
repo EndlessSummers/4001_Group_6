@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.http import HttpResponseRedirect, JsonResponse
 import pymysql
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
-from Funbox.models import Activities, UserInfo
+from Funbox.models import Activities, UserHash, UserInfo
 from django.core.mail import send_mail
 import random
 
@@ -58,35 +58,50 @@ def input_email(request):
 #+
 def reg_email(request, i_email):
     user_list = UserInfo.objects.all()
-    for object in user_list:
-        print(object.user_id)
-        if object.user_id == i_email:
-            message = "用户已存在！"
-            status = "failure"
-            return JsonResponse({'status':status, 'message': message})
-    subject = 'Funbox Activation Email'
-    current_site = get_current_site(request)
-    message = render_to_string('email_template.html', {
-        'body': "to comfirm registration for user: ",
-        'url': "/reg_form/",
-        'user': i_email,
-        'domain': current_site.domain,
-    })
-    send_mail(subject=subject, message=message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
-    status = "success"
-    message = "你的邮箱已成功提交"   
-    return  JsonResponse({'status':status, 'message':message})
+    trans_hash = ""
+    try: 
+        tem_user = UserHash.objects.get(user_id = i_email)
+        tem_user.hashnum = str(hash(i_email))
+        trans_hash = tem_user.hashnum
+        tem_user.save()
+    except: 
+        tem_user = UserHash.objects.create(user_id = i_email)
+        tem_user.hashnum = str(hash(i_email))
+        trans_hash = tem_user.hashnum
+        tem_user.save()
+    finally:
+        for object in user_list:
+            print(object.user_id)
+            if object.user_id == i_email:
+                message = "用户已存在！"
+                status = "failure"
+                return JsonResponse({'status':status, 'message': message})
+        subject = 'Funbox Activation Email'
+        current_site = get_current_site(request)
+        message = render_to_string('email_template.html', {
+            'body': "to comfirm registration for user: ",
+            'url': "/reg_form/",
+            'user': trans_hash,
+            'domain': current_site.domain,
+        })
+        send_mail(subject=subject, message=message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
+        status = "success"
+        message = "你的邮箱已成功提交"
+        return  JsonResponse({'status':status, 'message':message})
     
 #+
 def reg_form(request):
     if (request.method == "GET"):
         path = request.get_full_path()
+        myuser = ""
         try:
-            email = path.split("email=")[1]
+            currhash = path.split("email=")[1]
+            tem_user = UserHash.objects.get(hashnum = currhash)
+            myuser = tem_user.user_id
         except:
-            return HttpResponse("ERROR: please enter this page through email")
+            return HttpResponse("ERROR: Hash value doesn't exist!")
         # print(email)
-        return render(request, 'reg_form.html', {"email": email})
+        return render(request, 'reg_form.html', {"email": myuser})
     if request.method == "POST":
         # print("jinlaile")
         i_email = request.POST.get("email")
@@ -98,23 +113,36 @@ def reg_form(request):
 def forget_mail(request, i_email):
     #to do
     user_list = UserInfo.objects.all()
-    for object in user_list:
-        if object.user_id == i_email:
-            subject = 'Funbox Find Password Email'
-            current_site = get_current_site(request)
-            message = render_to_string('email_template.html', {
-                'body': 'to set new password for user: ',
-                'url': "/find_password/",
-                'user': i_email,
-                'domain': current_site.domain,
-            })
-            send_mail(subject=subject, message=message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
-            status = "success"
-            message = "你的邮箱已成功提交"   
-            return  JsonResponse({'status':status, 'message':message})
-    message = "用户不存在！"
-    status = "failure"
-    return JsonResponse({'status':status, 'message': message})
+    trans_hash = ""
+    try: 
+        tem_user = UserHash.objects.get(user_id = i_email)
+        tem_user.hashnum = str(hash(i_email))
+        trans_hash = tem_user.hashnum
+        tem_user.save()
+    except: 
+        tem_user = UserHash.objects.create(user_id = i_email)
+        tem_user.hashnum = str(hash(i_email))
+        trans_hash = tem_user.hashnum
+        tem_user.save()
+    finally:
+        for object in user_list:
+            print(object.user_id)
+            if object.user_id == i_email:
+                subject = 'Funbox Find Password Email'
+                current_site = get_current_site(request)
+                message = render_to_string('email_template.html', {
+                    'body': 'to set new password for user: ',
+                    'url': "/find_password/",
+                    'user': trans_hash,
+                    'domain': current_site.domain,
+                })
+                send_mail(subject=subject, message=message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
+                status = "success"
+                message = "你的邮箱已成功提交"   
+                return  JsonResponse({'status':status, 'message':message})
+        message = "用户不存在！"
+        status = "failure"
+        return JsonResponse({'status':status, 'message': message})
 # +
 
 def set_profile(request):
@@ -747,12 +775,15 @@ def activate(request):
 def find_password(request):
     if (request.method == "GET"):
         path = request.get_full_path()
+        myuser = ""
         try:
-            email = path.split("email=")[1]
+            currhash = path.split("email=")[1]
+            tem_user = UserHash.objects.get(hashnum = currhash)
+            myuser = tem_user.user_id
         except:
-            return HttpResponse("ERROR: please enter this page through email")
+            return HttpResponse("ERROR: Hash value doesn't exist!")
         # print(email)
-        return render(request, 'find_password.html', {"email": email})
+        return render(request, 'find_password.html', {"email": myuser})
     if request.method == "POST":
         i_email = request.POST.get("email")
         curr_obj = UserInfo.objects.get(user_id = i_email)

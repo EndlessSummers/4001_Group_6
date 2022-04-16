@@ -131,3 +131,11 @@ class UserPreference(models.Model):
         db_table = 'user_preference'
         unique_together = (('user_info_user', 'activities_activities'),)
 
+
+class UserHash(models.Model):
+    user_id = models.CharField(db_column='User_ID', primary_key=True, max_length=45)  # Field name made lowercase.
+    hashnum = models.CharField(db_column='Password', max_length=1000, default = "")  # Field name made lowercase.
+    class Meta:
+        managed = True
+        db_table = 'user_hash'
+
