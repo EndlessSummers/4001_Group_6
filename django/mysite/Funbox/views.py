@@ -332,6 +332,10 @@ def index(request):
             return find_password(request)
         elif (hint == "filter"):
             return filter_data(request)
+        elif (hint == "note"):
+            print("NOTE INFO BELOW:")
+            print(request.POST)
+            return JsonResponse({})
     else:
         print("NO ENTER")
         return HttpResponse('登录成功')
@@ -519,5 +523,13 @@ def note(request):
             return render(request,'note.html',{"profile_style" : pro_style, "reverse_style": rev_style, 
             "password_opt": password_opt}) 
     elif request.method == "POST":
-        return index(request)
+        print("METHOD IS POST NOTE")
+        print("--------------------------------")
+        print(request.POST)
+        print("--------------------------------")
+        print(request.FILES)
+        return JsonResponse({})
+    else:
+        print("NO METHOD")
+        return JsonResponse({})
         

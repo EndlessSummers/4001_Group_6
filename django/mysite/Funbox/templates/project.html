@@ -134,7 +134,7 @@
       <p class="like">Likes: 30</p>
     </div>
   
-    <a class="btn btn-primary" href = "/note?image={{projectlist.0}}" style="width: 20%; right: 30px; position: absolute;"> Create Note </a>
+    <a class="btn btn-primary" href = "/note?image={{projectlist.0}}" target="_blank" style="width: 20%; right: 30px; position: absolute;"> Create Note </a>
   </div>
 </main>
 
@@ -143,11 +143,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   navbarToggleSidebar();
   navActivePage();
 });
-</script>
-
-<script>
-  $(document).ready(function() {
-  });
 </script>
 
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>

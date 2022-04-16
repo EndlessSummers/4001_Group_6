@@ -161,7 +161,7 @@
     
     <div class="grid-item">
       <img class="img-responsive" alt="" src="{{images.0}}">
-      <a href="/project?image={{names.0}}" class="project-description">
+      <a href="/project?image={{names.0}}" target="_blank" class="project-description">
         <div class="project-text-holder">
           <div class="project-text-inner">
             <h3>{{names.0}}</h3>
@@ -173,7 +173,7 @@
   
     <div class="grid-item">
       <img class="img-responsive" alt="" src="{{images.1}}">
-      <a href="/project?image={{names.1}}" class="project-description">
+      <a href="/project?image={{names.1}}" target="_blank" class="project-description">
         <div class="project-text-holder">
           <div class="project-text-inner">
             <h3>{{names.1}}</h3>
@@ -185,7 +185,7 @@
 
     <div class="grid-item">
       <img class="img-responsive" alt="" src="{{images.2}}">
-      <a href="/project?image={{names.2}}" class="project-description">
+      <a href="/project?image={{names.2}}" target="_blank" class="project-description">
         <div class="project-text-holder">
           <div class="project-text-inner">
             <h3>{{names.2}}</h3>
@@ -196,7 +196,7 @@
     </div>
     <div class="grid-item">
       <img class="img-responsive" alt="" src="{{images.3}}">
-      <a href="/project?image={{names.3}}" class="project-description">
+      <a href="/project?image={{names.3}}" target="_blank" class="project-description">
         <div class="project-text-holder">
           <div class="project-text-inner">
             <h3>{{names.3}}</h3>
@@ -208,7 +208,7 @@
     
     <div class="grid-item">
       <img class="img-responsive" alt="" src="{{images.4}}">
-      <a href="/project?image={{names.4}}" class="project-description">
+      <a href="/project?image={{names.4}}" target="_blank" class="project-description">
         <div class="project-text-holder">
           <div class="project-text-inner">
             <h3>{{names.4}}</h3>
@@ -220,7 +220,7 @@
 
     <div class="grid-item">
       <img class="img-responsive" alt="" src="{{images.5}}">
-      <a href="/project?image={{names.5}}" class="project-description">
+      <a href="/project?image={{names.5}}" target="_blank" class="project-description">
         <div class="project-text-holder">
           <div class="project-text-inner">
             <h3>{{names.5}}</h3>
@@ -232,7 +232,7 @@
 
     <div class="grid-item">
       <img class="img-responsive" alt="" src="{{images.6}}">
-      <a href="/project?image={{names.6}}" class="project-description">
+      <a href="/project?image={{names.6}}" target="_blank" class="project-description">
         <div class="project-text-holder">
           <div class="project-text-inner">
             <h3>{{names.6}}</h3>
@@ -243,7 +243,7 @@
     </div>
     <div class="grid-item">
       <img class="img-responsive" alt="" src="{{images.7}}">
-      <a href="/project?image={{names.7}}" class="project-description">
+      <a href="/project?image={{names.7}}" target="_blank" class="project-description">
         <div class="project-text-holder">
           <div class="project-text-inner">
             <h3>{{names.7}}</h3>
@@ -284,7 +284,7 @@ document.addEventListener("scroll", function (event) {
   if (totalY < lastY + 2*viewY) {
     newName = myNames[img_index+1];
     if (newName !== undefined) {
-      string = '<div class="grid-item"> <img class="img-responsive" alt="" src="/media/photos_activities/{name}.jpg"><a href="/project?image={name}" class="project-description"><div class="project-text-holder"><div class="project-text-inner"><h3>{name}</h3><p>Discover more</p></div></div></a></div>';
+      string = '<div class="grid-item"> <img class="img-responsive" alt="" src="/media/photos_activities/{name}.jpg"><a href="/project?image={name}" target="_blank" class="project-description"><div class="project-text-holder"><div class="project-text-inner"><h3>{name}</h3><p>Discover more</p></div></div></a></div>';
       $(".grid").append(string.replaceAll('{name}', newName));
       img_index++;
     }

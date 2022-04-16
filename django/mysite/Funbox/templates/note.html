@@ -16,7 +16,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <title>Project</title>
+  <title>Note</title>
 
   <link href="{% static 'css/external.css' %}" rel="stylesheet">
   <link href="{% static 'css/main.css' %}" rel="stylesheet">
@@ -82,20 +82,22 @@
       <p>Please edit your note here.</p>
     </div>
     <div class="section-container-spacer" >
-       <form name="noteset" action="" class="reveal-content" autocomplete="off" target="iframeName" method="get">
+       <form name="noteset" action="/note/" class="reveal-content" autocomplete="off" target="_blank" method="post" enctype="multipart/form-data">
+         {% csrf_token %}
           <div class="row">
             <div class="col-xs-8">
               <div class="form-group">
-                <input type="text" class="form-control" id="title" placeholder="Title">
+                <input type="text" class="form-control" id="title" name="title" placeholder="Title" maxlength="50">
               </div>
               <div class="form-group">
-                <textarea class="form-control" rows="5" placeholder="Enter your message"></textarea>
+                <textarea class="form-control" rows="5" name="body" placeholder="Enter your message" maxlength="500"></textarea>
               </div>
               <div id="image_view" class="image_upload"></div>
               <label for="upload_click" class="invi_label">
                 <button type="submit" id="upload_click" class="btn btn-primary upload_button">Upload images</button>
-                <input type="file" id="note-image" class="btn btn-primary upload_button" style="opacity: 0;" accept = ".jpeg,.jpg,.gif,.png,.bmp" multiple>
+                <input type="file" id="note-image" name="images" class="btn btn-primary upload_button" style="opacity: 0;" accept="image/*">
               </label>
+              <input type="text" class="form-control" name="hint" value="note" style="display: none;" required>
               <button type="submit" class="btn btn-primary upload_button" style="right: 30px; width: 100px;">Submit</button>
             </div>
           </div>
@@ -120,22 +122,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
   var div;
   // 当用户上传时触发事件
   input.onchange = function() {
-    document.getElementById("image_view").innerHTML = "";
+    // document.getElementById("image_view").innerHTML = "";
     readFile(this);
+    console.log(input.value);
   }
   //处理图片并添加都dom中的函数
   var readFile = function (obj) {
     // 获取input里面的文件组
     var fileList = obj.files;
-    if (fileList.length > 9) {
+    if (fileList.length + upload_img_num > 9) {
       return alert("The number of uploaded images cannot be greater than 9.");
     }
     //对文件组进行遍历，可以到控制台打印出fileList去看看
     var j = 0;
     for (var i = 0; i < fileList.length; i++) {
-      if (!input['value'].match(/.jpg|.jpeg|.gif|.png|.bmp/i)) {  //判断所选文件格式
-        return alert("The format of the uploaded images are incorrect.");
-      }
       var reader = new FileReader();
       reader.readAsDataURL(fileList[i]);
       // 当文件读取成功时执行的函数
@@ -145,8 +145,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
         div.innerHTML = '<img src="' + this.result + '" /><a class="removebtn" onclick="removeimg(\'uploadimg_' + j + '\')">&times;</a>';
         document.getElementById("image_view").appendChild(div);
         j++;
+        upload_img_num++;
+        console.log("uploading");
+        console.log("image global number " + upload_img_num);
       }
     }
+    console.log(fileList)
   }
 }
 
@@ -157,11 +161,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   navbarToggleSidebar();
   navActivePage();
 });
-</script>
-
-<script>
-  $(document).ready(function() {
-  });
 </script>
 
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>

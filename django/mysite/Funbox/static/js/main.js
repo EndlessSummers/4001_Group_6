@@ -2,6 +2,7 @@
 var _index=0;
 var clearTime = null;
 var img_index = 8;
+var upload_img_num = 0;
 
 function myOnSubmit(e, info) {
     var state;
@@ -296,6 +297,9 @@ function load(e, info) {
 
 function removeimg(uploadimg) {
   document.getElementById(uploadimg).remove();
+  upload_img_num--;
+  console.log("removing");
+  console.log("image global number " + upload_img_num);
 }
 
 function edit_usr_p(e) {
