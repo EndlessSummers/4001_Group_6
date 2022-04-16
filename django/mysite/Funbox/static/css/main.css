@@ -58,9 +58,17 @@ label{
 .note .like {
   position: absolute;
   bottom: 0;
-  right: 25px;
+  right: 30%;
   margin-left: 50px;
   color: #818181;
+}
+
+.note .left {
+  width: 70%;
+}
+
+.note .right {
+  width: 29.5%;
 }
 
 .sidenav label{
