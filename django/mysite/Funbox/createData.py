@@ -347,3 +347,11 @@ def insert_database():
     activity_participant =1,
     activity_place = "Home",
     activity_tag = "Film&TV")
+
+    Activities.objects.create(activities_id = "After_the_rain",
+    activity_desc = "With the ever-changing state of the world, it sometimes heats up, sometimes declines, and every day is chaotically spent in changes. It was taken for granted in the past, but it is instantly filled with uncertainty. It seems that I have become accustomed to facing life without affirmative sentences. Anxiety erodes the motivation to find the light, and this song, JJ firmly tells, tells the faith of music company; firmly believes that there will be a more beautiful next story after this storm.",
+    activity_timelength = 90,  # Field name made lowercase.
+    activity_photo = "/photos_activities/After_the_rain.jpg",
+    activity_participant =1,
+    activity_place = "Home",
+    activity_tag = "Music")

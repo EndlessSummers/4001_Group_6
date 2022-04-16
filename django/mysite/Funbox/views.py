@@ -11,7 +11,7 @@ from django.contrib.sites.shortcuts import get_current_site
 # from .tokens import account_activation_token
 from django.contrib import messages
 from django.urls import reverse
-from createData import insert_database
+from .createData import insert_database
 
 # Create your views here.
 #登录页面
