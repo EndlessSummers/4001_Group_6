@@ -134,15 +134,30 @@
       <p class="like">Likes: 30</p>
     </div>
   
-    <a class="btn btn-primary" href = "/note?image={{projectlist.0}}" target="_blank" style="width: 20%; right: 30px; position: absolute;"> Create Note </a>
+    <a class="btn btn-primary" id="create-note" style="width: 20%; right: 30px; position: absolute;"> Create Note </a>
+    <!-- onclick="ToNote(event)" href="/note?image={{projectlist.0}}" target="_blank" -->
   </div>
 </main>
 
 <script>
-document.addEventListener("DOMContentLoaded", function (event) {
+  document.addEventListener("DOMContentLoaded", function (event) {
   navbarToggleSidebar();
   navActivePage();
 });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if ("{{user_email}}" == "") {
+      $("#create-note").on("click", function(event){
+        event.preventDefault();
+        alert("Login to create node!");
+      });
+    } else {
+      $("#create-note").attr("href") = "/note?image={{projectlist.0}}";
+      $("#create-note").attr("target") = "_blank";
+    }
+  });
 </script>
 
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
