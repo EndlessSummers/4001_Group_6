@@ -22,84 +22,6 @@ class Activities(models.Model):
         db_table = 'activities'
 
 
-class Comment(models.Model):
-    user_info_commentor = models.OneToOneField('UserInfo', models.DO_NOTHING, db_column='User_info_Commentor_ID', primary_key=True)  # Field name made lowercase.
-    note_note = models.ForeignKey('Note', models.DO_NOTHING, db_column='Note_Note_id')  # Field name made lowercase.
-    createdat = models.DateTimeField(db_column='CreatedAt', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = True
-        db_table = 'comment'
-        unique_together = (('user_info_commentor', 'note_note'),)
-
-
-class Group(models.Model):
-    group_id = models.IntegerField(db_column='Group_id', primary_key=True)  # Field name made lowercase.
-    group_name = models.CharField(db_column='Group_name', max_length=45, blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = True
-        db_table = 'group'
-
-
-class GroupMessage(models.Model):
-    group_group = models.OneToOneField(Group, models.DO_NOTHING, db_column='Group_Group_id', primary_key=True)  # Field name made lowercase.
-    user_info_user = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='User_info_User_ID')  # Field name made lowercase.
-    content = models.CharField(db_column='Content', max_length=1000, blank=True, null=True)  # Field name made lowercase.
-    created_at = models.DateTimeField(db_column='Created_At', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = True
-        db_table = 'group_message'
-        unique_together = (('group_group', 'user_info_user'),)
-
-
-class Message(models.Model):
-    user_info_sender = models.OneToOneField('UserInfo', models.DO_NOTHING, db_column='User_info_Sender_ID', primary_key=True, related_name='Sender')  # Field name made lowercase.
-    user_info_receiver_id = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='User_info_Receiver_ID',related_name='Receiver')  # Field name made lowercase.
-    created_at = models.DateTimeField(db_column='Created_At', blank=True, null=True)  # Field name made lowercase.
-    content = models.CharField(max_length=1000, blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'message'
-        unique_together = (('user_info_sender', 'user_info_receiver_id'),)
-
-
-class Note(models.Model):
-    note_id = models.IntegerField(db_column='Note_id', primary_key=True)  # Field name made lowercase.
-    user_info_user = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='User_info_User_ID')  # Field name made lowercase.
-    created_at = models.DateTimeField(db_column='Created_At', blank=True, null=True)  # Field name made lowercase.
-    content = models.CharField(max_length=1000, blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'note'
-
-
-class Rankings(models.Model):
-    activities_activities = models.OneToOneField(Activities, models.DO_NOTHING, db_column='Activities_Activities_id', primary_key=True)  # Field name made lowercase.
-    user_info_user = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='User_info_User_ID')  # Field name made lowercase.
-    ranking = models.IntegerField(db_column='Ranking', blank=True, null=True)  # Field name made lowercase.
-    created_at = models.DateTimeField(db_column='Created_At', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = True
-        db_table = 'rankings'
-        unique_together = (('activities_activities', 'user_info_user'),)
-
-
-class UserHistory(models.Model):
-    user_info_user = models.OneToOneField('UserInfo', models.DO_NOTHING, db_column='User_info_User_ID', primary_key=True)  # Field name made lowercase.
-    activities_activities = models.ForeignKey(Activities, models.DO_NOTHING, db_column='Activities_Activities_id')  # Field name made lowercase.
-    created_at = models.DateTimeField(db_column='Created_at', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = True
-        db_table = 'user_history'
-        unique_together = (('user_info_user', 'activities_activities'),)
-
-
 class UserInfo(models.Model):
     user_id = models.CharField(db_column='User_ID', primary_key=True, max_length=45)  # Field name made lowercase.
     password = models.CharField(db_column='Password', max_length=45)  # Field name made lowercase.
@@ -112,24 +34,25 @@ class UserInfo(models.Model):
         db_table = 'user_info'
 
 
-class UserInfoHasGroup(models.Model):
-    user_info_user = models.OneToOneField(UserInfo, models.DO_NOTHING, db_column='User_info_User_ID', primary_key=True)  # Field name made lowercase.
-    group_group = models.ForeignKey(Group, models.DO_NOTHING, db_column='Group_Group_id')  # Field name made lowercase.
-
-    class Meta:
-        managed = True
-        db_table = 'user_info_has_group'
-        unique_together = (('user_info_user', 'group_group'),)
-
-
 class UserPreference(models.Model):
-    user_info_user = models.OneToOneField(UserInfo, models.DO_NOTHING, db_column='User_info_User_ID', primary_key=True)  # Field name made lowercase.
-    activities_activities = models.ForeignKey(Activities, models.DO_NOTHING, db_column='Activities_Activities_id')  # Field name made lowercase.
+    user = models.ForeignKey(UserInfo, models.CASCADE)  # Field name made lowercase.
+    activity = models.ForeignKey(Activities, models.CASCADE, default = "Hiking")  # Field name made lowercase.
+    likes = models.BooleanField(default = False)
 
     class Meta:
         managed = True
         db_table = 'user_preference'
-        unique_together = (('user_info_user', 'activities_activities'),)
+        unique_together = (('user', 'activity'),)
+
+class Notes(models.Model):
+    user = models.ForeignKey(UserInfo, models.CASCADE)  # Field name made lowercase.
+    activity = models.ForeignKey(Activities, models.CASCADE, default = "Hiking")  # Field name made lowercase.
+    note = models.CharField(max_length = 200, default = "", null = True)
+
+    class Meta:
+        managed = True
+        db_table = 'notes'
+        unique_together = (('user', 'activity'),)
 
 
 class UserHash(models.Model):

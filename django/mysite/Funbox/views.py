@@ -345,14 +345,23 @@ def project(request):
             curr_obj = Activities.objects.get(activities_id = image)
             curr_desc = curr_obj.activity_desc
             curr_photo = curr_obj.activity_photo.url
+            curr_time = curr_obj.activity_timelength
+            curr_par = curr_obj.activity_participant
+            curr_place = curr_obj.activity_place
+            curr_tag = curr_obj.activity_tag
+
             
         except:
             curr_obj = Activities.objects.get(activities_id = "Hiking")
             image = "Hiking"
             curr_desc = curr_obj.activity_desc
             curr_photo = curr_obj.activity_photo.url
+            curr_time = curr_obj.activity_timelength
+            curr_par = curr_obj.activity_participant
+            curr_place = curr_obj.activity_place
+            curr_tag = curr_obj.activity_tag
 
-        curr_list = [image,curr_desc,curr_photo]
+        curr_list = [image, curr_time, curr_par, curr_place, curr_tag, curr_desc,curr_photo,]
         status = request.session.get('is_login')
         print("status is:", status)
         if status:
