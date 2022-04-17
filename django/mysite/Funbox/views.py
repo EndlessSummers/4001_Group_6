@@ -481,7 +481,14 @@ def window_cancel(request):
 # 加载user窗口
 def window_user(request):
     if request.method == "GET":
+        # path = request.get_full_path()
         user_info = request.session.get("user1")
+        # try:
+        #     other_user_name = path.split("user=")[1]
+        #     cur_obj = UserInfo.objects.get(user_id = other_user_name)
+        # except:
+        #     print("EXCEPT ENTER WINDOW USER")
+        #     curr_obj = UserInfo.objects.get(user_id = user_info)
         curr_obj = UserInfo.objects.get(user_id = user_info)
         current_photo = curr_obj.user_photo.url
         current_name = curr_obj.user_name
