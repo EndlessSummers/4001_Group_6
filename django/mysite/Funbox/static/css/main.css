@@ -63,6 +63,10 @@ label{
   width: 22.5%;
 }
 
+.note .left img {
+  margin-top: 10px;
+}
+
 .sidenav label{
 	display: inline;
 	width:100%;

@@ -108,15 +108,16 @@
     {% if notephotos.0 %}
     <div class="note" style="overflow: hidden;">
       <div class="left" style="display: inline-block;">
-        <h3>{{notetitles.0}}<span style="position:absolute; right: 25%; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.0}}</span></h3>
-        <div>
+        <!-- <h3>{{notetitles.0}}<span style="position:absolute; right: 25%; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.0}}</span></h3> -->
+        <h3 style="display: inline-block; margin-top: 18px;"> {{notetitles.0}} </h3>
+        <img style="height: 50px; width: 50px; float: right;" src="/static/imgs/Nick_Wilde.jpeg" alt="">
+        <div style="width: 110px; height: 22px; margin-bottom: 5px; margin-top:-16px; overflow: hidden; text-overflow: ellipsis;"><span>by&nbsp</span>{{noteusers.0}}</div>
         <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.0}}</span></p>
         <div style="display: inline-block; position: absolute; right: 25%; margin-top: -40px;">
           <a onclick="like_note(event, '{{noteids.0}}', '0')" class="like {{notehearts.0}}" id="like_note_button0" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
           <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes0" style="font-size: 28px; ">{{notelikes.0}}</span>
         </div>
-        </div>
-    </div>
+      </div>
       <div class="right" id="img_filed" style="float: right;">
         <img class="img-responsive" src="{{notephotos.0}}">
 
@@ -125,7 +126,9 @@
     {% else %}
     <div class="note">
       <div class="left" style="display: inline-block; width: 100%;">
-          <h3>{{notetitles.0}}<span style="position:absolute; right: 0; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.0}}</span></h3>
+        <h3 style="display: inline-block; margin-top: 18px;"> {{notetitles.0}} </h3>
+        <img style="height: 50px; width: 50px; float: right;" src="/static/imgs/Nick_Wilde.jpeg" alt="">
+        <div style="width: 110px; height: 22px; margin-bottom: 5px; margin-top:-16px; overflow: hidden; text-overflow: ellipsis;"><span>by&nbsp</span>{{noteusers.0}}</div>
           <div>
           <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.0}}</span></p>
           <div style="display: inline-block; position: absolute; right: 0; margin-top: -40px;">
@@ -146,7 +149,9 @@
     {% if notephotos.1 %}
     <div class="note" style="overflow: hidden;">
       <div class="left" style="display: inline-block;">
-        <h3>{{notetitles.1}}<span style="position:absolute; right: 25%; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.1}}</span></h3>
+        <h3 style="display: inline-block; margin-top: 18px;"> {{notetitles.0}} </h3>
+        <img style="height: 50px; width: 50px; float: right;" src="/static/imgs/Nick_Wilde.jpeg" alt="">
+        <div style="width: 110px; height: 22px; margin-bottom: 5px; margin-top:-16px; overflow: hidden; text-overflow: ellipsis;"><span>by&nbsp</span>{{noteusers.1}}</div>
         <div>
         <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.1}}</span></p>
         <div style="display: inline-block; position: absolute; right: 25%; margin-top: -40px;">
@@ -162,7 +167,9 @@
     {% else %}
     <div class="note">
       <div class="left" style="display: inline-block; width: 100%;">
-          <h3>{{notetitles.1}}<span style="position:absolute; right: 0; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.1}}</span></h3>
+        <h3 style="display: inline-block; margin-top: 18px;"> {{notetitles.0}} </h3>
+        <img style="height: 50px; width: 50px; float: right;" src="/static/imgs/Nick_Wilde.jpeg" alt="">
+        <div style="width: 110px; height: 22px; margin-bottom: 5px; margin-top:-16px; overflow: hidden; text-overflow: ellipsis;"><span>by&nbsp</span>{{noteusers.1}}</div>
           <div>
           <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.1}}</span></p>
           <div style="display: inline-block; position: absolute; right: 0; margin-top: -40px;">
@@ -179,7 +186,9 @@
     {% if notephotos.2 %}
     <div class="note" style="overflow: hidden;">
       <div class="left" style="display: inline-block;">
-        <h3>{{notetitles.2}}<span style="position:absolute; right: 25%; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.2}}</span></h3>
+        <h3 style="display: inline-block; margin-top: 18px;"> {{notetitles.0}} </h3>
+        <img style="height: 50px; width: 50px; float: right;" src="/static/imgs/Nick_Wilde.jpeg" alt="">
+        <div style="width: 110px; height: 22px; margin-bottom: 5px; margin-top:-16px; overflow: hidden; text-overflow: ellipsis;"><span>by&nbsp</span>{{noteusers.2}}</div>
         <div>
         <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.2}}</span></p>
         <div style="display: inline-block; position: absolute; right: 25%; margin-top: -40px;">
@@ -195,7 +204,9 @@
     {% else %}
     <div class="note">
       <div class="left" style="display: inline-block; width: 100%;">
-          <h3>{{notetitles.2}}<span style="position:absolute; right: 0; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.2}}</span></h3>
+        <h3 style="display: inline-block; margin-top: 18px;"> {{notetitles.0}} </h3>
+        <img style="height: 50px; width: 50px; float: right;" src="/static/imgs/Nick_Wilde.jpeg" alt="">
+        <div style="width: 110px; height: 22px; margin-bottom: 5px; margin-top:-16px; overflow: hidden; text-overflow: ellipsis;"><span>by&nbsp</span>{{noteusers.2}}</div>
           <div>
           <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.2}}</span></p>
           <div style="display: inline-block; position: absolute; right: 0; margin-top: -40px;">
