@@ -355,6 +355,9 @@ def project(request):
     print("views.py.project() called")
     if request.method == "GET":
         path = request.get_full_path()
+        print("-----------------")
+        print(path)
+        print("-----------------")
         try:
             image = path.split("image=")[1]
             curr_act = Activities.objects.get(activities_id = image)

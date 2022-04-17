@@ -500,3 +500,38 @@ function like(e, info) {
     }
   })
 }
+
+function like_note(e, info, ind) {
+  if ($("#user-profile").attr("style") == "display:none;"){
+    alert("Log in to like a note");
+    return;
+  }
+  button_name = "#like_note_button"+ind;
+  console.log(button_name);
+  like_name = "#note_likes"+ind;
+  $(button_name).toggleClass("heart");
+  var value;
+  if ($(button_name).hasClass("heart")) {
+    $(like_name).html(parseInt($(like_name).html())+1);
+    value = 1;
+  } else {
+    $(like_name).html(parseInt($(like_name).html())-1);
+    value = -1;
+  }
+
+  $.ajax({
+    url: "/project/",
+    method: "GET",
+    data: {
+      "hint": "like_note",
+      "value": value,
+      "id": info,
+    },
+    success: function(args) {
+      console.log("ajax success");
+    },
+    error: function(args) {
+      console.log("!!!ajax failure!!!");
+    }
+  })
+}
