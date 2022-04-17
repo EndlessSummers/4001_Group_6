@@ -84,7 +84,7 @@ def reg_email(request, i_email):
         })
         send_mail(subject=subject, message=message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
         status = "success"
-        message = "你的邮箱已成功提交"
+        message = "Continue to sign up with email sent to your account."
         return  JsonResponse({'status':status, 'message':message})
     
 # 用户注册表单
@@ -140,7 +140,7 @@ def forget_mail(request, i_email):
                 })
                 send_mail(subject=subject, message=message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
                 status = "success"
-                message = "你的邮箱已成功提交"   
+                message = "Continue to find password with email sent to your account."   
                 return  JsonResponse({'status':status, 'message':message})
         message = "用户不存在！"
         status = "failure"

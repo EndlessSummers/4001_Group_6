@@ -13,15 +13,14 @@
                             <label for="Email"> Email </label>
                             <input type="email" class="form-control" name="email" id="Email" placeholder="you@some.com" required>
                             <label for="Password"> Password </label>
-                            <input type="password" class="form-control" name="password" id="Password" placeholder="cherry is 2 awesome!" required>
+                            <input type="password" class="form-control" name="password" id="Password" placeholder="8-16 characters with digits" required>
                             <input type="text" class="form-control" name="hint" value="login" style="display: none;" required>
+                            
                             <p class="alert alert-danger" id="error" style="display: none;"></p>
-
-                            <button class="btn btn-default toggle_password" onclick="togglePasswordView(event, 'normal')"> View Password</button>
-                            <input class="btn btn-primary" type="submit" name="submit" id="Submit" value="login">
                             <p class="alert alert-success" id="success" style="display: none;"></p>
+                            <input class="btn btn-primary" type="submit" name="submit" id="Submit" value="login">
+                            <button class="btn btn-default toggle_password" onclick="togglePasswordView(event, 'normal')"> View Password</button>
                         </form>
-
                         <div class="bottom_info">
                             <p><a onclick="load(event, 'signUp')" style="display: inline;">Create New Account</a> </p>
                             <p><a onclick="load(event, 'forget')" style="display: inline;">Forget Password?</a> </p>
