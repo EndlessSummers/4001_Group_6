@@ -3,6 +3,7 @@ var _index=0;
 var clearTime = null;
 var img_index = 8;
 var upload_img_num = 0;
+var note_index = 3;
 
 function myOnSubmit(e, info) {
     var state;

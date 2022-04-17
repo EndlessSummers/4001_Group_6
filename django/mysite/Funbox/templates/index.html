@@ -285,7 +285,7 @@ document.addEventListener("scroll", function (event) {
     myNames[{{forloop.counter0}}] = "{{name}}";
   {% endfor %}
   if (totalY < lastY + 2*viewY) {
-    newName = myNames[img_index+1];
+    newName = myNames[img_index];
     if (newName !== undefined) {
       string = '<div class="grid-item"> <img class="img-responsive" alt="" src="/media/photos_activities/{name}.jpg"><a href="/project?image={name}" target="_blank" class="project-description"><div class="project-text-holder"><div class="project-text-inner"><h3>{name}</h3><p>Discover more</p></div></div></a></div>';
       $(".grid").append(string.replaceAll('{name}', newName));

@@ -466,10 +466,7 @@ def project(request):
             except:
                 curr_list.append("")
 
-            return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, 
-            "password_opt": password_opt, "projectlist" : curr_list, "noteusers" : note_users,
-            "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos, "noteids" : note_ids, "notehearts" : note_userlike, "notelikes" : note_likes,
-            "userids" : note_userids, "userphotos" : note_userphotos})
+            return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, "password_opt": password_opt, "projectlist" : curr_list, "noteusers" : note_users, "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos, "noteids" : note_ids, "notehearts" : note_userlike, "notelikes" : note_likes, "userids" : note_userids, "userphotos" : note_userphotos})
         else:
             # if (like_state != None):
                 #弹出一个框
@@ -478,10 +475,7 @@ def project(request):
             password_opt = "forget password"
             for i in (Notes.objects.filter(activity = curr_act)):
                 note_userlike.append("")
-            return render(request,'project.html',{"profile_style" : pro_style, "reverse_style": rev_style, 
-            "password_opt": password_opt, "projectlist" : curr_list, "noteusers" : note_users,
-            "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos, "noteids" : note_ids, "notehearts" : note_userlike, "notelikes" : note_likes,
-            "userids" : note_userids, "userphotos" : note_userphotos}) 
+            return render(request,'project.html',{"profile_style" : pro_style, "reverse_style": rev_style, "password_opt": password_opt, "projectlist" : curr_list, "noteusers" : note_users, "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos, "noteids" : note_ids, "notehearts" : note_userlike, "notelikes" : note_likes, "userids" : note_userids, "userphotos" : note_userphotos}) 
             
     if request.method == "POST":
         print("METHOD IS POST")
@@ -569,7 +563,6 @@ def window_user(request):
         
         return render(request,'windows/window_user.html', {"user_email":user_info,
          "user_name" : current_name, "user_photo" : current_photo, "user_recommendations" : rec_act, "user_likes" : likemost })
-
 
 def find_password(request):
     if (request.method == "GET"):
