@@ -432,7 +432,7 @@ function help() {
       $(".help .top .img").eq(_index).fadeIn(200).siblings().fadeOut(200);
       $(".bottom ul li").eq(_index).toggleClass("isActive");
       $(".bottom #helpText").html($(".help .top .img").eq(_index).html());
-    },3000);
+    },5000);
   }
 
   auto();

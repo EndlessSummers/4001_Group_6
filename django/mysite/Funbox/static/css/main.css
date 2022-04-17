@@ -388,20 +388,8 @@ iframe {
   height: 100%;
   position: relative;
   background-position: center;
-  /* background-size: cover; */
+  background-size: contain;
   background-repeat: no-repeat;
-}
-
-@media (max-width:991px) {
-  .top .img {
-    background-size: cover;
-  }
-}
-
-@media (min-width:992px) {
-  .top .img {
-    background-size: contain;
-  }
 }
 
 .bottom li {
