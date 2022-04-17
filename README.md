@@ -7,13 +7,25 @@ Execution:
   2. Run Command: python manage.py runserver
   3. Click the link offered by terminal
  
-4.12 Updates:
-Adding photos for users and activities
+Necessary libraries (for pip)
+numpy
+Django
+pillow
+pymysql
+urllib3
+
+Create a new database (importnat!)
 
 After Pulling the newest:
-
 1. python manage.py makemigrations Funbox 
-2. python manage.py migrate --fake-initial
-Then the database is successfully updated.
+2. python manage.py migrate
+3. python manage.py runserver (for local test)
 
-Admin page implemented
+To add admin accounts:
+python manage.py createsuperuser
+
+
+Note that the server on Ali Cloud is also implemented. IF you would like to test on the cloud, please inform us!
+
+
+
