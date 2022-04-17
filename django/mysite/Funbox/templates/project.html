@@ -106,6 +106,7 @@
       <p><img class="img-responsive" alt="" src="{{projectlist.6}}"></p>
     </div>
 
+    {% if notetitles.0 %}
     <div class="note">
       <div class="left" style="display: inline-block;">
       <a style="text-decoration: none;">
@@ -114,7 +115,7 @@
           <p style="color: #818181;">{{notebodies.0}}</p>
         </div>
       </a>
-      <a>Full Text</a>
+      <!-- <a>Full Text</a> -->
       <p class="like">Likes: 30</p>
       </div>
       <div class="right" id="img_filed" style="float: right;">
@@ -122,7 +123,12 @@
 
       </div>
     </div>
+    {% else %}
+    <h3>No note is available for this, click the button below to create one</h3>
+
+    {% endif %}
     
+    {% if notetitles.1 %}
     <div class="note">
       <div class="left" style="display: inline-block;">
       <a style="text-decoration: none;">
@@ -131,15 +137,16 @@
           <p style="color: #818181;">{{notebodies.1}}</p>
         </div>
       </a>
-      <a>Full Text</a>
-      <p class="like">Likes: 31</p>
+      <p class="like">Likes: 30</p>
       </div>
       <div class="right" id="img_filed" style="float: right;">
         <img src="{{notephotos.1}}" style="width:100%; height:100%">
 
       </div>
     </div>
+    {% endif %}
 
+    {% if notetitles.1 %}
     <div class="note">
       <div class="left" style="display: inline-block;">
       <a style="text-decoration: none;">
@@ -148,7 +155,7 @@
           <p style="color: #818181;">{{notebodies.2}}</p>
         </div>
       </a>
-      <a>Full Text</a>
+      <!-- <a>Full Text</a> -->
       <p class="like">Likes: 30</p>
       </div>
       <div class="right" id="img_filed" style="float: right;">
@@ -156,6 +163,7 @@
 
       </div>
     </div>
+    {% endif %}
   
     <a class="btn btn-primary" id="create-note" style="width: 20%; right: 30px; position: absolute;"> Create Note </a>
     <!-- onclick="ToNote(event)" href="/note?image={{projectlist.0}}" target="_blank" -->
@@ -174,7 +182,7 @@
     if ("{{user_email}}" == "") {
       $("#create-note").on("click", function(event){
         event.preventDefault();
-        alert("Login to create node!");
+        alert("Login to create note!");
       });
     } else {
       $("#create-note").attr("href", "/note?image={{projectlist.0}}");
