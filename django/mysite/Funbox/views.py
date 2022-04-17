@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 import pymysql
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from urllib3 import HTTPResponse
-from Funbox.models import Activities, UserHash, UserInfo, UserPreference, Notes
+from Funbox.models import Activities, UserHash, UserInfo, UserPreference, Notes, notelikes
 from django.core.mail import send_mail
 import random
 
@@ -13,6 +13,9 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages
 from django.urls import reverse
 from .createData import insert_database
+from .recommendation import recommend, stand_est, cos_dis
+import numpy as np
+
 
 # Create your views here.
 #登录页面
@@ -377,15 +380,14 @@ def project(request):
             curr_par = curr_act.activity_participant
             curr_place = curr_act.activity_place
             curr_tag = curr_act.activity_tag
-        
-        print("I'm back")
-        like_state = request.GET.get("value")
-        print("like state: ", like_state)
 
         note_users = []
         note_titles = []
         note_notes = []
         note_photos = []
+        note_ids = []
+        note_likes = []
+        note_userlike = []
 
 
         if Notes.objects.filter(activity = curr_act).count() != 0:
@@ -393,55 +395,85 @@ def project(request):
                 note_users.append(i.user.user_name)
                 note_titles.append(i.title)
                 note_notes.append(i.note)
+                note_ids.append(i.id)
+                note_likes.append(notelikes.objects.filter(note = i, likes = True).count())
+
+                print(i.id)
                 if i.activity_photo == "":
                     note_photos.append("")
                 else:
-                    print("none?", i.activity_photo)
                     note_photos.append(i.activity_photo.url)
 
 
         likenum = UserPreference.objects.filter(activity = curr_act, likes = True).count()
         curr_list = [image, curr_time, curr_par, curr_place, curr_tag, curr_desc,curr_photo, likenum]
         status = request.session.get('is_login')
-        print("status is:", status)
         if status:
 
             user_info = request.session.get('user1')
             curr_obj = UserInfo.objects.get(user_id = user_info)
             current_photo = curr_obj.user_photo.url
         
-            if UserPreference.objects.filter(user = curr_obj, activity = curr_act).count() == 0:
-                print("created again for ", curr_obj.user_id)
-                UserPreference.objects.create(user = curr_obj, activity = curr_act)
-            curr_like = UserPreference.objects.get(user = curr_obj, activity = curr_act)
-            if like_state == "1":
+            if request.GET.get("hint") == "like":
+                like_state = request.GET.get("value")
+                if UserPreference.objects.filter(user = curr_obj, activity = curr_act).count() == 0:
+                    UserPreference.objects.create(user = curr_obj, activity = curr_act)
+                curr_like = UserPreference.objects.get(user = curr_obj, activity = curr_act)
+                if like_state == "1":
+                    curr_like.likes = True
+                    curr_like.save()
+                elif like_state == "-1":
+                    curr_like.likes = False
+                    curr_like.save()
 
-                curr_like.likes = True
-                curr_like.save()
-            elif like_state == "-1":
-                curr_like.likes = False
-                curr_like.save()
+            elif request.GET.get("hint") == "like_note":
+                note_state = request.GET.get("value")
+                note_id = Notes.objects.get(id = request.GET.get("id"))
+                if notelikes.objects.filter(user = curr_obj, note = note_id).count() == 0:
+                    notelikes.objects.create(user = curr_obj, note = note_id)
+                curr_notelike = notelikes.objects.get(user = curr_obj, note = note_id)
+                if note_state == "1":
+                    curr_notelike.likes = True
+                    curr_notelike.save()
+                else:
+                    curr_notelike.likes = False
+                    curr_notelike.save()
 
             current_name = curr_obj.user_name
             pro_style = "display:block;"
             rev_style = "display:none;"
             password_opt = "change password"
+
+            for i in (Notes.objects.filter(activity = curr_act)):
+                try:
+                    if notelikes.objects.get(user = curr_obj, note = i).likes == True:
+                        note_userlike.append("heart")
+                    else:
+                        note_userlike.append("")
+                except:
+                    note_userlike.append("")
+
+            curr_like = UserPreference.objects.get(user = curr_obj, activity = curr_act)
             if curr_like.likes == True:
                 curr_list.append("heart")
             else:
                 curr_list.append("")
+            print("likes of notes:", note_likes)
+
             return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, 
             "password_opt": password_opt, "projectlist" : curr_list, "noteusers" : note_users,
-            "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos})
+            "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos, "noteids" : note_ids, "notehearts" : note_userlike, "notelikes" : note_likes})
         else:
             # if (like_state != None):
                 #弹出一个框
             pro_style = "display:none;"
             rev_style = "display:block;"
             password_opt = "forget password"
+            for i in (Notes.objects.filter(activity = curr_act)):
+                note_userlike.append("")
             return render(request,'project.html',{"profile_style" : pro_style, "reverse_style": rev_style, 
             "password_opt": password_opt, "projectlist" : curr_list, "noteusers" : note_users,
-            "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos}) 
+            "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos, "noteids" : note_ids, "notehearts" : note_userlike, "notelikes" : note_likes}) 
             
     if request.method == "POST":
         print("METHOD IS POST")
@@ -492,7 +524,48 @@ def window_user(request):
         curr_obj = UserInfo.objects.get(user_id = user_info)
         current_photo = curr_obj.user_photo.url
         current_name = curr_obj.user_name
-        return render(request,'windows/window_user.html', {"user_email":user_info, "user_name" : current_name, "user_photo" : current_photo })
+
+        #Recommendation System
+        tem = 0
+        user_dic = {}
+        act_dic = {}
+        likedic = {"Music":0, "Film&TV":0, "Game" : 0, "Sports" : 0, "Handcraft" : 0, "Cooking" : 0}
+        userpos = 0
+        for user in UserInfo.objects.all():
+            user_dic[tem] = user
+            if user.user_id == request.session.get("user1"):
+                userpos = tem
+            tem = tem + 1
+        tem1 = 0
+        for act in Activities.objects.all():
+            act_dic[tem1] = act
+            tem1 = tem1 + 1
+        datalist = []
+        for user1 in UserInfo.objects.all():
+            curr_list = []
+            for act1 in Activities.objects.all():
+                try:
+                    UserPreference.objects.get(user = user1, activity = act1, likes = True)
+                    curr_list.append(1)
+                except:
+                    curr_list.append(0)
+            datalist.append(curr_list)
+        datalist = np.mat(datalist)
+        rec = recommend(datalist, userpos, 1, sim_means=cos_dis, est_method=stand_est)
+        print("recommendation is", rec)
+        print("activity dic now is", act_dic.get(rec[0][0]))
+        rec_act = (act_dic[rec[0][0]]).activities_id
+        print(rec_act)
+
+        #likes
+        curr_user = UserInfo.objects.get(user_id = request.session.get("user1"))
+        for obj in UserPreference.objects.filter(user = curr_user):
+            likedic[obj.activity.activity_tag] += 1
+        likemost = sorted(likedic, key = likedic.get, reverse= True)[0]
+
+        
+        return render(request,'windows/window_user.html', {"user_email":user_info,
+         "user_name" : current_name, "user_photo" : current_photo, "user_recommendations" : rec_act, "user_likes" : likemost })
 
 
 def find_password(request):

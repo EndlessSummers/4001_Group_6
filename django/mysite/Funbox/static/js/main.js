@@ -253,7 +253,7 @@ function togglePasswordView(e, info) {
     }
 }
 
-function load(e, info, input=None) {
+function load(e, info) {
   _index = 0;
   clearInterval(clearTime);
   e.preventDefault();

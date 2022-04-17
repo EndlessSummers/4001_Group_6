@@ -1,4 +1,5 @@
 import numpy as np
+from Funbox.models import Activities, UserHash, UserInfo, UserPreference, Notes
 
 item_id_dict= dict() #dictionary for item id 和 列数 （id为1的item 在第一列）
 
@@ -50,7 +51,6 @@ def stand_est(data_mat, user, sim_means, item):
 
 def recommend(data_mat, user, N, sim_means=cos_dis, est_method=stand_est):
     # Main Recommendation
-    print(np.nonzero(data_mat[user, :].A==0))
     un_rated_item = np.nonzero(data_mat[user, :].A==0)[1]
     if len(un_rated_item) == 0:
         return 'you rated everything'
@@ -108,9 +108,11 @@ def loadExData2():
            [1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0]]       
     return np.mat(data)
 
-data = loadExData2()
-data = np.mat(data)
-user = 3
-N = 3
-ans = recommend(data, user, N, sim_means=cos_dis, est_method=stand_est)
-print(ans)#结果
+
+
+# data = loadExData2()
+# data = np.mat(data)
+# user = 3
+# N = 3
+# ans = recommend(data, user, N, sim_means=cos_dis, est_method=stand_est)
+# print(ans)#结果
