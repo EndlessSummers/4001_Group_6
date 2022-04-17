@@ -289,7 +289,9 @@ function load(e, info) {
   } else if (info === "help") {
     xhttp.open("GET", "/windows/window_help/");
   } else if (info === "profile") {
-    xhttp.open("GET", "/windows/window_user?");
+    path = "/windows/window_user?user=" + input;
+    console.log(path);
+    xhttp.open("GET", path);
   }
   
   xhttp.send();
