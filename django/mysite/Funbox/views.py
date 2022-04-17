@@ -387,7 +387,7 @@ def project(request):
 
         if Notes.objects.filter(activity = curr_act).count() != 0:
             for i in (Notes.objects.filter(activity = curr_act)):
-                note_users.append(i.user.user_id)
+                note_users.append(i.user.user_name)
                 note_titles.append(i.title)
                 note_notes.append(i.note)
                 if i.activity_photo == "":
@@ -438,7 +438,7 @@ def project(request):
             password_opt = "forget password"
             return render(request,'project.html',{"profile_style" : pro_style, "reverse_style": rev_style, 
             "password_opt": password_opt, "projectlist" : curr_list, "noteusers" : note_users,
-            "notetiles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos}) 
+            "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos}) 
             
     if request.method == "POST":
         print("METHOD IS POST")

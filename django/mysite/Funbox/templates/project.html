@@ -80,18 +80,17 @@
 
     <div class="section-container-spacer">
         <h1>{{projectlist.0}}</h1> 
-        <div style="vertical-align: bottom;">
+        <div>
           <p  class="project_info" style="font-size: 19px; display: inline-block; font-weight: 700;  margin-top: 16px; margin-bottom: 0px;">
           <span>{{projectlist.1}}min </span>
           <span>{{projectlist.2}} people </span>
           <span> {{projectlist.3}} </span>
           <span> {{projectlist.4}}</span>         
-          
+        </p>
         <div style="display: inline-block; position: absolute; right: 0; padding-right: 15px;">
           <a onclick="like(event, '{{projectlist.0}}')" class="like {{projectlist.8}}" id="like_button" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
           <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="likes" style="font-size: 22px; ">{{projectlist.7}}</span>
         </div>
-          </p>
         <!-- </div> -->
         </div>
         <p>{{projectlist.5}}</p>
@@ -103,62 +102,107 @@
     </div>
 
     {% if notetitles.0 %}
-    <div class="note">
+    {% if notephotos.0 %}
+    <div class="note" style="overflow: hidden;">
       <div class="left" style="display: inline-block;">
-      <a style="text-decoration: none;">
+        <h3>{{notetitles.0}}<span style="position:absolute; right: 25%; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.0}}</span></h3>
         <div>
-          <h3>{{notetitles.0}}</h3><h4 style="position:absolute; right: 30%;">{{noteusers.0}}</h4>
-          <p style="color: #818181;">{{notebodies.0}}</p>
+        <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.0}}</span></p>
+        <div style="display: inline-block; position: absolute; right: 25%; margin-top: -40px;">
+          <a onclick="like(event, '{{projectlist.0}}')" class="like {{projectlist.8}}" id="like_button" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+          <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="likes" style="font-size: 28px; ">{{projectlist.7}}</span>
         </div>
-      </a>
-      <!-- <a>Full Text</a> -->
-      <p class="like">Likes: 30</p>
-      </div>
+        </div>
+    </div>
       <div class="right" id="img_filed" style="float: right;">
-        <img src="{{notephotos.0}}" style="width:100%; height:100%">
+        <img class="img-responsive" src="{{notephotos.0}}">
 
       </div>
     </div>
+    {% else %}
+    <div class="note">
+      <div class="left" style="display: inline-block; width: 100%;">
+          <h3>{{notetitles.0}}<span style="position:absolute; right: 0; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.0}}</span></h3>
+          <div>
+          <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.0}}</span></p>
+          <div style="display: inline-block; position: absolute; right: 0; margin-top: -40px;">
+            <a onclick="like(event, '{{projectlist.0}}')" class="like {{projectlist.8}}" id="like_button" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+            <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="likes" style="font-size: 28px; ">{{projectlist.7}}</span>
+          </div>
+          </div>
+      </div>
+    </div>
+    {% endif %}
+
     {% else %}
     <h3>No note is available for this, click the button below to create one</h3>
 
     {% endif %}
     
     {% if notetitles.1 %}
-    <div class="note">
+    {% if notephotos.1 %}
+    <div class="note" style="overflow: hidden;">
       <div class="left" style="display: inline-block;">
-      <a style="text-decoration: none;">
+        <h3>{{notetitles.1}}<span style="position:absolute; right: 25%; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.1}}</span></h3>
         <div>
-          <h3>{{notetitles.1}}</h3><h4 style="position:absolute; right: 30%;">{{noteusers.1}}</h4>
-          <p style="color: #818181;">{{notebodies.1}}</p>
+        <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.1}}</span></p>
+        <div style="display: inline-block; position: absolute; right: 25%; margin-top: -40px;">
+          <a onclick="like(event, '{{projectlist.1}}')" class="like {{projectlist.8}}" id="like_button" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+          <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="likes" style="font-size: 28px; ">{{projectlist.7}}</span>
         </div>
-      </a>
-      <p class="like">Likes: 30</p>
-      </div>
+        </div>
+    </div>
       <div class="right" id="img_filed" style="float: right;">
-        <img src="{{notephotos.1}}" style="width:100%; height:100%">
-
+        <img class="img-responsive" src="{{notephotos.1}}">
+      </div>
+    </div>
+    {% else %}
+    <div class="note">
+      <div class="left" style="display: inline-block; width: 100%;">
+          <h3>{{notetitles.1}}<span style="position:absolute; right: 0; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.1}}</span></h3>
+          <div>
+          <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.1}}</span></p>
+          <div style="display: inline-block; position: absolute; right: 0; margin-top: -40px;">
+            <a onclick="like(event, '{{projectlist.1}}')" class="like {{projectlist.8}}" id="like_button" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+            <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="likes" style="font-size: 28px; ">{{projectlist.7}}</span>
+          </div>
+          </div>
       </div>
     </div>
     {% endif %}
+    {% endif %}
 
-    {% if notetitles.1 %}
-    <div class="note">
+    {% if notetitles.2 %}
+    {% if notephotos.2 %}
+    <div class="note" style="overflow: hidden;">
       <div class="left" style="display: inline-block;">
-      <a style="text-decoration: none;">
+        <h3>{{notetitles.2}}<span style="position:absolute; right: 25%; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.2}}</span></h3>
         <div>
-          <h3>{{notetitles.2}}</h3><h4 style="position:absolute; right: 30%;">{{noteusers.2}}</h4>
-          <p style="color: #818181;">{{notebodies.2}}</p>
+        <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.2}}</span></p>
+        <div style="display: inline-block; position: absolute; right: 25%; margin-top: -40px;">
+          <a onclick="like(event, '{{projectlist.2}}')" class="like {{projectlist.8}}" id="like_button" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+          <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="likes" style="font-size: 28px; ">{{projectlist.7}}</span>
         </div>
-      </a>
-      <!-- <a>Full Text</a> -->
-      <p class="like">Likes: 30</p>
+        </div>
       </div>
-      <div class="right" id="img_filed" style="float: right;">
-        <img src="{{notephotos.2}}" style="width:100%; height:100%">
-
+      <div class="right" id="img_filed" style="float: right; height: 100%;">
+        <img src="{{notephotos.2}}" style="height: 100%">
       </div>
     </div>
+    {% else %}
+    <div class="note">
+      <div class="left" style="display: inline-block; width: 100%;">
+          <h3>{{notetitles.2}}<span style="position:absolute; right: 0; font-weight:normal; color:rgb(116, 107, 107); font-style: italic;">{{noteusers.2}}</span></h3>
+          <div>
+          <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.2}}</span></p>
+          <div style="display: inline-block; position: absolute; right: 0; margin-top: -40px;">
+            <a onclick="like(event, '{{projectlist.2}}')" class="like {{projectlist.8}}" id="like_button" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+            <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="likes" style="font-size: 28px; ">{{projectlist.7}}</span>
+          </div>
+          </div>
+      </div>
+    </div>
+    {% endif %}
     {% endif %}
   
     <a class="btn btn-primary" id="create-note" style="width: 20%; right: 30px; position: absolute;"> Create Note </a>
@@ -175,6 +219,8 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    console.log($("#note_1").height());
+    console.log($("#img_filed_1").height());
     if ("{{user_email}}" == "") {
       $("#create-note").on("click", function(event){
         event.preventDefault();
