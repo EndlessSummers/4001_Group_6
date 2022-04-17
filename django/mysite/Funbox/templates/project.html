@@ -48,7 +48,10 @@
       <ul class="nav">
         <div class="user-profile" onclick="load(event, 'edit')" id="user-profile" style="{{profile_style}}">
           <img alt="" src="{{user_photo}}" id="user_picture" alt="user_profile" style="display: inline-block;">
-          <p> {{user_name}} <br> {{user_email}} </p>
+          <div style="width: 110px; display: inline-block;">
+            <div style="width: 110px; height: 22px; margin-bottom: 5px; overflow: hidden; text-overflow: ellipsis;" id="profile_name">{{user_name}}</div>
+            <div style="width: 110px; height: 22px; margin-bottom: 5px; text-overflow: ellipsis; overflow: hidden;">{{user_email}}</div>
+          </div>
         </div>
         <li><a href="/" title="" >Home</a></li>
         <li><a onclick="load(event, 'help')" title="">Help</a></li>
@@ -109,8 +112,8 @@
         <div>
         <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.0}}</span></p>
         <div style="display: inline-block; position: absolute; right: 25%; margin-top: -40px;">
-          <a onclick="like_note(event, '{{noteids.0}}', '0')" class="like {{projectlist.8}}" id="like_note_button0" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
-          <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes0" style="font-size: 28px; ">{{projectlist.7}}</span>
+          <a onclick="like_note(event, '{{noteids.0}}', '0')" class="like {{notehearts.0}}" id="like_note_button0" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+          <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes0" style="font-size: 28px; ">{{notelikes.0}}</span>
         </div>
         </div>
     </div>
@@ -126,8 +129,8 @@
           <div>
           <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.0}}</span></p>
           <div style="display: inline-block; position: absolute; right: 0; margin-top: -40px;">
-            <a onclick="like_note(event, '{{noteids.0}}', '0')" class="like {{projectlist.8}}" id="like_note_button0" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
-            <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes0" style="font-size: 28px; ">{{projectlist.7}}</span>
+            <a onclick="like_note(event, '{{noteids.0}}', '0')" class="like {{notehearts.0}}" id="like_note_button0" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+            <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes0" style="font-size: 28px; ">{{notelikes.0}}</span>
           </div>
           </div>
       </div>
@@ -147,8 +150,8 @@
         <div>
         <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.1}}</span></p>
         <div style="display: inline-block; position: absolute; right: 25%; margin-top: -40px;">
-          <a onclick="like_note(event, '{{noteids.1}}', '1')" class="like {{projectlist.8}}" id="like_note_button1" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
-          <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes1" style="font-size: 28px; ">{{projectlist.7}}</span>
+          <a onclick="like_note(event, '{{noteids.1}}', '1')" class="like {{notehearts.1}}" id="like_note_button1" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+          <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes1" style="font-size: 28px; ">{{notelikes.1}}</span>
         </div>
         </div>
     </div>
@@ -163,8 +166,8 @@
           <div>
           <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.1}}</span></p>
           <div style="display: inline-block; position: absolute; right: 0; margin-top: -40px;">
-            <a onclick="like_note(event, '{{noteids.1}}', '1')" class="like {{projectlist.8}}" id="like_note_button1" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
-            <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes1" style="font-size: 28px; ">{{projectlist.7}}</span>
+            <a onclick="like_note(event, '{{noteids.1}}', '1')" class="like {{notehearts.1}}" id="like_note_button1" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+            <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes1" style="font-size: 28px; ">{{notelikes.1}}</span>
           </div>
           </div>
       </div>
@@ -180,8 +183,8 @@
         <div>
         <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.2}}</span></p>
         <div style="display: inline-block; position: absolute; right: 25%; margin-top: -40px;">
-          <a onclick="like_note(event, '{{noteids.2}}', '2')" class="like {{projectlist.8}}" id="like_note_button2" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
-          <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes2" style="font-size: 28px; ">{{projectlist.7}}</span>
+          <a onclick="like_note(event, '{{noteids.2}}', '2')" class="like {{notehearts.2}}" id="like_note_button2" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+          <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes2" style="font-size: 28px; ">{{notelikes.2}}</span>
         </div>
         </div>
       </div>
@@ -196,8 +199,8 @@
           <div>
           <p style="font-size: 19px; display: block; font-weight: 700; margin-top: 16px; margin-bottom: 0px;"> <span>{{notebodies.2}}</span></p>
           <div style="display: inline-block; position: absolute; right: 0; margin-top: -40px;">
-            <a onclick="like_note(event, '{{noteids.2}}', '2')" class="like {{projectlist.8}}" id="like_note_button2" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
-            <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes2" style="font-size: 28px; ">{{projectlist.7}}</span>
+            <a onclick="like_note(event, '{{noteids.2}}', '2')" class="like {{notehearts.2}}" id="like_note_button2" style="color: #2b2b2f; font-size: 30px; text-decoration: none;">
+            <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes2" style="font-size: 28px; ">{{notelikes.2}}</span>
           </div>
           </div>
       </div>
