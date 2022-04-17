@@ -77,6 +77,7 @@ def reg_email(request, i_email):
             'url': "/reg_form/",
             'user': trans_hash,
             'domain': current_site.domain,
+            'i_email': i_email,
         })
         send_mail(subject=subject, message=message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
         status = "success"
@@ -132,6 +133,7 @@ def forget_mail(request, i_email):
                     'url': "/find_password/",
                     'user': trans_hash,
                     'domain': current_site.domain,
+                    'i_email': i_email,
                 })
                 send_mail(subject=subject, message=message, from_email= 'Funbox2022@163.com' ,recipient_list = [i_email,])
                 status = "success"
