@@ -123,8 +123,11 @@
       </div>
       <ul class="nav">
         <div class="user-profile" onclick="load(event, 'edit')" id="user-profile" style="{{profile_style}}">
-          <img alt="" src="{{user_photo}}" id="user_picture" alt="user_profile" style="display: inline-block;">
-          <p> {{user_name}} <br> {{user_email}} </p>
+          <img alt="" src="{{user_photo}}" id="user_picture" alt="user_profile" style="display: inline;">
+          <div style="width: 110px; display: inline-block;">
+          <div style="width: 110px; height: 22px; margin-bottom: 5px; overflow: hidden; text-overflow: ellipsis;" id="profile_name">{{user_name}}</div>
+          <div style="width: 110px; height: 22px; margin-bottom: 5px; text-overflow: ellipsis; overflow: hidden;">{{user_email}}</div>
+          </div>
         </div>
         <li><a href="/" title="" >Home</a></li>
         <li><a href="/admin/" title="" >Admin</a></li>
