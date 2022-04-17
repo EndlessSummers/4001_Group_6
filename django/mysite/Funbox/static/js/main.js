@@ -253,7 +253,7 @@ function togglePasswordView(e, info) {
     }
 }
 
-function load(e, info) {
+function load(e, info, input=None) {
   _index = 0;
   clearInterval(clearTime);
   e.preventDefault();
@@ -288,6 +288,8 @@ function load(e, info) {
     xhttp.open("GET", "/windows/window_user/");
   } else if (info === "help") {
     xhttp.open("GET", "/windows/window_help/");
+  } else if (info === "profile") {
+    xhttp.open("GET", "/windows/window_user?");
   }
   
   xhttp.send();
@@ -501,7 +503,7 @@ function like(e, info) {
   })
 }
 
-function like_note(e, info, ind) {
+function like_note(e, info, ind, image) {
   if ($("#user-profile").attr("style") == "display:none;"){
     alert("Log in to like a note");
     return;
@@ -526,6 +528,7 @@ function like_note(e, info, ind) {
       "hint": "like_note",
       "value": value,
       "id": info,
+      "image": image,
     },
     success: function(args) {
       console.log("ajax success");
