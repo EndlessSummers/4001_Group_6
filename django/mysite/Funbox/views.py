@@ -513,7 +513,7 @@ def window_cancel(request):
 # 加载user窗口
 def window_user(request):
     if request.method == "GET":
-        # path = request.get_full_path()
+        path = request.get_full_path()
         user_info = request.session.get("user1")
         # try:
         #     other_user_name = path.split("user=")[1]
@@ -638,3 +638,5 @@ def note(request):
     elif request.method == "POST":
         return index(request)
         
+def window_other(request):
+    return render(request, 'windows/window_other.html')

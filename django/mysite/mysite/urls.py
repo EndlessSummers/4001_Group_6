@@ -37,6 +37,7 @@ urlpatterns = [
     path('windows/window_help/', views.window_help),
     path('windows/window_cancel/', views.window_cancel),
     path('windows/window_user/', views.window_user),
+    path('windows/window_other/', views.window_other),
     # path('reg_form', views.reg_form),
     path('reg_form/', views.reg_form, name="reg_form"),
     path('find_password/', views.find_password, name="find_password"),

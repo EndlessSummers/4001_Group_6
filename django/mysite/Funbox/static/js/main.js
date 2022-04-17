@@ -288,10 +288,6 @@ function load(e, info) {
     xhttp.open("GET", "/windows/window_user/");
   } else if (info === "help") {
     xhttp.open("GET", "/windows/window_help/");
-  } else if (info === "profile") {
-    path = "/windows/window_user?user=" + input;
-    console.log(path);
-    xhttp.open("GET", path);
   }
   
   xhttp.send();
@@ -334,15 +330,13 @@ function edit_usr_p(e) {
   // var form = document.getElementById('myform')
   var infos = document.getElementsByClassName('data_container');
   var datas = [];
-  for (i=0; i<infos.length; i++) {
-    let p = infos[i].getElementsByTagName("p")[0];
-    data = p.innerHTML;
-    p.setAttribute("hidden", "True");
-    datas.push(data);
-    input = infos[i].getElementsByTagName("input")[0]
-    input.setAttribute("value", data);
-    input.removeAttribute("hidden");
-  }
+  let p = infos[0].getElementsByTagName("p")[0];
+  data = p.innerHTML;
+  p.setAttribute("hidden", "True");
+  datas.push(data);
+  input = infos[0].getElementsByTagName("input")[0]
+  input.setAttribute("value", data);
+  input.removeAttribute("hidden");
 
   $("#edit").css("display", "none");
   $("#save").removeAttr("style");
@@ -449,19 +443,17 @@ function save_usr_p(e) {
 
   var infos = document.getElementsByClassName('data_container');
   var datas = [];
-  for (i=0; i<infos.length; i++) {
-    input = infos[i].getElementsByTagName("input")[0];
-    data = input.value;
-    input.setAttribute("hidden", "True");
-    datas.push(data);
-    let p = infos[i].getElementsByTagName("p")[0];
-    p.innerHTML = data;
-    p.removeAttribute("hidden");
-    // input.removeAttribute("value");
-  }
+  input = infos[0].getElementsByTagName("input")[0];
+  data = input.value;
+  input.setAttribute("hidden", "True");
+  datas.push(data);
+  let p = infos[0].getElementsByTagName("p")[0];
+  p.innerHTML = data;
+  p.removeAttribute("hidden");
+  // input.removeAttribute("value");
   console.log(datas);
 
-  var user_name = document.getElementsById('profile_name');
+  var user_name = document.getElementById('profile_name');
   var new_name = infos[0].getElementsByTagName("p")[0].innerHTML;
   // console.log(new_name+"<br>"+document.getElementsByName("email")[0].innerHTML);
   user_name.innerHTML = new_name;
@@ -540,3 +532,23 @@ function like_note(e, info, ind, image) {
     }
   })
 }
+
+function load_other(e, user) {
+  const xhttp = new XMLHttpRequest();
+
+  xhttp.onload = function() {
+    document.getElementById("event_box").innerHTML = this.responseText;
+    document.getElementById("event_box").removeAttribute("hidden");
+    document.getElementById("close").onclick = function() {
+      this.parentNode.parentNode.setAttribute("hidden", "True");
+      this.parentNode.parentNode.removeChild(this.parentNode);
+      console.log('window closed');
+      return false;
+    }
+  };
+
+  path = "/windows/window_other?user=" + user;
+  xhttp.open("GET", path);
+
+  xhttp.send();
+} 
