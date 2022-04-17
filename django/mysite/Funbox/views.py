@@ -400,7 +400,7 @@ def project(request):
                 note_ids.append(i.id)
                 note_likes.append(notelikes.objects.filter(note = i, likes = True).count())
                 note_userids.append(i.user.user_id)
-                note_userphotos.append(i.user.user_photo).url
+                note_userphotos.append(i.user.user_photo.url)
 
                 print(i.id)
                 if i.activity_photo == "":
@@ -521,55 +521,50 @@ def window_cancel(request):
 # 加载user窗口
 def window_user(request):
     if request.method == "GET":
-        path = request.get_full_path()
         user_info = request.session.get("user1")
-        # try:
-        #     other_user_name = path.split("user=")[1]
-        #     cur_obj = UserInfo.objects.get(user_id = other_user_name)
-        # except:
-        #     print("EXCEPT ENTER WINDOW USER")
-        #     curr_obj = UserInfo.objects.get(user_id = user_info)
         curr_obj = UserInfo.objects.get(user_id = user_info)
         current_photo = curr_obj.user_photo.url
         current_name = curr_obj.user_name
 
-        #Recommendation System
-        tem = 0
-        user_dic = {}
-        act_dic = {}
-        likedic = {"Music":0, "Film&TV":0, "Game" : 0, "Sports" : 0, "Handcraft" : 0, "Cooking" : 0}
-        userpos = 0
-        for user in UserInfo.objects.all():
-            user_dic[tem] = user
-            if user.user_id == request.session.get("user1"):
-                userpos = tem
-            tem = tem + 1
-        tem1 = 0
-        for act in Activities.objects.all():
-            act_dic[tem1] = act
-            tem1 = tem1 + 1
-        datalist = []
-        for user1 in UserInfo.objects.all():
-            curr_list = []
-            for act1 in Activities.objects.all():
-                try:
-                    UserPreference.objects.get(user = user1, activity = act1, likes = True)
-                    curr_list.append(1)
-                except:
-                    curr_list.append(0)
-            datalist.append(curr_list)
-        datalist = np.mat(datalist)
-        rec = recommend(datalist, userpos, 1, sim_means=cos_dis, est_method=stand_est)
-        print("recommendation is", rec)
-        print("activity dic now is", act_dic.get(rec[0][0]))
-        rec_act = (act_dic[rec[0][0]]).activities_id
-        print(rec_act)
+        rec_act, likemost = findlikes(user_info)
 
-        #likes
-        curr_user = UserInfo.objects.get(user_id = request.session.get("user1"))
-        for obj in UserPreference.objects.filter(user = curr_user):
-            likedic[obj.activity.activity_tag] += 1
-        likemost = sorted(likedic, key = likedic.get, reverse= True)[0]
+        #Recommendation System
+        # tem = 0
+        # user_dic = {}
+        # act_dic = {}
+        # likedic = {"Music":0, "Film&TV":0, "Game" : 0, "Sports" : 0, "Handcraft" : 0, "Cooking" : 0}
+        # userpos = 0
+        # for user in UserInfo.objects.all():
+        #     user_dic[tem] = user
+        #     if user.user_id == request.session.get("user1"):
+        #         userpos = tem
+        #     tem = tem + 1
+        # tem1 = 0
+        # for act in Activities.objects.all():
+        #     act_dic[tem1] = act
+        #     tem1 = tem1 + 1
+        # datalist = []
+        # for user1 in UserInfo.objects.all():
+        #     curr_list = []
+        #     for act1 in Activities.objects.all():
+        #         try:
+        #             UserPreference.objects.get(user = user1, activity = act1, likes = True)
+        #             curr_list.append(1)
+        #         except:
+        #             curr_list.append(0)
+        #     datalist.append(curr_list)
+        # datalist = np.mat(datalist)
+        # rec = recommend(datalist, userpos, 1, sim_means=cos_dis, est_method=stand_est)
+        # print("recommendation is", rec)
+        # print("activity dic now is", act_dic.get(rec[0][0]))
+        # rec_act = (act_dic[rec[0][0]]).activities_id
+        # print(rec_act)
+
+        # #likes
+        # curr_user = UserInfo.objects.get(user_id = request.session.get("user1"))
+        # for obj in UserPreference.objects.filter(user = curr_user):
+        #     likedic[obj.activity.activity_tag] += 1
+        # likemost = sorted(likedic, key = likedic.get, reverse= True)[0]
 
         
         return render(request,'windows/window_user.html', {"user_email":user_info,
@@ -647,4 +642,95 @@ def note(request):
         return index(request)
         
 def window_other(request):
-    return render(request, 'windows/window_other.html')
+    if request.method == "GET":
+        path = request.get_full_path()
+        try:
+            user_info = path.split("user=")[1]
+        except:
+            return HTTPResponse("Please enter the page from project!")
+        curr_obj = UserInfo.objects.get(user_id = user_info)
+        current_photo = curr_obj.user_photo.url
+        current_name = curr_obj.user_name
+        rec_act, likemost = findlikes(user_info)
+        #Recommendation System
+        # tem = 0
+        # user_dic = {}
+        # act_dic = {}
+        # likedic = {"Music":0, "Film&TV":0, "Game" : 0, "Sports" : 0, "Handcraft" : 0, "Cooking" : 0}
+        # userpos = 0
+        # for user in UserInfo.objects.all():
+        #     user_dic[tem] = user
+        #     if user.user_id == user_info:
+        #         userpos = tem
+        #     tem = tem + 1
+        # tem1 = 0
+        # for act in Activities.objects.all():
+        #     act_dic[tem1] = act
+        #     tem1 = tem1 + 1
+        # datalist = []
+        # for user1 in UserInfo.objects.all():
+        #     curr_list = []
+        #     for act1 in Activities.objects.all():
+        #         try:
+        #             UserPreference.objects.get(user = user1, activity = act1, likes = True)
+        #             curr_list.append(1)
+        #         except:
+        #             curr_list.append(0)
+        #     datalist.append(curr_list)
+        # datalist = np.mat(datalist)
+        # rec = recommend(datalist, userpos, 1, sim_means=cos_dis, est_method=stand_est)
+        # print("recommendation is", rec)
+        # print("activity dic now is", act_dic.get(rec[0][0]))
+        # rec_act = (act_dic[rec[0][0]]).activities_id
+        # print(rec_act)
+
+        # #likes
+        # curr_user = UserInfo.objects.get(user_id = user_info)
+        # for obj in UserPreference.objects.filter(user = curr_user):
+        #     likedic[obj.activity.activity_tag] += 1
+        # likemost = sorted(likedic, key = likedic.get, reverse= True)[0]
+
+        
+        return render(request,'windows/window_other.html', {"user_email":user_info,
+         "user_name" : current_name, "user_photo" : current_photo, "user_recommendations" : rec_act, "user_likes" : likemost })
+
+def findlikes(user_info):
+    #Recommendation System
+    tem = 0
+    user_dic = {}
+    act_dic = {}
+    likedic = {"Music":0, "Film&TV":0, "Game" : 0, "Sports" : 0, "Handcraft" : 0, "Cooking" : 0}
+    userpos = 0
+    for user in UserInfo.objects.all():
+        user_dic[tem] = user
+        if user.user_id == user_info:
+            userpos = tem
+        tem = tem + 1
+    tem1 = 0
+    for act in Activities.objects.all():
+        act_dic[tem1] = act
+        tem1 = tem1 + 1
+    datalist = []
+    for user1 in UserInfo.objects.all():
+        curr_list = []
+        for act1 in Activities.objects.all():
+            try:
+                UserPreference.objects.get(user = user1, activity = act1, likes = True)
+                curr_list.append(1)
+            except:
+                curr_list.append(0)
+        datalist.append(curr_list)
+    datalist = np.mat(datalist)
+    rec = recommend(datalist, userpos, 1, sim_means=cos_dis, est_method=stand_est)
+    print("recommendation is", rec)
+    print("activity dic now is", act_dic.get(rec[0][0]))
+    rec_act = (act_dic[rec[0][0]]).activities_id
+    print(rec_act)
+
+    #likes
+    curr_user = UserInfo.objects.get(user_id = user_info)
+    for obj in UserPreference.objects.filter(user = curr_user):
+        likedic[obj.activity.activity_tag] += 1
+    likemost = sorted(likedic, key = likedic.get, reverse= True)[0]
+
+    return rec_act, likemost
