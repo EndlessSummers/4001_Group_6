@@ -355,3 +355,27 @@ def insert_database():
     activity_participant =1,
     activity_place = "Home",
     activity_tag = "Music")
+
+    Activities.objects.create(activities_id = "The_Bad_Guys",
+    activity_desc = "In Los Angeles, California, in a world of humans and anthropomorphic animals co-existing, The Bad Guys, a gang of notorious, criminal animals led by the cool-headed Mr. Wolf and known for their brazen thefts while eluding the authorities, attempt to steal the Golden Dolphin award from guinea pig philanthropist Professor Rupert Marmalade IV after being insulted by Governor Diane Foxington on-air.",
+    activity_timelength = 100,  # Field name made lowercase.
+    activity_photo = "/photos_activities/The_Bad_Guys.jpg",
+    activity_participant = 1,
+    activity_place = "Center",
+    activity_tag = "Film&TV")
+
+    Activities.objects.create(activities_id = "Skateboard",
+    activity_desc = 'A skateboard is a type of sports equipment used for skateboarding. They are usually made of a specially designed 7-8 ply maple plywood deck and polyurethane wheels attached to the underside by a pair of skateboarding trucks.The skateboarder moves by pushing with one foot while the other foot remains balanced on the board, or by pumping on\'s legs in structures such as a bowl or half pipe. A skateboard can also be used by simply standing on the deck while on a downward slope and allowing gravity to propel the board and rider.',
+    activity_timelength = 120,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Skateboard.jpg",
+    activity_participant = 1,
+    activity_place = "Outdoor",
+    activity_tag = "Sports")
+
+    Activities.objects.create(activities_id = "Exploding_kittens",
+    activity_desc = 'Exploding Kittens is a card game designed by Elan Lee, Matthew Inman from the comics site The Oatmeal, and Shane Small. Exploding Kittens is described as a "strategic card game about cats and destruction".',
+    activity_timelength = 60,  # Field name made lowercase.
+    activity_photo = "/photos_activities/Exploding_kittens.jpg",
+    activity_participant = 5,
+    activity_place = "Home",
+    activity_tag = "Game")
