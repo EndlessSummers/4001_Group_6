@@ -400,7 +400,7 @@ def project(request):
                 note_ids.append(i.id)
                 note_likes.append(notelikes.objects.filter(note = i, likes = True).count())
                 note_userids.append(i.user.user_id)
-                note_userphotos.append(i.user.user_photo)
+                note_userphotos.append(i.user.user_photo).url
 
                 print(i.id)
                 if i.activity_photo == "":
