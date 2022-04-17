@@ -388,6 +388,8 @@ def project(request):
         note_ids = []
         note_likes = []
         note_userlike = []
+        note_userids = []
+        note_userphotos = []
 
 
         if Notes.objects.filter(activity = curr_act).count() != 0:
@@ -397,6 +399,8 @@ def project(request):
                 note_notes.append(i.note)
                 note_ids.append(i.id)
                 note_likes.append(notelikes.objects.filter(note = i, likes = True).count())
+                note_userids.append(i.user.user_id)
+                note_userphotos.append(i.user.user_photo)
 
                 print(i.id)
                 if i.activity_photo == "":
@@ -453,16 +457,19 @@ def project(request):
                 except:
                     note_userlike.append("")
 
-            curr_like = UserPreference.objects.get(user = curr_obj, activity = curr_act)
-            if curr_like.likes == True:
-                curr_list.append("heart")
-            else:
+            try:
+                curr_like = UserPreference.objects.get(user = curr_obj, activity = curr_act)
+                if curr_like.likes == True:
+                    curr_list.append("heart")
+                else:
+                    curr_list.append("")
+            except:
                 curr_list.append("")
-            print("likes of notes:", note_likes)
 
             return render(request,'project.html',{"profile_style" : pro_style, "user_email":user_info.split('@')[0], "reverse_style": rev_style, "user_name" : current_name, "user_photo" : current_photo, 
             "password_opt": password_opt, "projectlist" : curr_list, "noteusers" : note_users,
-            "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos, "noteids" : note_ids, "notehearts" : note_userlike, "notelikes" : note_likes})
+            "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos, "noteids" : note_ids, "notehearts" : note_userlike, "notelikes" : note_likes,
+            "userids" : note_userids, "userphotos" : note_userphotos})
         else:
             # if (like_state != None):
                 #弹出一个框
@@ -473,7 +480,8 @@ def project(request):
                 note_userlike.append("")
             return render(request,'project.html',{"profile_style" : pro_style, "reverse_style": rev_style, 
             "password_opt": password_opt, "projectlist" : curr_list, "noteusers" : note_users,
-            "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos, "noteids" : note_ids, "notehearts" : note_userlike, "notelikes" : note_likes}) 
+            "notetitles" : note_titles,  "notebodies": note_notes, "notephotos" : note_photos, "noteids" : note_ids, "notehearts" : note_userlike, "notelikes" : note_likes,
+            "userids" : note_userids, "userphotos" : note_userphotos}) 
             
     if request.method == "POST":
         print("METHOD IS POST")
