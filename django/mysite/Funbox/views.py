@@ -390,9 +390,10 @@ def project(request):
                 note_users.append(i.user.user_id)
                 note_titles.append(i.title)
                 note_notes.append(i.note)
-                if i.activity_photo == None:
-                    note_photos.append(None)
+                if i.activity_photo == "":
+                    note_photos.append("")
                 else:
+                    print("none?", i.activity_photo)
                     note_photos.append(i.activity_photo.url)
 
 
