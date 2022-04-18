@@ -425,7 +425,7 @@ function help() {
     clearTime = setInterval(function(){
       $(".bottom ul li").eq(_index).toggleClass("isActive");
       _index++;
-      if(_index>4) _index=0;
+      if(_index>3) _index=0;
       $(".help .top .img").eq(_index).fadeIn(200).siblings().fadeOut(200);
       $(".bottom ul li").eq(_index).toggleClass("isActive");
       $(".bottom #helpText").html($(".help .top .img").eq(_index).html());
