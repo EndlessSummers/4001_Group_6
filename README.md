@@ -9,7 +9,7 @@ pillow
 pymysql
 urllib3
 
-Create a new database (importnat!)
+Create a new database (important!)
 
 After Pulling the newest:
 1. python manage.py makemigrations Funbox 
