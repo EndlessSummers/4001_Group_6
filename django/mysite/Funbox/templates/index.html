@@ -1,7 +1,11 @@
+<!-- Index Page -->
+
 <!DOCTYPE html>
+<!-- load static path defined in django template -->
 {% load static %}
 <html lang="en">
 
+<!-- meta information -->
 <head>
   <meta charset="UTF-8">
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -15,17 +19,20 @@
   
   <link href="./assets/apple-icon-180x180.png" rel="apple-touch-icon">
   <link href="./assets/apple-icon-180x180.png" rel="icon">
+  <!-- load jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
 
   <title>Title page</title>  
 
+  <!-- link Cascading Style Sheets -->
   <link href="{% static 'css/external.css' %}" rel="stylesheet">
   <link href="{% static 'css/main.css' %}" rel="stylesheet">
 </head>
 
+<!-- contents -->
 <body>
 <header class="">
+  <!-- control navbar to open and close  -->
   <div class="navbar navbar-default visible-xs">
     <button type="button" class="navbar-toggle collapsed">
       <span class="sr-only">Toggle navigation</span>
@@ -33,9 +40,11 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
+    <!-- click to redirct to index -->
     <a href="/" class="navbar-brand"> FunBox </a>
   </div>
 
+  <!-- filterbar -->
   <div id="mySidenav" class="sidenav">
     <!-- The close button -->
     <label for="filtersubmit">
@@ -113,28 +122,41 @@
     </form>
   </div>
 
+  <!-- sidebar -->
   <nav class="sidebar">
     <div class="navbar-collapse" id="navbar-collapse">
+      <!-- logo & redirection -->
       <div class="site-header hidden-xs">
           <a class="site-brand" href="/" title="">
             <img class="img-responsive site-logo" alt="" src="/static/imgs/funbox.png" style="width: 200px; height: 100px;">
             FunBox
           </a>
       </div>
+      <!-- section below logo (also navbar) -->
       <ul class="nav">
+        <!-- user profile, will not display if no user had logged in-->
         <div class="user-profile" onclick="load(event, 'edit')" id="user-profile" style="{{profile_style}}">
           <img alt="" src="{{user_photo}}" id="user_picture" alt="user_profile" style="display: inline;">
+          <!-- information wrapper, display image with name & email in the same line -->
           <div style="width: 110px; display: inline-block;">
+            <!-- will truncate if username | email is too long  -->
           <div style="width: 110px; height: 22px; margin-bottom: 5px; overflow: hidden; text-overflow: ellipsis;" id="profile_name">{{user_name}}</div>
           <div style="width: 110px; height: 22px; margin-bottom: 5px; text-overflow: ellipsis; overflow: hidden;">{{user_email}}</div>
           </div>
         </div>
+        <!-- navigations -->
         <li><a href="/" title="" >Home</a></li>
         <li><a href="/admin/" title="" >Admin</a></li>
+        <!-- functions; To open filter bar; To load help window  -->
         <li><a onclick="openNav()" title="">Recommendation</a></li>
         <li><a onclick="load(event, 'help')" title="">Help</a></li>
       </ul>
 
+      <!-- footer section 
+        No user: display `Log in`, `Sign up`, `forget password`
+        User: display `Log out`, `change password`
+        `Cancel Account` always displays
+        -->
       <nav class="nav-footer">
         <p style="font-size: 12px;"> Enjoy our work? Tell us how you feel by</p>
         <ul class="nav">
@@ -152,12 +174,12 @@
 </header>
 
 <main class="" id="main-collapse">
-
-<!-- Add your site or app content here -->
+  <!-- empty wrapper for all `load` functions -->
   <div class="hero-full-wrapper">
     <div class="login-description" id="event_box" hidden></div>
   </div>
   
+  <!-- grid for all itens -->
   <div class="grid">
   <div class="gutter-sizer"></div>
     <div class="grid-sizer"></div>
@@ -197,6 +219,7 @@
         </div>
       </a>
     </div>
+
     <div class="grid-item">
       <img class="img-responsive" alt="" src="{{images.3}}">
       <a href="/project?image={{names.3}}" target="_blank" class="project-description">
@@ -244,6 +267,7 @@
         </div>
       </a>
     </div>
+
     <div class="grid-item">
       <img class="img-responsive" alt="" src="{{images.7}}">
       <a href="/project?image={{names.7}}" target="_blank" class="project-description">
@@ -255,10 +279,12 @@
         </div>
       </a>
     </div>
+    <!-- for debugging -->
     <div class="last"></div>
   </div>
 </div>
 
+<!-- external script for masonry build, referenced in `external.js` -->
 <script>
   document.addEventListener("DOMContentLoaded", function (event) {
     masonryBuild();
@@ -268,6 +294,7 @@
 </main>
 </body>
 
+<!-- external script for open and close navbar when window size is small, referenced in `external.js` -->
 <script>
 document.addEventListener("DOMContentLoaded", function (event) {
   navbarToggleSidebar();
@@ -275,6 +302,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 
+<!-- onscroll function to dynamically load more items when scrolling down -->
 <script>
 document.addEventListener("scroll", function (event) {
   var lastY = window.scrollY; // where user scrolls to
@@ -296,8 +324,11 @@ document.addEventListener("scroll", function (event) {
 });
 </script>
 
+<!-- scripts -->
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/external.js' %}"></script>
+
+<!-- script to help send django required csrf_token when post with ajax -->
 <script>
   document.addEventListener("DOMContentLoaded", function (event) {
     $(document).ajaxSend(function(event, xhr, settings){
