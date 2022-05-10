@@ -18,7 +18,7 @@ import numpy as np
 
 
 # Create your views here.
-#登录页面
+# 登录页面
 def login(request, i_email, i_password):
     #指定要访问的页面，render的功能：讲请求的页面结果提交给客户端
         user_list = UserInfo.objects.all()
@@ -38,7 +38,8 @@ def login(request, i_email, i_password):
         message = "user email or password error!"
         status = "failure"
         return JsonResponse({'status':status, 'message': message})
-    
+
+# 用户登出  
 def log_out(request):
     try:
         request.session.flush()
@@ -46,11 +47,13 @@ def log_out(request):
     except:
         return HttpResponseRedirect('/')
 
+# 注销账号
 def cancel_account(request):
     curr_id = request.session.get("user1")
     cur_obj = UserInfo.objects.get(user_id = curr_id)
     cur_obj.delete()
     return log_out(request)
+
 # 用户注册发送邮件
 # 验证用户不存在，生成HASH值，发送邮件
 def reg_email(request, i_email):
@@ -255,8 +258,7 @@ def find_password(request):
         message = "Your password has been changed"
         return JsonResponse({'status':status, 'message': message})
 
-# 创建数据库
-       
+# 创建数据库   
 def savenotes(request):
     new_photo = request.FILES.get("photos")
     new_title = request.POST.get("title")
@@ -268,7 +270,7 @@ def savenotes(request):
     Notes.objects.create(user = user_obj, activity = act_obj, title = new_title, note = new_body, activity_photo = new_photo)
     return redirect("/project/?image=" + act_name)
 
-# 验证表单信息 进入首页
+# 验证表单信息 进入首页，表单分流
 def index(request):
     print("views.py.index() called")
     if request.method == "GET":
@@ -564,6 +566,7 @@ def window_user(request):
         return render(request,'windows/window_user.html', {"user_email":user_info,
          "user_name" : current_name, "user_photo" : current_photo, "user_recommendations" : rec_act, "user_likes" : likemost })
 
+# 加载forget password窗口，发送邮件
 def find_password(request):
     if (request.method == "GET"):
         path = request.get_full_path()
@@ -586,6 +589,7 @@ def find_password(request):
         message = "Your password has been changed"
         return JsonResponse({'status':status, 'message': message})
 
+# note页面，GET进入，POST提交数据
 def note(request):
     if request.method == "GET":
         path = request.get_full_path()
@@ -633,7 +637,8 @@ def note(request):
             "password_opt": password_opt, "activity" : image}) 
     elif request.method == "POST":
         return index(request)
-        
+   
+# 加载other user窗口
 def window_other(request):
     if request.method == "GET":
         path = request.get_full_path()
@@ -687,6 +692,7 @@ def window_other(request):
         return render(request,'windows/window_other.html', {"user_email":user_info,
          "user_name" : current_name, "user_photo" : current_photo, "user_recommendations" : rec_act, "user_likes" : likemost })
 
+# recommendation system
 def findlikes(user_info):
     #Recommendation System
     tem = 0

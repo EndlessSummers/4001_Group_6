@@ -4,6 +4,7 @@ var clearTime = null;
 var img_index = 8;
 var note_index = 3;
 
+// front-end checking before submitting a form
 function myOnSubmit(e, info) {
     var state;
     if (info === "login") {
@@ -23,11 +24,13 @@ function myOnSubmit(e, info) {
     }
 
     if (!state) {
+      // submission fails
       console.log("INVALID INPUT");
       $("#error").removeAttr('style');
       e.preventDefault();
       return false;
     } else {
+      // submission success
       console.log("VALID INPUT");
       // e.preventDefault();
       // return false;
@@ -35,6 +38,9 @@ function myOnSubmit(e, info) {
       // console.log("checkpoint1");
       $("#error").removeAttr('style').css("display", "none");
       $("#success").removeAttr('style').css("display", "none");
+      
+      // return true if does not submit in ajax
+      // i.e. direct submit, will possibly reload/redirect page 
       if (info == "register") return true;
       if (info == "user") {
         save_usr_p(e);
@@ -42,10 +48,13 @@ function myOnSubmit(e, info) {
       }
       // if (info == "repeat") return true;
       if (info == "cancel") return true;
+
+      // submit in ajax 
       return ajaxSubmit(info);
     }
 }
 
+// ajax submission, get response from backend and update page without reload/redirect
 function ajaxSubmit(info) {
   console.log("ajax function called");
   let string = {};
@@ -54,41 +63,54 @@ function ajaxSubmit(info) {
   $.ajax({
     url: "/",
     method: "POST",
+    // wait for result before going forward
     async: false,
     data: $('form').serialize(),
     success: function(args) {
+      // ajax submission suceess, processing the response
       console.log("ajax success");
       string["status"] = args["status"];
       if (args["status"] == "failure") {
+        // submission fails in backend
         $("#error").html(args["message"])
         $("#error").removeAttr('style').css("display", "block");
         // return false;
       } else if (args['status'] == 'success') {
+        // submission success in backend
         $("#success").html(args['message'])
         $("#success").removeAttr('style').css("display", "block");
         // return true;
       }
     },
     error: function(args) {
+      // ajax submission fails
       console.log("!!!ajax failure!!!");
     }
   })
+
+  // specification for login
   console.log(info);
   if (info == "login") {
     console.log(string["status"]);
+    // false when user/password error
+    // true when user/passwrod match, reload page
     if (string["status"] == "failure") return false;
     else return true;
   } else if (info == "register") {
     console.log("entered register");
     return true;
   }
+
+  // stop form from submitting twice
   return false;
 }
 
+// open filterbar 
 function openNav() {
     document.getElementById("mySidenav").style.width = "100%";
 }
 
+// filterbar value change function
 function changeV(rangename) {
     if(rangename === 'Time') {
         var v = document.getElementById("Timerange").value;
@@ -105,6 +127,7 @@ function changeV(rangename) {
     }
 }
 
+// fliterbar reset all information
 function ClearTags() {
   document.getElementById("Timerange").value = "-1";
   document.getElementById("Timevalue").innerHTML = "";
@@ -121,6 +144,7 @@ function ClearTags() {
   }
 }
 
+// filterbar tag selection with color
 function ChangeTags(Tagname) {
   var v = document.getElementById(Tagname).value;
   if(v === '0') {
@@ -138,12 +162,14 @@ function ChangeTags(Tagname) {
   }
 }
 
+// close filterbar and submit
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     $("#filtersubmit").click(); 
     console.log("save button clicked")
 }
 
+// frontend username checking
 function validate_username() {
   let user_name = document.forms['myform']['name'].value;
   console.log("user_name is "+user_name);
@@ -161,6 +187,7 @@ function validate_username() {
   return true;
 }
 
+// frontend email checking
 function validate_email() {
     let email = document.forms["form"]["email"].value;
     let p_email = document.getElementById("error");
@@ -179,6 +206,7 @@ function validate_email() {
     return true;
 }
 
+// frontend password difference checking (reset password)
 function validate_change() {
     let oldPasswd = document.forms["form"]["oldpassword"].value;
     let passwd = document.forms["form"]["password"].value;
@@ -196,6 +224,7 @@ function validate_change() {
     return true;
 }
 
+// frontend password checking
 function validate_passwd() {
     let passwd = document.forms["form"]["password"].value;
     let p_passwd = document.getElementById("error");
@@ -218,6 +247,7 @@ function validate_passwd() {
     return true;
 }
 
+// frontend password agreement checking (set password)
 function validate_repeat() {
     let passwd = document.forms["form"]["password"].value;
     let repeat = document.forms["form"]["repeat"].value;
@@ -235,6 +265,7 @@ function validate_repeat() {
     return true;
 }
 
+// display password on click button
 function togglePasswordView(e, info) {
     // change the visibility of password;
     e.preventDefault();
@@ -253,12 +284,14 @@ function togglePasswordView(e, info) {
     }
 }
 
+// load function on click buttons using XMLHttpRequest
 function load(e, info) {
   _index = 0;
   clearInterval(clearTime);
   e.preventDefault();
   const xhttp = new XMLHttpRequest();
 
+  // load window in pre-set wrapper and set close icon 
   xhttp.onload = function() {
     document.getElementById("event_box").innerHTML = this.responseText;
     document.getElementById("event_box").removeAttribute("hidden");
@@ -270,12 +303,16 @@ function load(e, info) {
     }
   };
 
+  // call help function
+  // will do nothing if not help window loaded
+  // will begin counting for automatically switch if help window loaded
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       xhttp.addEventListener("load", help);
     }
   }
 
+  // get windows based on given information
   if (info === "login") {
     xhttp.open("GET", "/windows/window_login/");
   } else if (info === "signUp") {
@@ -295,12 +332,14 @@ function load(e, info) {
   console.log("btn clicked");
 }
 
+// remove loaded image in note editing
 function removeimg(uploadimg) {
   document.getElementById(uploadimg).remove();
   document.getElementById("note-image").value = '';
   console.log("removing");
 }
 
+// click to edit user profile
 function edit_usr_p(e) {
   e.preventDefault()
   console.log('function ' + edit_usr_p.name);
@@ -398,6 +437,7 @@ function edit_usr_p(e) {
   return false;
 }
 
+// empty function (abandonded)
 function log_out(e) {
   // const xhttp = new XMLHttpRequest();
   // xhttp.open("GET", "/logout/");
@@ -406,6 +446,7 @@ function log_out(e) {
   // window.location.href = "{% url 'logout/' %}";
 }
 
+// automatically switch for help window
 function help() {
   console.log("function help called");
 
@@ -435,6 +476,7 @@ function help() {
   auto();
 }
 
+// click to save user profile information
 function save_usr_p(e) {
   console.log('function ' + save_usr_p.name);
   $("#chg_usr_p").off();
@@ -463,6 +505,7 @@ function save_usr_p(e) {
   $("#edit").removeAttr("style");
 }
 
+// like a project, alter heart color and send information to backend
 function like(e, info) {
   if ($("#user-profile").attr("style") == "display:none;"){
     alert("You cannot like a event when not logging in");
@@ -496,6 +539,7 @@ function like(e, info) {
   })
 }
 
+// like a note, alter heart color and send information to backend
 function like_note(e, info, ind, image) {
   if ($("#user-profile").attr("style") == "display:none;"){
     alert("Log in to like a note");
@@ -532,6 +576,7 @@ function like_note(e, info, ind, image) {
   })
 }
 
+// load others' profile but cannot edit
 function load_other(e, user) {
   const xhttp = new XMLHttpRequest();
 
