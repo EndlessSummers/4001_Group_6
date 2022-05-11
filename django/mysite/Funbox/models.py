@@ -10,6 +10,7 @@ from django.db.models import Model
 #from django.contrib.postgres.fields import ArrayField 
 
 
+# Table for activities. PK is the name of activity.
 class Activities(models.Model):
     activities_id = models.CharField(db_column='Activities_id', max_length = 45, primary_key=True)  # Field name made lowercase.
     activity_desc = models.CharField(db_column='Activity_desc', max_length=1000, blank=True, null=True)  # Field name made lowercase.
@@ -23,6 +24,7 @@ class Activities(models.Model):
         db_table = 'activities'
 
 
+# Table for users. PK is the user email.
 class UserInfo(models.Model):
     user_id = models.CharField(db_column='User_ID', primary_key=True, max_length=45)  # Field name made lowercase.
     password = models.CharField(db_column='Password', max_length=45)  # Field name made lowercase.
@@ -35,6 +37,10 @@ class UserInfo(models.Model):
         db_table = 'user_info'
 
 
+# Table for user likes on activities
+# User and Activities are set as FK.
+# when user or activity instance is deleted,
+# the corresponding likes are deleted as well.
 class UserPreference(models.Model):
     user = models.ForeignKey(UserInfo, models.CASCADE)  # Field name made lowercase.
     activity = models.ForeignKey(Activities, models.CASCADE, default = "Hiking")  # Field name made lowercase.
@@ -45,6 +51,11 @@ class UserPreference(models.Model):
         db_table = 'user_preference'
         unique_together = (('user', 'activity'),)
 
+
+# Table for user notes on activities
+# User and Activities are set as FK.
+# when user or activity instance is deleted,
+# the corresponding notes are deleted as well.
 class Notes(models.Model):
     user = models.ForeignKey(UserInfo, models.CASCADE)  # Field name made lowercase.
     activity = models.ForeignKey(Activities, models.CASCADE, default = "Hiking")  # Field name made lowercase.
@@ -57,13 +68,20 @@ class Notes(models.Model):
         db_table = 'notes'
 
 
+# Table to store hash values of users
+# useful for registration and find password.
 class UserHash(models.Model):
     user_id = models.CharField(db_column='User_ID', primary_key=True, max_length=45)  # Field name made lowercase.
     hashnum = models.CharField(db_column='Password', max_length=1000, default = "")  # Field name made lowercase.
     class Meta:
         managed = True
         db_table = 'user_hash'
+        
 
+# Table for user likes on notes
+# User and notes are set as FK.
+# when user or note instance is deleted,
+# the corresponding note likes are deleted as well.
 class notelikes(models.Model):
     user = models.ForeignKey(UserInfo, models.CASCADE)  # Field name made lowercase.
     note = models.ForeignKey(Notes, models.CASCADE)  # Field name made lowercase.

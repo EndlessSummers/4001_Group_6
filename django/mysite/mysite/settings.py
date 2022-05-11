@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-
+# please check your database, or use our cloud server to verify our codes.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
