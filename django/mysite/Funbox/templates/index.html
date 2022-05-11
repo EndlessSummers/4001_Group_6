@@ -112,7 +112,7 @@
               </label>
             </a>
             &#8195&#8195
-            <a class="btn btn-primary btn-sm" style="width: 150px; padding-left: 0%; padding-right: 0%;"
+            <a class="btn btn-primary btn-sm" style="width: 150px; padding-left: 0%; padding-right: 0%; margin-left: 32px;"
               onclick="ClearTags()">
               Clear all choices
             </a>
@@ -308,18 +308,29 @@ document.addEventListener("scroll", function (event) {
   var lastY = window.scrollY; // where user scrolls to
   var totalY = document.body.offsetHeight; // the total height of our document // 2571
   var viewY = window.innerHeight; // the height of the viewport //861
+  
+  // access data from django
   var myNames = {};
   {% for name in names %}
     myNames[{{forloop.counter0}}] = "{{name}}";
   {% endfor %}
+
+  // load before reaching the end
   if (totalY < lastY + 2*viewY) {
     newName = myNames[img_index];
     if (newName !== undefined) {
+      // not reach the end of the data
+      // create string for item and append into grid
       string = '<div class="grid-item"> <img class="img-responsive" alt="" src="/media/photos_activities/{name}.jpg"><a href="/project?image={name}" target="_blank" class="project-description"><div class="project-text-holder"><div class="project-text-inner"><h3>{name}</h3><p>Discover more</p></div></div></a></div>';
       $(".grid").append(string.replaceAll('{name}', newName));
+      
+      // index increment
       img_index++;
     }
   }
+
+  // masonry build to set the position for the newly appended item
+  // external function, referenced in `external.js`
   masonryBuild();
 });
 </script>

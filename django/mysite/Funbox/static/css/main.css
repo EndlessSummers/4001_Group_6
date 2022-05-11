@@ -164,10 +164,22 @@ a.like {
 .sidenav .range {
     display: flex;
     position: absolute;
-    left: 300px;
+    /* left: 300px; */
     flex-wrap: wrap;
     width: 560px;
     text-align: center;
+}
+
+@media (min-width: 768px) {
+  .sidenav .range{
+    left: 270px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidenav .range{
+    left: 0px;
+  }
 }
 
 input[type=range] {

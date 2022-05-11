@@ -97,22 +97,24 @@
 
       <!-- project information -->
       <div class="section-container-spacer">
-          <h1>{{projectlist.0}}</h1> 
-          <div>
-            <p  class="project_info" style="font-size: 19px; display: inline-block; font-weight: 700;  margin-top: 16px; margin-bottom: 0px;">
+        <!-- project name -->
+        <h1>{{projectlist.0}}</h1> 
+        <div>
+          <p class="project_info" style="font-size: 19px; display: inline-block; font-weight: 700;  margin-top: 16px; margin-bottom: 0px;">
+            <!-- project Time/Participants/Place/Tag -->
             <span>{{projectlist.1}}min </span>
             <span>{{projectlist.2}} people </span>
             <span> {{projectlist.3}} </span>
             <span> {{projectlist.4}}</span>         
           </p>
+          <!-- like button -->
           <div style="display: inline-block; position: absolute; right: 0; padding-right: 15px;">
             <a onclick="like(event, '{{projectlist.0}}')" class="like {{projectlist.8}}" id="like_button">
             <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="likes" style="font-size: 22px; ">{{projectlist.7}}</span>
           </div>
-          <!-- </div> -->
-          </div>
-          <p>{{projectlist.5}}</p>
-          <!-- <li><a class="btn btn-default" onclick="like(event, '{{projectlist.0}}')"> LIKE </a></li> -->
+        </div>
+        <!-- project description -->
+        <p>{{projectlist.5}}</p>
       </div>
 
       <!-- responsive image of project -->
@@ -122,124 +124,144 @@
 
       <!-- note section -->
       <div class="bottom-wrapper">
-      <!-- if note 0 exists -->
-      {% if notetitles.0 %}
-      <!-- if note 0 contains a photo -->
-      {% if notephotos.0 %}
-      <div class="note" style="overflow: hidden;">
-        <div class="left" style="">
-          <h3> {{notetitles.0}} </h3>
-          <img src="{{userphotos.0}}" alt="" onclick="load_other(event,'{{userids.0}}')">
-          <div class="note-owner"><span>by&nbsp</span>{{noteusers.0}}</div>
-          <p class="note-body"> <span>{{notebodies.0}}</span></p>
-          <div class="like-wrapper" style="right: 25%;">
-            <a onclick="like_note(event, '{{noteids.0}}', '0', '{{projectlist.0}}')" class="like {{notehearts.0}}" id="like_note_button0">
-            <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes0" style="font-size: 28px; ">{{notelikes.0}}</span>
-          </div>
-        </div>
-        <div class="right" id="img_filed" style="float: right;">
-          <img class="img-responsive" src="{{notephotos.0}}">
-        </div>
-      </div>
-      <!-- note 0 exists but without a photo -->
-      {% else %}
-      <div class="note">
-        <div class="left" style=" width: 100%;">
-          <h3> {{notetitles.0}} </h3>
-          <img src="{{userphotos.0}}" alt="" onclick="load_other(event,'{{userids.0}}')">
-          <div class="note-owner"><span>by&nbsp</span>{{noteusers.0}}</div>
-            <div>
+
+        {% if notetitles.0 %}
+        <!-- if note 0 exists -->
+        {% if notephotos.0 %}
+        <!-- if note 0 contains a photo -->
+        <div class="note" style="overflow: hidden;">
+          <div class="left" style="">
+
+            <!-- note title/writer profile/writer/bodies -->
+            <h3> {{notetitles.0}} </h3>
+            <img src="{{userphotos.0}}" alt="" onclick="load_other(event,'{{userids.0}}')">
+            <div class="note-owner"><span>by&nbsp</span>{{noteusers.0}}</div>
             <p class="note-body"> <span>{{notebodies.0}}</span></p>
-            <div class="like-wrapper" style="right: 0;">
+
+            <!-- like button -->
+            <div class="like-wrapper" style="right: 25%;">
               <a onclick="like_note(event, '{{noteids.0}}', '0', '{{projectlist.0}}')" class="like {{notehearts.0}}" id="like_note_button0">
               <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes0" style="font-size: 28px; ">{{notelikes.0}}</span>
             </div>
-            </div>
-        </div>
-      </div>
-      {% endif %}
-      <!-- note 0 does not exist -->
-      {% else %}
-      <h3>No note is available, click the button on the left to create one</h3>
+          </div>
 
-      {% endif %}
-      
-      <!-- if note 1 exists ... -->
-      {% if notetitles.1 %}
-      {% if notephotos.1 %}
-      <div class="note" style="overflow: hidden;">
-        <div class="left" style="">
-          <h3> {{notetitles.1}} </h3>
-          <img src="{{userphotos.1}}" alt="" onclick="load_other(event,'{{userids.1}}')">
-          <div class="note-owner"><span>by&nbsp</span>{{noteusers.1}}</div>
-          <div>
-          <p class="note-body"> <span>{{notebodies.1}}</span></p>
-          <div class="like-wrapper" style="right: 25%;">
-            <a onclick="like_note(event, '{{noteids.1}}', '1', '{{projectlist.0}}')" class="like {{notehearts.1}}" id="like_note_button1">
-            <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes1" style="font-size: 28px; ">{{notelikes.1}}</span>
+          <!-- attached image -->
+          <div class="right" id="img_filed" style="float: right;">
+            <img class="img-responsive" src="{{notephotos.0}}">
           </div>
-          </div>
-      </div>
-        <div class="right" id="img_filed" style="float: right;">
-          <img class="img-responsive" src="{{notephotos.1}}">
         </div>
-      </div>
-      {% else %}
-      <div class="note">
-        <div class="left" style=" width: 100%;">
-          <h3> {{notetitles.1}} </h3>
-          <img src="{{userphotos.1}}" alt="" onclick="load_other(event,'{{userids.1}}')">
-          <div class="note-owner"><span>by&nbsp</span>{{noteusers.1}}</div>
+        
+        {% else %}
+        <!-- note 0 exists but without a photo -->
+        <div class="note">
+          <div class="left" style=" width: 100%;">
+
+            <!-- note title/writer profile/writer/bodies -->
+            <h3> {{notetitles.0}} </h3>
+            <img src="{{userphotos.0}}" alt="" onclick="load_other(event,'{{userids.0}}')">
+            <div class="note-owner"><span>by&nbsp</span>{{noteusers.0}}</div>
             <div>
+              <p class="note-body"> <span>{{notebodies.0}}</span></p>
+              <div class="like-wrapper" style="right: 0;">
+                <a onclick="like_note(event, '{{noteids.0}}', '0', '{{projectlist.0}}')" class="like {{notehearts.0}}" id="like_note_button0">
+                <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes0" style="font-size: 28px; ">{{notelikes.0}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <!-- note 0 does not exist -->
+        <h3>No note is available, click the button on the left to create one</h3>
+
+        {% endif %}
+
+        {% if notetitles.1 %}
+        <!-- if note 1 exists -->
+        {% if notephotos.1 %}
+        <!-- if note 1 contains a photo -->
+        <div class="note" style="overflow: hidden;">
+          <div class="left" style="">
+
+            <!-- note title/writer profile/writer/bodies -->
+            <h3> {{notetitles.1}} </h3>
+            <img src="{{userphotos.1}}" alt="" onclick="load_other(event,'{{userids.1}}')">
+            <div class="note-owner"><span>by&nbsp</span>{{noteusers.1}}</div>
             <p class="note-body"> <span>{{notebodies.1}}</span></p>
-            <div class="like-wrapper" style="right: 0;">
+
+            <!-- like button -->
+            <div class="like-wrapper" style="right: 25%;">
               <a onclick="like_note(event, '{{noteids.1}}', '1', '{{projectlist.0}}')" class="like {{notehearts.1}}" id="like_note_button1">
               <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes1" style="font-size: 28px; ">{{notelikes.1}}</span>
             </div>
-            </div>
-        </div>
-      </div>
-      {% endif %}
-      {% endif %}
+          </div>
 
-      {% if notetitles.2 %}
-      {% if notephotos.2 %}
-      <div class="note" style="overflow: hidden;">
-        <div class="left" style="">
-          <h3> {{notetitles.2}} </h3>
-          <img src="{{userphotos.2}}" alt="" onclick="load_other(event,'{{userids.2}}')">
-          <div class="note-owner"><span>by&nbsp</span>{{noteusers.2}}</div>
-          <div>
-          <p class="note-body"> <span>{{notebodies.2}}</span></p>
-          <div class="like-wrapper" style="right: 25%;">
-            <a onclick="like_note(event, '{{noteids.2}}', '2', '{{projectlist.0}}')" class="like {{notehearts.2}}" id="like_note_button2">
-            <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes2" style="font-size: 28px; ">{{notelikes.2}}</span>
-          </div>
+          <!-- attached image -->
+          <div class="right" id="img_filed" style="float: right;">
+            <img class="img-responsive" src="{{notephotos.1}}">
           </div>
         </div>
-        <div class="right" id="img_filed" style="float: right; height: 100%;">
-          <img class="img-responsive" src="{{notephotos.2}}">
-        </div>
-      </div>
-      {% else %}
-      <div class="note">
-        <div class="left" style=" width: 100%;">
-          <h3> {{notetitles.2}} </h3>
-          <img src="{{userphotos.2}}" alt="" onclick="load_other(event,'{{userids.2}}')">
-          <div class="note-owner"><span>by&nbsp</span>{{noteusers.2}}</div>
+        {% else %}
+        <!-- note 1 exists but without a photo -->
+        <div class="note">
+          <div class="left" style=" width: 100%;">
+
+            <!-- note title/writer profile/writer/bodies -->
+            <h3> {{notetitles.1}} </h3>
+            <img src="{{userphotos.1}}" alt="" onclick="load_other(event,'{{userids.1}}')">
+            <div class="note-owner"><span>by&nbsp</span>{{noteusers.1}}</div>
             <div>
-            <p class="note-body"> <span>{{notebodies.2}}</span></p>
-            <div class="like-wrapper" style="right: 0;">
-              <a onclick="like_note(event, '{{noteids.2}}', '2', '{{projectlist.0}}')" class="like {{notehearts.2}}" id="like_note_button2">
-              <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes2" style="font-size: 28px; ">{{notelikes.2}}</span>
+              <p class="note-body"> <span>{{notebodies.1}}</span></p>
+
+              <!-- like button -->
+              <div class="like-wrapper" style="right: 0;">
+                <a onclick="like_note(event, '{{noteids.1}}', '1', '{{projectlist.0}}')" class="like {{notehearts.1}}" id="like_note_button1">
+                <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes1" style="font-size: 28px; ">{{notelikes.1}}</span>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
+        {% endif %}
+        {% endif %}
+
+        {% if notetitles.2 %}
+        {% if notephotos.2 %}
+        <div class="note" style="overflow: hidden;">
+          <div class="left" style="">
+            <h3> {{notetitles.2}} </h3>
+            <img src="{{userphotos.2}}" alt="" onclick="load_other(event,'{{userids.2}}')">
+            <div class="note-owner"><span>by&nbsp</span>{{noteusers.2}}</div>
+            <div>
+              <p class="note-body"> <span>{{notebodies.2}}</span></p>
+              <div class="like-wrapper" style="right: 25%;">
+                <a onclick="like_note(event, '{{noteids.2}}', '2', '{{projectlist.0}}')" class="like {{notehearts.2}}" id="like_note_button2">
+                <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes2" style="font-size: 28px; ">{{notelikes.2}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="right" id="img_filed" style="float: right; height: 100%;">
+            <img class="img-responsive" src="{{notephotos.2}}">
+          </div>
+        </div>
+        {% else %}
+        <div class="note">
+          <div class="left" style=" width: 100%;">
+            <h3> {{notetitles.2}} </h3>
+            <img src="{{userphotos.2}}" alt="" onclick="load_other(event,'{{userids.2}}')">
+            <div class="note-owner"><span>by&nbsp</span>{{noteusers.2}}</div>
+            <div>
+              <p class="note-body"> <span>{{notebodies.2}}</span></p>
+              <div class="like-wrapper" style="right: 0;">
+                <a onclick="like_note(event, '{{noteids.2}}', '2', '{{projectlist.0}}')" class="like {{notehearts.2}}" id="like_note_button2">
+                <i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes2" style="font-size: 28px; ">{{notelikes.2}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endif %}
       </div>
-      {% endif %}
-      {% endif %}
-      </div>
-      <!-- onclick="ToNote(event)" href="/note?image={{projectlist.0}}" target="_blank" -->
     </div>
   </div>
 </main>
@@ -273,6 +295,8 @@ document.addEventListener("scroll", function (event) {
   var lastY = window.scrollY; // where user scrolls to
   var totalY = document.body.offsetHeight; // the total height of our document // 2571
   var viewY = window.innerHeight; // the height of the viewport //861
+  
+  // access data from django
   var myids = {};
   var mybodies = {};
   var myphotos = {};
@@ -317,17 +341,24 @@ document.addEventListener("scroll", function (event) {
     myusers[{{forloop.counter0}}] = "{{user}}";
   {% endfor %}
 
+  // load before reaching the end
   if (totalY < lastY + 2*viewY) {
     Newid = myids[note_index];
     if (Newid !== undefined) {
       console.log(myids[note_index]+" "+mybodies[note_index]+" "+mytitles[note_index]+" "+myhearts[note_index]);
       Newphoto = myphotos[note_index];
       if (Newphoto !== "") {
+        // create string for note with an image
         string = '<div class="note" style="overflow: hidden;"><div class="left" style=""><h3>'+mytitles[note_index]+'</h3><img src="'+myuphotos[note_index]+'" alt="" onclick="load_other(event,\''+myuids[note_index]+'\')"><div class="note-owner"><span>by&nbsp</span>'+myusers[note_index]+'</div><div><p class="note-body"> <span>'+mybodies[note_index]+'</span></p><div class="like-wrapper" style="right: 25%;"><a onclick="like_note(event, \''+myids[note_index]+'\', "'+note_index+'", "{{projectlist.0}}")" class="like '+myhearts[note_index]+'" id="like_note_button'+note_index+'"><i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes'+note_index+'" style="font-size: 28px; ">'+mylikes[note_index]+'</span></div></div></div><div class="right" id="img_filed" style="float: right; height: 100%;"><img class="img-responsive" src="'+myphotos[note_index]+'"></div></div>';
       } else {
+        // create string for note without an image
         string = '<div class="note"><div class="left" style=" width: 100%;"><h3>' +mytitles[note_index]+ '</h3><img src="'+myuphotos[note_index]+'" alt="" onclick="load_other(event,\''+myuids[note_index]+'\')"><div class="note-owner"><span>by&nbsp</span>'+myusers[note_index]+'</div><div><p class="note-body"> <span>'+mybodies[note_index]+'</span></p><div class="like-wrapper" style="right: 0;"><a onclick="like_note(event, \''+myids[note_index]+'\', "'+note_index+'", "{{projectlist.0}}")" class="like '+myhearts[note_index]+'" id="like_note_button'+note_index+'"><i class="fa fa-heart " aria-hidden="true"></i> </a><span id="note_likes'+note_index+'"style="font-size: 28px; ">'+mylikes[note_index]+'</span></div></div></div></div>'
       }
+
+      // append new note to wrapper
       $(".bottom-wrapper").append(string);
+
+      // index increment
       note_index++;
     }
   }

@@ -48,10 +48,10 @@
     <div class="navbar-collapse" id="navbar-collapse">
       <!-- logo & redirection -->
       <div class="site-header hidden-xs">
-          <a class="site-brand" href="/" title="">
-            <img class="img-responsive site-logo" alt="" src="/static/imgs/funbox.png" style="width: 200px; height: 100px;">
-            FunBox
-          </a>
+        <a class="site-brand" href="/" title="">
+          <img class="img-responsive site-logo" alt="" src="/static/imgs/funbox.png" style="width: 200px; height: 100px;">
+          FunBox
+        </a>
       </div>
       
       <!-- section below logo (also navbar) -->
@@ -93,14 +93,14 @@
 
   <!-- note section -->
   <div class="row">
-  <div class="col-xs-12">
-    <div class="section-container-spacer">
-      <h1>Note Editor</h1>
-      <p>Please edit your note here.</p>
-    </div>
-    <div class="section-container-spacer" >
-       <form name="noteset" action="" class="reveal-content" autocomplete="off" target="_self" method="post" enctype="multipart/form-data" onsubmit="return true">
-         {% csrf_token %}
+    <div class="col-xs-12">
+      <div class="section-container-spacer">
+        <h1>Note Editor</h1>
+        <p>Please edit your note here.</p>
+      </div>
+      <div class="section-container-spacer" >
+        <form name="noteset" action="" class="reveal-content" autocomplete="off" target="_self" method="post" enctype="multipart/form-data" onsubmit="return true">
+          {% csrf_token %}
           <div class="row">
             <div class="col-xs-8">
               <div class="form-group">
@@ -120,9 +120,9 @@
             </div>
           </div>
         </form>
+      </div>
     </div>
   </div>
-</div>
 
 </main>
 
@@ -139,33 +139,28 @@ document.addEventListener("DOMContentLoaded", function (event) {
   window.onload = function() {
   var input = document.getElementById("note-image");
   var div;
-  // 当用户上传时触发事件
+  // set onchange function
   input.onchange = function() {
     document.getElementById("image_view").innerHTML = "";
     readFile(this);
-    // console.log(input.value);
   }
-  //处理图片并添加都dom中的函数
+  
+  // read image
   var readFile = function (obj) {
-    // 获取input里面的文件组
     var fileList = obj.files;
-    // if (fileList.length + upload_img_num > 9) {
-    //   return alert("The number of uploaded images cannot be greater than 9.");
-    // }
-    //对文件组进行遍历，可以到控制台打印出fileList去看看
-    // var j = 0;
-    // for (var i = 0; i < fileList.length; i++) {
     var reader = new FileReader();
     reader.readAsDataURL(fileList[0]);
-      // 当文件读取成功时执行的函数
+
+    // set onload function
     reader.onload = function (e) {
+      // create div tag
       div = document.createElement('div');
       div.id = "uploadimg_0";
       div.innerHTML = '<img src="' + this.result + '" /><a class="removebtn" onclick="removeimg(\'uploadimg_0\')">&times;</a>';
+
+      // append created div
       document.getElementById("image_view").appendChild(div);
-      console.log("uploading");
     }
-    console.log(fileList)
   }
 }
 
