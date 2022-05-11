@@ -43,4 +43,4 @@ urlpatterns = [
     path('find_password/', views.find_password, name="find_password"),
     path("logout/", views.log_out, name="logout"),
     path("note/", views.note, name = "note")
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)   # for view images
