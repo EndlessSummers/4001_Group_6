@@ -23,7 +23,9 @@ def loadExData2():
            [0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],
            [1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0]]       
     return np.mat(data)
+
 # Similarity Calculation
+
 def eu_dis(inv1, inv2):
     # Euclidean Correlation
     return 1.0/(1.0+np.linalg.norm(inv1-inv2))
@@ -39,6 +41,11 @@ def cos_dis(inv1, inv2):
     num = float(inv1.T*inv2)
     den = np.linalg.norm(inv1) * np.linalg.norm(inv2)
     return num/den
+
+# It is a heuristic method to generate a scored matrix for specific user
+# After selecting one user, the algo will predict what is the score of 
+# unrated items. Then the final recommendation will return a list with item id
+# and corresponding ratings
 
 def stand_est(data_mat, user, sim_means, item):
     # given any similarity calculation method, rate each item
@@ -62,17 +69,9 @@ def stand_est(data_mat, user, sim_means, item):
     else:
         return rat_sim_total/sim_total
 
-def recommend(data_mat, user, N, sim_means=cos_dis, est_method=stand_est):
-    # Main Recommendation
-    un_rated_item = np.nonzero(data_mat[user, :].A==0)[1]
-    if len(un_rated_item) == 0:
-        return 'you rated everything'
-    item_score = []
-    for item in un_rated_item:
-        est_mated_score = est_method(data_mat, user, sim_means, item)
-        item_score.append((item, est_mated_score))
-    return sorted(item_score, key=lambda jj: jj[1], reverse=True)[:N]
-
+# Another method for generating scores. The algo first use SVD for the whole rating matrix. 
+# Then, we derive the new matrix for calculation using the multiply of the original matrix, u and sigma
+# Repeat the same procedure in the standard one.
 def svd_est(data_mat, user, sim_means, item):
     #using SVD
     n = data_mat.shape[1]
@@ -93,3 +92,14 @@ def svd_est(data_mat, user, sim_means, item):
     else:
         return rate_sim_total/sim_total
 
+# Recommendation of item. It will append the scores into a list for certain users.
+def recommend(data_mat, user, N, sim_means=cos_dis, est_method=stand_est):
+    # Main Recommendation
+    un_rated_item = np.nonzero(data_mat[user, :].A==0)[1]
+    if len(un_rated_item) == 0:
+        return 'you rated everything'
+    item_score = []
+    for item in un_rated_item:
+        est_mated_score = est_method(data_mat, user, sim_means, item)
+        item_score.append((item, est_mated_score))
+    return sorted(item_score, key=lambda jj: jj[1], reverse=True)[:N]
